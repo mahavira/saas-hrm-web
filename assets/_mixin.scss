@@ -1,0 +1,75 @@
+/* 水平垂直居中(绝对定位)
+--------------------------*/
+@mixin center($width: null, $height: null) {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  @if not $width and not $height {
+      transform: translate(-50%, -50%);
+  } @else if $width and $height {
+      width: $width;
+      height: $height;
+      margin: -($width / 2) #{0 0} -($height / 2);
+  } @else if not $height {
+      width: $width;
+      margin-left: -($width / 2);
+      transform: translateY(-50%);
+  } @else {
+      height: $height;
+      margin-top: -($height / 2);
+      transform: translateX(-50%);
+  }
+}
+/* 子元素水平垂直居中
+--------------------------*/
+@mixin center-children {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* 清除浮云
+--------------------------*/
+@mixin clearfix() {
+  &:before,
+  &:after {
+      content: "";
+      display: table;
+  }
+  &:after {
+      clear: both;
+  }
+}
+/* 文字溢出
+--------------------------*/
+@mixin text-ellipsis () {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 断点
+--------------------------*/
+$breakpoints: (
+  'mobile'  : ( max-width:  480px ),
+  'tablet'  : ( max-width:  768px ),
+  'desktop' : ( max-width:  992px ),
+  'wide'  : ( max-width: 1366px ),
+);
+
+  
+@mixin respond-to($name) {
+  // If the key exists in the map
+  @if map-has-key($breakpoints, $name) {
+    // Prints a media query based on the value
+    @media #{inspect(map-get($breakpoints, $name))} {
+      @content;
+    }
+  }
+ 
+  // If the key doesn't exist in the map
+  @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+        + "Please make sure it is defined in `$breakpoints` map.";
+  }
+}

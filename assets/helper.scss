@@ -1,0 +1,50 @@
+@import './variable.scss';
+@import './mixin';
+.clearfix{
+  @include clearfix;
+}
+.is-blod{
+  font-weight: 700;
+}
+.is-relative {
+  position: relative;
+}
+.is-absolute {
+  position: absolute;
+}
+.is-primary{
+  color: $--color-primary !important;
+}
+/* transform-x */
+.transform-x-leave-active,
+.transform-x-enter-active {
+  transition: transform .3s ease-in-out;
+}
+.transform-x-enter, .transform-x-leave-to {
+  transform: translateX(-100%);
+}
+.transform-x-enter-to {
+  transform: translateX(0);
+}
+/* transform-x */
+.slide-left-leave-active,
+.slide-left-enter-active {
+  transition: transform .3s ease-in-out;
+}
+.slide-left-enter, .slide-left-leave-to {
+  transform: translateX(100%);
+}
+.slide-left-enter-to {
+  transform: translateX(0);
+}
+/*fade-transform*/
+.fade-leave-active,
+.fade-enter-active {
+  transition: all .3s;
+}
+.fade-enter {
+  opacity: 0;
+}
+.fade-leave-to {
+  opacity: 0;
+}

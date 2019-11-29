@@ -1,0 +1,40 @@
+- path: /
+  name: /
+  label: 工作台
+- path: /personnel
+  name: personnel
+  label: 人事
+  redirect: /personnel/manage/roster
+  children:
+    - path: manage/roster
+      name: manage
+      label: 员工管理
+    - path: relation/enrollment/wait
+      name: relation
+      label: 员工关系
+      redirect: relation/enrollment/wait
+- path: /organization
+  name: organization
+  label: 组织
+  children:
+    - path: roster
+      name: manage
+      label: 组织管理
+    - path: diagram
+      name: diagram
+      label: 架构图
+    - path: post
+      name: post
+      label: 岗位管理
+    - path: postsystem
+      name: postsystem
+      label: 职务体系
+- path: /recruit
+  name: recruit
+  label: 招聘
+- path: /attendance
+  name: attendance
+  label: 考勤
+- path: /salary
+  name: salary
+  label: 薪酬

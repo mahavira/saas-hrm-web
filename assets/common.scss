@@ -1,0 +1,221 @@
+@import './variable.scss';
+@import './mixin';
+body{
+  font-size: 14px;
+}
+.sp-tabs{
+  &__one{
+    position: absolute;
+    left: 0;
+    top: -46px;
+    overflow: hidden;
+    .item{
+      color: #FFF;
+      font-size: 18px;
+      height: 46px;
+      padding: 10px 34px 10px 24px;
+      box-sizing: border-box;
+      line-height: 1;
+      margin-right: 12px;
+      font-weight: 400;
+      &.active{
+        background: #FFF;
+        color: #000;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        position: relative;
+        font-weight: 500;
+        &::before{
+          content: '';
+          position: absolute;
+          right: 0px;
+          top: -2px;
+          background: #FFF;
+          width: 22px;
+          height: 129%;
+          transform: rotate(-12deg);
+          transform-origin: right top;
+          border-radius: 25px;
+        }
+      }
+    }
+  }
+  &__two{
+    overflow: hidden;
+    background: #FFF;
+    padding: 16px 16px 0;
+    box-shadow: 1px 2px 2px $bgcolor-primary;
+    z-index: 1;
+    position: relative;
+    .item{
+      color: rgba(0,0,0,0.5);
+      font-size: 14px;
+      padding: 16px 18px 16px 24px;
+      box-sizing: border-box;
+      line-height: 1;
+      margin-right: 10px;
+      font-weight: 400;
+      &.active{
+        background: $bgcolor-primary;
+        color: #000;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        position: relative;
+        font-weight: 500;
+        &::before{
+          content: '';
+          position: absolute;
+          right: 1px;
+          top: -2px;
+          background: $bgcolor-primary;
+          width: 22px;
+          height: 129%;
+          transform: rotate(-12deg);
+          transform-origin: right top;
+          border-radius: 25px;
+        }
+      }
+    }
+  }
+  &__three{
+    padding: 34px 24px 20px;
+    .item{
+      font-size: 14px;
+      font-weight:400;
+      color:rgba(0,0,0,0.45);
+      line-height: 28px;
+      padding: 0 32px;
+      margin: 5px 0;
+      position: relative;
+      &:before{
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 100%;
+        width: 1px;
+        background: #CCCCCD;
+      }
+      &:last-of-type:before{
+        content: none;
+      }
+      &.active{
+        color: $--color-primary;
+      }
+    }
+  }
+}
+.sp-fixed-height{
+  &__126{
+    height: calc(100vh - 126px);
+  }
+}
+.sp-container{
+  background: #FFF;
+  border-radius: 10px;
+  margin: 0 24px 32px;
+  position: relative;
+  &__filter{
+    padding: 18px 32px;
+    display: flex;
+    justify-content: space-between;
+    .search{
+      width: 272px;
+    }
+  }
+  &__table{
+    min-height: 528px;
+    .detail-btn {
+      height: 22px;
+      width: 22px;
+      line-height: 22px;
+      padding: 0;
+      border-radius: 4px;
+    }
+  }
+  &__footer{
+    padding: 24px 28px;
+    display: flex;
+    justify-content: space-between;
+    .handler{
+      font-size: 12px;
+      color:rgba(0,0,0,0.65);
+      .el-button{
+        margin-left: 20px;
+      }
+    }
+  }
+  &__detail{
+    width: 724px;
+    height: 100%;
+    background:$bgcolor-edit;
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    .back{
+      width: 32px;
+      height: 32px;
+      line-height: 32px;
+      padding: 0;
+      text-align: center;
+      color: $--color-primary;
+      font-size: 18px;
+    }
+    .header{
+      height: 68px;
+      padding: 18px 32px;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: space-between;
+    }
+    .body{
+      flex: 1;
+    }
+    .footer{
+      height: 56px;
+      padding: 12px 32px;
+      background: #FFF;
+      box-sizing: border-box;
+      text-align: right;
+    }
+  }
+}
+.sp-container__form{
+  &,.items{
+    padding: 24px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .item{
+    width: 50%;
+    margin-bottom: 24px;
+    .el-form-item__label{
+      line-height: 16px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      height: 100%;
+    }
+    .el-form-item__content{
+      margin-right:18px;
+      line-height: 32px;
+      .inner{
+        @include text-ellipsis()
+      }
+    }
+    .el-select, .el-input{
+      width: 100%;
+    }
+    &.full{
+      flex: 0 0 100%;
+    }
+    &.top-align{
+      .el-form-item__label{
+        align-items: flex-start;
+        padding-top: 6px;
+      }
+    }
+  }
+}

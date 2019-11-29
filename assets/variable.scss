@@ -1,0 +1,29 @@
+$color-primary: #220EDB;
+$color-yellow: #F6E62E;
+$color-orange: #E35711;
+$color-turquoise: #85CACD;
+$color-salmon: #F2B6D2;
+
+$bgcolor-primary: #F1F2F4;
+$bgcolor-edit: #F3F6FD;
+
+/* 改变主题色变量 */
+$--color-primary: #220EDB;
+$--border-radius-base: 10px !default;
+$--button-small-font-size: 14px !default;
+$--button-small-padding-vertical: 8px !default;
+$--table-header-background-color: rgba(0,0,0,0.03) !default;
+$--table-row-hover-background-color: rgba(243,246,253,1) !default;
+$--table-current-row-background-color: rgba(243,246,253,1) !default;
+$--dialog-title-font-size: 16px !default;
+$--popover-arrow-size: 10px !default;
+
+/* Pagination
+-------------------------- */
+/// fontSize||Font|1
+$--pagination-font-size: 14px !default;
+/// height||Other|4
+$--pagination-button-height: 32px !default;
+
+/* 改变 icon 字体路径变量，必需 */
+$--font-path: '~element-ui/lib/theme-chalk/fonts';
