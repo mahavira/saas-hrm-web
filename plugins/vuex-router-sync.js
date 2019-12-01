@@ -24,13 +24,25 @@ export default function ({ app, store }) {
     state: cloneRoute(app.router.currentRoute),
     getters: {
       currentPaths: state => state.path.split('/').filter(n => !!n),
-      currentPath: (state, getters) => (index = 0) => {
+      currentPath: (state, getters) => (level = 0) => {
         if (!getters.currentPaths.length) { return '/' }
-        return getters.currentPaths.length >= index ? getters.currentPaths[index] : '/'
+        return getters.currentPaths.length >= level ? getters.currentPaths[level] : '/'
       },
       currentMenu: (state, getters) => (level = 0) => {
+        if (!level) { return menus }
         const paths = [...getters.currentPaths].splice(0, level)
         return findChildren(menus, paths)
+      },
+      currentMenus (state, getters) {
+        const paths = []
+        const res = [
+          menus,
+          ...getters.currentPaths.map((path) => {
+            paths.push(path)
+            return findChildren(menus, [...paths])
+          }).filter(n => !!n)
+        ]
+        return res
       }
     },
     mutations: {

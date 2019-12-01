@@ -9,7 +9,12 @@
         :name="item.path"
       />
     </el-tabs>
-    <nuxt-child class="container" />
+    <el-scrollbar
+      class="is-vertical"
+      style="height: calc(100vh - 105px)"
+    >
+      <nuxt-child class="container" />
+    </el-scrollbar>
   </div>
 </template>
 <script>
@@ -34,9 +39,6 @@ const menus = [{
 }, {
   path: 'tabs',
   title: 'Tab'
-}, {
-  path: 'drag-dialog',
-  title: '拖拽对话框'
 }, {
   path: 'form',
   title: '表单'

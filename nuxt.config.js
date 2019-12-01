@@ -35,11 +35,14 @@ export default {
     { src: '@/plugins/element-ui', ssr: false },
     '@/plugins/moment',
     '@/plugins/axios',
-    '@/plugins/vuex-router-sync'
+    '@/plugins/vuex-router-sync',
+    { src: '~/plugins/bus-inject', ssr: false }
   ],
   router: {
     // 在每页渲染前运行 middleware/user-agent.js 中间件的逻辑
     // middleware: 'auth'
+    extendRoutes (routes, resolve) {
+    }
   },
   /*
   ** Nuxt.js dev-modules
@@ -63,7 +66,7 @@ export default {
   axios: {
     proxy: true,
     prefix: '/api',
-    baseURL: 'http://172.16.17.106:9590/',
+    timeout: 1000,
     headers: {
       AuthorizationType: 'web-api'
     }

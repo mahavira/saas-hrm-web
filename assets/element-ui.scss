@@ -1,4 +1,4 @@
-@import "./variable.scss";
+@import "./var.scss";
 @import "~element-ui/packages/theme-chalk/src/index";
 .el-button--default{
   border-color: #FFF;
@@ -65,7 +65,7 @@
 }
 .el-table tr.current-row{
   > td{
-    color: $--color-primary;
+    color: $color-primary;
   }
 }
 .el-table::before{
@@ -101,4 +101,10 @@
 }
 .el-popover{
   border-radius: 10px;
+}
+.el-tree{
+  background: transparent;
+}
+.el-loading-mask{
+  background-color: rgba(255, 255, 255, 0.6);
 }

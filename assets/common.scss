@@ -1,4 +1,4 @@
-@import './variable.scss';
+@import './var.scss';
 @import './mixin';
 body{
   font-size: 14px;
@@ -100,7 +100,7 @@ body{
         content: none;
       }
       &.active{
-        color: $--color-primary;
+        color: $color-primary;
       }
     }
   }
@@ -110,19 +110,19 @@ body{
     height: calc(100vh - 126px);
   }
 }
+.sp-filter{
+  padding: 18px 32px;
+  display: flex;
+  justify-content: space-between;
+  .search{
+    width: 272px;
+  }
+}
 .sp-container{
   background: #FFF;
   border-radius: 10px;
   margin: 0 24px 32px;
   position: relative;
-  &__filter{
-    padding: 18px 32px;
-    display: flex;
-    justify-content: space-between;
-    .search{
-      width: 272px;
-    }
-  }
   &__table{
     min-height: 528px;
     .detail-btn {
@@ -160,7 +160,7 @@ body{
       line-height: 32px;
       padding: 0;
       text-align: center;
-      color: $--color-primary;
+      color: $color-primary;
       font-size: 18px;
     }
     .header{
@@ -197,12 +197,15 @@ body{
       justify-content: flex-end;
       align-items: center;
       height: 100%;
+      font-weight:500;
+      color:rgba(0,0,0,0.8);
     }
     .el-form-item__content{
       margin-right:18px;
       line-height: 32px;
       .inner{
-        @include text-ellipsis()
+        color:rgba(0,0,0,0.65);
+        @include text-ellipsis();
       }
     }
     .el-select, .el-input{

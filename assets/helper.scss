@@ -1,4 +1,4 @@
-@import './variable.scss';
+@import './var.scss';
 @import './mixin';
 .clearfix{
   @include clearfix;
@@ -13,7 +13,25 @@
   position: absolute;
 }
 .is-primary{
-  color: $--color-primary !important;
+  color: $color-primary !important;
+}
+.is-white{
+  color: #FFF !important;
+}
+.is-white-bg{
+  background-color: #FFF !important;
+}
+.is-justify-center{
+  justify-content: center;
+}
+.is-justify-end{
+  justify-content: flex-end;
+}
+.is-justify-space-between{
+  justify-content: space-between;
+}
+.is-justify-space-around{
+  justify-content: space-around;
 }
 /* transform-x */
 .transform-x-leave-active,
@@ -24,6 +42,18 @@
   transform: translateX(-100%);
 }
 .transform-x-enter-to {
+  transform: translateX(0);
+}
+/* transform-y */
+.transform-y-leave-active,
+.transform-y-enter-active {
+  transition: transform .3s ease-in-out;
+}
+.transform-y-enter,
+.transform-y-leave-to {
+  transform: translateY(100%);
+}
+.transform-y-enter-to {
   transform: translateX(0);
 }
 /* transform-x */

@@ -21,7 +21,7 @@ export function arr2Obj (arr = [], key = 'name', childrenKey = 'children') {
 export function findChildren (arr = [], paths = [], key = 'name', childrenKey = 'children') {
   let children = []
   const value = paths.shift()
-  if (!value) { return arr }
+  if (!value) { return children }
   arr.some((item, i) => {
     if (item[key] === value) {
       children = paths.length ? findChildren(item[childrenKey], paths, key, childrenKey) : item[childrenKey]

@@ -17,7 +17,8 @@
     "normalize.css": "^8.0.1",
     "nuxt": "^2.0.0",
     "vue-hoc": "^0.4.7",
-    "vue-moment": "^4.0.0"
+    "vue-moment": "^4.0.0",
+    "vue-orgchart": "^1.1.7"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^1.0.1",
