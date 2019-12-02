@@ -4,6 +4,7 @@
     .logo
     nuxt-link.item(v-for="(item, key) in menus[0]" :key="key" :to="item.redirect || item.path"
       :class="[item.name, (item.name === currentPaths[0] || (!item.name && !currentPaths.length)) ? 'active' : '']")
+      div.anibg
       span {{item.label}}
   .el-container.is-vertical
     .lay-header
@@ -111,7 +112,20 @@ export default {
   text-decoration: none;
   margin-left: 8px;
   transition: all 0.2s;
-  &:before {
+  transition: all 0.3s ease-in;
+  border-radius: 10px 0 0 10px;
+  .anibg{
+    background: #F1F2F4;
+    border-radius: 10px 0 0 10px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    transform: translateX(100%);
+    transition: all 0.3s ease;
+  }
+  &:after {
     content: '';
     position: absolute;
     left: -4px;
@@ -119,38 +133,57 @@ export default {
     width: 100%;
     height: 32px;
     background: url(~assets/images/workbench.png) center top no-repeat / 32px 32px;
+    transition: all 0.3s ease-out;
   }
   span {
     position: relative;
     left: -4px;
   }
   &.active {
-    background: $bgcolor-primary;
     color: $color-primary;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
+    .anibg{
+      transform: translateX(0);
+    }
   }
-  &.active:before{
+  &:hover{
+    background: rgba($color: #000000, $alpha: 0.1);
+  }
+  &.active:after{
     background-image: url(~assets/images/workbench-active.png);
   }
   &.personnel{
-    &:before{
+    &:after{
       background-image: url(~assets/images/personnel.png);
     }
-    &.active:before{
+    &.active:after{
       background-image: url(~assets/images/personnel-active.png);
     }
   }
-  &.recruit:before{
-    background-image: url(~assets/images/recruit.png);
+  &.recruit{
+    &:after{
+      background-image: url(~assets/images/recruit.png);
+    }
+    &.active:after{
+      background-image: url(~assets/images/recruit-active.png);
+    }
   }
-  &.organization:before{
-    background-image: url(~assets/images/organization.png);
+  &.organization{
+    &:after{
+      background-image: url(~assets/images/organization.png);
+    }
+    &.active:after{
+      background-image: url(~assets/images/organization-active.png);
+    }
   }
-  &.attendance:before{
-    background-image: url(~assets/images/attendance.png);
+  &.attendance{
+    &:after{
+      background-image: url(~assets/images/attendance.png);
+    }
+    &.active:after{
+      background-image: url(~assets/images/attendance-active.png);
+    }
   }
-  &.salary:before{
+  &.salary:after{
     background-image: url(~assets/images/salary.png);
   }
 }

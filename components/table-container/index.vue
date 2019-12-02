@@ -89,6 +89,11 @@ import defaultEditHandler from './defaultEditHandler'
  * 扩展其他功能可通过再次封装实现
  */
 export default {
+  provide () {
+    return {
+      parent: this
+    }
+  },
   components: { TDetail, THandler },
   props: {
     handler: { type: Array, default: () => null },

@@ -20,6 +20,7 @@
 </template>
 <script>
 export default {
+  inject: ['parent'],
   props: {
     item: { type: Object, default: () => {} }
   },
@@ -29,18 +30,19 @@ export default {
   },
   methods: {
     onHandler (e) {
+      console.log(this.parent, e)
       if (e === 'ADD') {
-        this.$parent.openAddDialog()
+        this.parent.openAddDialog()
       } else if (e === 'DELETE') {
-        this.$parent.selected = true
+        this.parent.selected = true
       } else if (e === 'EDIT') {
         this.$parent.editing = true
       } else
       // if (this.$parent[e]) {
       //   this.$parent[e]()
       // } else
-      if (this.$parent.$parent[e]) {
-        this.$parent.$parent[e](this.$parent)
+      if (this.parent.$parent[e]) {
+        this.parent.$parent[e](this.parent)
       }
     },
     onDorpdownHandler (type, e) {

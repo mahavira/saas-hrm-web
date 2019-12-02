@@ -320,10 +320,10 @@ body{
   }
 }
 @keyframes wave-svg-anim {
-0% {
-  transform: translateX(-210px);
-}
-100% {
-  transform: translateX(210px);
-}
+  0% {
+    transform: translateX(-210px);
+  }
+  100% {
+    transform: translateX(210px);
+  }
 }

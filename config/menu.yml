@@ -155,9 +155,19 @@
     - path: talent
       name: talent
       label: 人才库
-- path: /attendance
+- path: /attendance/current
   name: attendance
   label: 考勤
+  children:
+  - path: current
+    name: current
+    label: 当月考勤
+  - path: history
+    name: history
+    label: 历史考勤
+  - path: vacation
+    name: vacation
+    label: 假期
 - path: /salary
   name: salary
   label: 薪酬

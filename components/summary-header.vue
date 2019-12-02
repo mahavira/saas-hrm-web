@@ -1,50 +1,61 @@
 <template>
   <div class="header">
-    <div class="item is-primary">
-      在职 <span class="num is-primary">9 人</span>
-    </div>
-    <div class="item">
-      全职 <span class="num">9</span> 人
+    <div v-for="(item,index) in data" :key="index" :class="{'is-primary':index==0}" class="item">
+      {{ item.label }} <span :class="{'is-primary':index==0}" class="num">{{ item.value }} {{ unit }}</span>
       <el-popover
+        v-if="item.children && item.children.length"
         placement="bottom"
         trigger="hover"
         width="432"
       >
         <div class="popover">
-          <div class="item">
-            <div>全职</div>
-            <div><span>103</span> 人</div>
-          </div>
-          <div class="item">
-            <div>实习生</div>
-            <div><span>34</span> 人</div>
-          </div>
-          <div class="item">
-            <div>劳务派遣</div>
-            <div><span>3</span> 人</div>
-          </div>
-          <div class="item">
-            <div>退休返聘</div>
-            <div><span>11</span> 人</div>
+          <div v-for="(citem,i) in item.children" :key="i" class="item">
+            <div>{{ citem.label }}</div>
+            <div><span>{{ item.value }}</span> {{ unit }}</div>
           </div>
         </div>
         <i slot="reference" class="el-icon-caret-bottom" />
       </el-popover>
     </div>
-    <div class="item">
-      试用期 <span class="num">9</span> 人
-    </div>
-    <div class="item">
-      待入职 <span class="num">9</span> 人
-    </div>
-    <div class="item">
-      待离职 <span class="num">9</span> 人
-    </div>
   </div>
 </template>
 <script>
+
 export default {
   props: {
+    unit: { type: String, default: '人' },
+    data: {
+      type: Array,
+      default: () => [{
+        label: '在职',
+        value: 9
+      }, {
+        label: '全职',
+        value: 9,
+        children: [{
+          label: '全职',
+          value: 103
+        }, {
+          label: '实习生',
+          value: 1203
+        }, {
+          label: '劳务派遣',
+          value: 3
+        }, {
+          label: '退休返聘',
+          value: 11
+        }]
+      }, {
+        label: '试用期',
+        value: 9
+      }, {
+        label: '待入职',
+        value: 9
+      }, {
+        label: '待离职',
+        value: 9
+      }]
+    }
   }
 }
 </script>

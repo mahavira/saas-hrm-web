@@ -6,15 +6,6 @@ import {
   DATE_PICKER
 } from '~/utils/formType'
 
-export const urls = {
-  list: '/hrEducationInfo/list',
-  update: '/hrEducationInfo/edit',
-  detail: '/hrEducationInfo/detail',
-  add: '/hrEducationInfo/add'
-}
-
-export const primaryKey = 'id'
-
 export const tableFields = {
   xingming: {
     label: fields.xingming,
@@ -32,15 +23,17 @@ export const tableFields = {
   gongzuoxingzhi: {
     label: fields.gongzuoxingzhi
   },
-  phone: {
-    label: fields.phone
+  xueli: {
+    label: fields.xueli
   },
-  credential_type: {
-    label: fields.credential_type
+  biyeyuanxiao: {
+    label: fields.biyeyuanxiao
   },
-  credential_number: {
-    label: fields.credential_number,
-    width: 100
+  biyezhuanye: {
+    label: fields.biyezhuanye
+  },
+  jiaoyujieshushijian: {
+    label: fields.jiaoyujieshushijian
   }
 }
 
@@ -170,41 +163,15 @@ export const editFields = {
   }
 }
 
-export const  handler = [{
+export const handler = [{
   type: 'button',
-  color: 'primary',
-  icon: 'el-icon-plus',
+  icon: 'el-icon-document',
   handler: 'ADD',
-  label: '添加员工'
+  label: '批量续签合同'
 }, {
   type: 'button',
-  color: 'default',
-  icon: 'el-icon-upload2 is-primary',
-  handler: 'IMPORT',
-  label: '导入名册'
-}, {
-  type: 'button',
-  color: 'default',
-  icon: 'el-icon-delete-solid is-primary',
-  handler: 'DELETE',
-  label: '批量删除'
-}]
-export const editHandler = [{
-  type: 'button',
-  color: 'primary',
-  icon: 'el-icon-check',
-  handler: 'ADD',
-  label: '确认入职'
-}, {
-  type: 'button',
-  color: 'default',
-  icon: 'el-icon-edit is-primary',
-  handler: 'EDIT',
-  label: '快速编辑'
-}, {
-  type: 'button',
-  color: 'default',
-  icon: 'el-icon-view is-primary',
-  handler: 'toInfo',
-  label: '员工档案'
+  color:'default',
+  icon: 'el-icon-download',
+  handler: 'EXPORT',
+  label: '导出'
 }]
