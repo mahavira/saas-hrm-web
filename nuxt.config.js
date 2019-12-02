@@ -66,6 +66,7 @@ export default {
   axios: {
     proxy: true,
     prefix: '/api',
+    // baseURL: 'http://172.16.17.106:9590/',
     timeout: 1000,
     headers: {
       AuthorizationType: 'web-api'

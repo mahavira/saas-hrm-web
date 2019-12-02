@@ -1,5 +1,5 @@
-import * as education from './.conf/education.js'
-import * as work from './.conf/work.js'
+import * as education from './education.js'
+import * as work from './work.js'
 const mods = {
   education,
   work

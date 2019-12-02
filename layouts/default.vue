@@ -18,20 +18,20 @@
         nuxt(v-if="!menus[3]||!menus[3].length")
         tab-level-three(v-else :tabs="menus[3]" :active="currentPaths[3]" :prefix="[...currentPaths].splice(0,3).join('/')")
           nuxt
-  dialog-insert
+  dialog-add
 </template>
 <script>
 import TabLevelOne from '~/components/level-tab/one'
 import TabLevelTwo from '~/components/level-tab/two'
 import TabLevelThree from '~/components/level-tab/three'
-import DialogInsert from '~/components/dialog-insert'
+import DialogAdd from '~/components/dialog/add'
 export default {
   provide () {
     return {
       $app: this
     }
   },
-  components: { TabLevelOne, TabLevelTwo, TabLevelThree, DialogInsert },
+  components: { TabLevelOne, TabLevelTwo, TabLevelThree, DialogAdd },
   computed: {
     menus () {
       return this.$store.getters['route/currentMenus']

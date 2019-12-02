@@ -32,7 +32,7 @@ export default {
       if (e === 'ADD') {
         this.$parent.openAddDialog()
       } else if (e === 'DELETE') {
-        this.$parent.deleting = true
+        this.$parent.selected = true
       } else if (e === 'EDIT') {
         this.$parent.editing = true
       } else

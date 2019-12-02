@@ -3,7 +3,7 @@ import {
   SELECT,
   TEXTAREA,
   INPUT,
-  DATE_SELECT
+  DATE_PICKER
 } from '~/utils/formType'
 
 export const tableFields = {
@@ -56,11 +56,11 @@ export const addFields = {
   },
   jiaoyujieshushijian: {
     label: fields.jiaoyujieshushijian,
-    formType: DATE_SELECT
+    formType: DATE_PICKER
   },
   jiaoyukaishishijian: {
     label: fields.jiaoyukaishishijian,
-    formType: DATE_SELECT
+    formType: DATE_PICKER
   },
   xuexixingshi: {
     label: fields.xuexixingshi,
@@ -125,11 +125,11 @@ export const editFields = {
   },
   jiaoyujieshushijian: {
     label: fields.jiaoyujieshushijian,
-    formType: DATE_SELECT
+    formType: DATE_PICKER
   },
   jiaoyukaishishijian: {
     label: fields.jiaoyukaishishijian,
-    formType: DATE_SELECT
+    formType: DATE_PICKER
   },
   xuexixingshi: {
     label: fields.xuexixingshi,

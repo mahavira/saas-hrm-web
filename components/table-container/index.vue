@@ -10,7 +10,7 @@
           suffix-icon="el-icon-search"
         />
       </div>
-      <div v-if="!deleting" class="handler">
+      <div v-if="!selected" class="handler">
         <t-handler v-for="(item, index) in handlerOptions" :key="index" :item="item" />
       </div>
     </div>
@@ -24,7 +24,7 @@
         v-if="tableFields"
       >
         <el-table-column
-          v-if="deleting"
+          v-if="selected"
           type="selection"
           width="60"
         />
@@ -56,70 +56,39 @@
         :total="pagination.total"
         :page-size="pagination.size"
         :current-page="pagination.page"
+        :page-sizes="[10, 20, 30, 50]"
+        @size-change="onPageSizeChange"
+        @current-change="onPageCurrentChange"
         background
         layout="prev, pager, next, sizes, total"
       />
-      <div v-if="deleting" class="handler">
+      <div v-if="selected" class="handler">
         <span>已选择 <span class="is-primary">{{ selectedRows.length }}</span> 条</span>
         <el-button @click="cancelDelete" type="default" size="small" class="is-shadow">取消</el-button>
         <el-button @click="confirmDelete" :disabled="!selectedRows.length" type="primary" size="small" class="is-shadow"><i class="el-icon-delete" /> 确认删除</el-button>
       </div>
     </div>
     <transition name="slide-left">
-      <div v-if="visibleDetail" class="sp-container__detail">
-        <div class="header">
-          <div>
-            <el-button @click="closeDetail" class="back" size="small" icon="el-icon-arrow-right" />
-          </div>
-          <div v-if="!editing">
-            <t-handler v-for="(item, index) in editHandlerOptions" :key="index" :item="item" />
-          </div>
-        </div>
-        <el-scrollbar class="body is-vertical">
-          <t-detail :data="currentRow" :formMeta="editFields" :editing="editing" />
-        </el-scrollbar>
-        <div v-if="editing" class="footer">
-          <el-button @click="cancelEdit" type="default" size="small" class="is-shadow">取消</el-button>
-          <el-button @click="onSave" :loading="loading" type="primary" size="small" class="is-shadow">保存</el-button>
-        </div>
-      </div>
+      <t-detail
+        v-if="visibleDetail"
+        :url="urls.update"
+        :fields="editFields"
+        :handler="editHandlerOptions"
+        :data.sync="currentRow"
+      />
     </transition>
   </div>
 </template>
 <script>
-import TDetail from './detail'
 import THandler from './handler'
-
-const defaultHandler = [{
-  type: 'button',
-  color: 'primary',
-  icon: 'el-icon-plus',
-  handler: 'ADD',
-  label: '新 增'
-}, {
-  type: 'dropdown',
-  color: 'default',
-  icon: 'el-icon-plus',
-  handler: 'DROPDOWN',
-  label: '批量操作',
-  options: [{
-    label: '批量删除',
-    value: 'DELETE'
-  }, {
-    label: '批量更新',
-    value: 'UPDATE'
-  }]
-}]
-const defaultEditHandler = [{
-  type: 'button',
-  color: 'default',
-  icon: 'el-icon-edit',
-  handler: 'EDIT',
-  label: '快速编辑'
-}]
-
+import TDetail from './detail'
+import defaultHandler from './defaultHandler'
+import defaultEditHandler from './defaultEditHandler'
+/**
+ * 该组件提供常规增删改查
+ * 扩展其他功能可通过再次封装实现
+ */
 export default {
-  inject: ['$app'],
   components: { TDetail, THandler },
   props: {
     handler: { type: Array, default: () => null },
@@ -139,12 +108,11 @@ export default {
       currentRow: {},
       selectedRows: [],
       tableData: [],
-      deleting: false, // 删除中
-      editing: false, // 编辑中
+      selected: false, // 选择中
       pagination: {
         total: 0,
-        page: 0,
-        size: 15
+        page: 1,
+        size: 10
       }
     }
   },
@@ -159,29 +127,25 @@ export default {
   watch: {
     visibleDetail (val) {
       this.isHighlightCurrentRow = val
-      this.editing = false
     }
   },
   created () {
     this.fetch()
-    console.log(this)
-    // this.$store.dispatch('dict/fetch', 'degree_type')
-    // this.$store.dispatch('dict/fetch', 'education')
-    // this.$store.dispatch('dict/fetch', 'learning_way')
   },
   methods: {
-    async fetch () {
+    async fetch (page = 1) {
       this.loading = true
       try {
         if (!this.urls || !this.urls.list) { throw new Error('需要提供Url') }
         const { data } = await this.$axios.post(this.urls.list, {
-          limit: 10,
-          page: 1
+          searchText: this.keyword,
+          limit: this.pagination.size,
+          page
         })
         this.tableData = data.data.rows
         this.pagination.total = data.data.total
       } catch (e) {
-        console.error(e.message)
+        console.error(e.message || e)
       } finally {
         this.loading = false
       }
@@ -202,62 +166,67 @@ export default {
         this.fetchDetail()
       }
     },
-    closeDetail () {
-      this.visibleDetail = false
-    },
     openDetail (row) {
       this.visibleDetail = true
     },
     cancelDelete () {
-      this.deleting = false
+      this.selected = false
       this.selectedRows = []
       this.$refs.table.clearSelection()
     },
-    confirmDelete () {
-      this.deleting = false
-      this.selectedRows = []
-      this.$refs.table.clearSelection()
+    async confirmDelete () {
+      if (!this.urls || !this.urls.delete) { throw new Error('需要提供Url') }
+      if (this.selectedRows.length) {
+        try {
+          const ids = this.selectedRows.map(row => row[this.primaryKey])
+          const { data } = await this.$axios.post(this.urls.delete, {
+            educationInfoId: ids.join()
+          })
+          console.table(data)
+          this.selected = false
+          this.selectedRows = []
+          this.$refs.table.clearSelection()
+          this.fetch()
+        } catch (e) {} finally {
+        }
+      }
     },
     onSearch (e) {
-      console.log(e)
+      this.pagination.page = 1
+      this.fetch()
     },
     onSelectionChange (e) {
       this.selectedRows = e
     },
-    onEdit () {
-      this.editing = true
-    },
-    cancelEdit () {
-      this.editing = false
-    },
-    onSave () {
-      this.save()
-    },
-    async save () {
-      const formData = Object.assign({}, this.formData)
-      this.loading = true
-      try {
-        await this.$axios.post(this.urls.update, formData)
-        this.editing = false
-      } catch (e) {} finally {
-        this.loading = false
-      }
-    },
     openAddDialog () {
       try {
         if (!this.urls || !this.urls.add) { throw new Error('需要提供Url') }
+        let isFetch = false
         this.$bus.$emit('dialog:insert', {
+          title: '新增教育经历',
           fields: this.addFields,
           url: this.urls.add,
-          callback (e) {
+          showCancelButton: false,
+          showConfirmNextButton: true,
+          callback: (e) => {
             if (e === 'confirm') {
               this.fetch()
-            }
+            } else if (e === 'next') {
+              isFetch = true
+            } else if (isFetch) { this.fetch() }
           }
         })
       } catch (e) {
         console.error(e.message || e)
       }
+    },
+    onPageCurrentChange (e) {
+      this.fetch(e)
+    },
+    onPageSizeChange (e) {
+      this.pagination.page = 1
+      this.pagination.size = e
+      this.fetch()
     }
   }
 }

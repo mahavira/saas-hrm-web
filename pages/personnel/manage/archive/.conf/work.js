@@ -3,7 +3,7 @@ import {
   SELECT,
   TEXTAREA,
   INPUT,
-  DATE_SELECT
+  DATE_PICKER
 } from '~/utils/formType'
 
 export const urls = {
@@ -51,13 +51,13 @@ export const addFields = {
     label: '选择员工',
     alias: 'name',
     formType: SELECT,
-    formDict: '',
+    options: '',
     rules: [{ required: true, message: '请选择员工', trigger: 'blur' }]
   },
   education: {
     label: '学历',
     formType: SELECT,
-    formDict: 'education',
+    options: 'education',
     rules: [{ required: true, message: '请选择学历', trigger: 'blur' }]
   },
   graduatedSchool: {
@@ -72,16 +72,16 @@ export const addFields = {
   },
   educationEndTime: {
     label: '教育结束时间',
-    formType: DATE_SELECT
+    formType: DATE_PICKER
   },
   educationStartTime: {
     label: '教育开始时间',
-    formType: DATE_SELECT
+    formType: DATE_PICKER
   },
   learningWay: {
     label: '学习形式',
     formType: SELECT,
-    formDict: 'learning_way'
+    options: 'learning_way'
   },
   diplomaNumber: {
     label: '毕业证书编号',
@@ -90,7 +90,7 @@ export const addFields = {
   degreeType: {
     label: '学位类型',
     formType: SELECT,
-    formDict: 'degree_type'
+    options: 'degree_type'
   },
   degreeName: {
     label: '学位名称',
@@ -132,7 +132,7 @@ export const editFields = {
   education: {
     label: fields.xueli,
     formType: SELECT,
-    formDict: 'education'
+    options: 'education'
   },
   graduatedSchool: {
     label: fields.biyeyuanxiao,
@@ -144,16 +144,16 @@ export const editFields = {
   },
   educationStartTime: {
     label: fields.jiaoyujieshushijian,
-    formType: DATE_SELECT
+    formType: DATE_PICKER
   },
   educationEndTime: {
     label: fields.jiaoyukaishishijian,
-    formType: DATE_SELECT
+    formType: DATE_PICKER
   },
   learningWay: {
     label: fields.xuexixingshi,
     formType: SELECT,
-    formDict: 'learning_way'
+    options: 'learning_way'
   },
   diplomaNumber: {
     label: fields.biyezhengshubianhao,
@@ -162,7 +162,7 @@ export const editFields = {
   degreeType: {
     label: fields.xueweileixing,
     formType: SELECT,
-    formDict: 'degree_type'
+    options: 'degree_type'
   },
   degreeName: {
     label: fields.xueweimingcheng,

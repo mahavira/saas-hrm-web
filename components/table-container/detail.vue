@@ -1,63 +1,39 @@
 <template>
-  <el-form ref="form" :model="formData" class="sp-container__form" label-width="100px">
-    <el-form-item v-for="(item, name) in formMeta" :key="name" :label="item.label" :class="{full: item.isFull, 'top-align': item.isTopAlign}" class="item">
-      <div v-if="!editing" class="inner">{{ formData[name] || '/' }}</div>
-      <div v-else>
-        <el-input v-if="item.formType==='input'" v-model="formData[name]" :placeholder="item.placeholder || '请输入'" size="small" />
-        <el-select v-if="item.formType==='select'" v-model="formData[name]" :placeholder="item.placeholder || '请选择'" size="small">
-          <el-option
-            v-for="(option, key) in dict[item.formDict]"
-            :key="key"
-            :value="key"
-            :label="option"
-          />
-        </el-select>
-        <el-date-picker
-          v-if="item.formType==='date-select'"
-          v-model="formData[name]"
-          :placeholder="item.placeholder || '请选择'"
-          :format="item.format||'yyyy-MM-dd'"
-          :value-format="item.valueFormat||'yyyy-MM-dd HH:mm:ss'"
-          size="small"
-          type="date"
-        />
-        <el-input
-          :rows="3"
-          v-if="item.formType==='textarea'"
-          v-model="formData[name]"
-          :placeholder="item.placeholder || '请输入'"
-          v-bind="item"
-          type="textarea"
-        />
+  <div class="sp-detail">
+    <div class="header">
+      <div>
+        <el-button @click="back" class="back" size="small" icon="el-icon-arrow-right" />
       </div>
-    </el-form-item>
-  </el-form>
+      <div v-if="!editing">
+        <t-handler v-for="(item, index) in handler" :key="index" :item="item" />
+      </div>
+    </div>
+    <el-scrollbar class="body is-vertical">
+      <sp-form ref="ltform" v-model="formData" :fields="fields" :edited="editing" />
+    </el-scrollbar>
+    <div v-if="editing" class="footer">
+      <el-button @click="cancelEdit" type="default" size="small" class="is-shadow">取消</el-button>
+      <el-button @click="onSave" :loading="loading" type="primary" size="small" class="is-shadow">保存</el-button>
+    </div>
+  </div>
 </template>
 <script>
+import THandler from './handler'
+import SpForm from '~/components/sp-form'
+
 export default {
+  components: { SpForm, THandler },
   props: {
-    editing: {
-      type: Boolean,
-      default: false
-    },
-    data: {
-      type: Object,
-      default: null
-    },
-    formMeta: {
-      type: Object,
-      default: null
-    }
+    data: { type: Object, default: null },
+    fields: { type: Object, default: null },
+    url: { type: String, default: '' },
+    handler: { type: Array, default: () => [] }
   },
   data () {
     return {
       formData: {},
-      loading: false
-    }
-  },
-  computed: {
-    dict () {
-      return this.$store.state.dict
+      loading: false,
+      editing: false
     }
   },
   watch: {
@@ -66,6 +42,37 @@ export default {
         this.$set(this, 'formData', Object.assign({}, val))
       },
       immediate: true
+    }
+  },
+  methods: {
+    back () {
+      this.$parent.visibleDetail = false
+    },
+    onEdit () {
+      this.editing = true
+    },
+    cancelEdit () {
+      this.editing = false
+    },
+    onSave () {
+      this.$refs.ltform.form.validate((valid) => {
+        if (valid) {
+          this.save()
+        } else {
+          return false
+        }
+      })
+    },
+    async save () {
+      const formData = Object.assign({}, this.formData)
+      this.loading = true
+      try {
+        await this.$axios.post(this.url, formData)
+        this.$emit('update:data', this.formData)
+        this.editing = false
+      } catch (e) {} finally {
+        this.loading = false
+      }
     }
   }
 }
