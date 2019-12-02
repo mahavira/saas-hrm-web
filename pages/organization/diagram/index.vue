@@ -8,15 +8,15 @@
       </div>
     </div>
     <div class="chart">
-      <vo-basic ref="orgchart" :data="chartData" />
+      <!-- <vo-basic ref="orgchart" :data="chartData" /> -->
     </div>
   </div>
 </template>
 <script>
-import { VoBasic } from 'vue-orgchart'
-import 'vue-orgchart/dist/style.min.css'
+// import { VoBasic } from 'vue-orgchart'
+// import 'vue-orgchart/dist/style.min.css'
 export default {
-  components: { VoBasic },
+  // components: { VoBasic },
   data () {
     return {
       chartData: {
