@@ -1,11 +1,19 @@
 <template>
-  <div style="height:0">
-    <div class="sp-filter is-white-bg">
-      <div />
+  <div class="sp-container" style="margin-top:32px">
+    <div class="sp-filter">
+      <div class="search">
+        <el-input
+          v-model="keyword"
+          @keyup.enter.native="onSearch"
+          size="small"
+          placeholder="请输入搜索关键词"
+          suffix-icon="el-icon-search"
+        />
+      </div>
       <div class="handler">
-        <el-button @click="onDelete" type="primary" class="is-shadow" size="mini"><i class="el-icon-plus" /> 新增组织</el-button>
+        <el-button @click="onDelete" type="primary" class="is-shadow" size="small"><i class="el-icon-plus" /> 新增组织</el-button>
         <el-dropdown>
-          <el-button @click="onDelete" type="default" class="is-shadow" size="mini">
+          <el-button @click="onDelete" type="default" class="is-shadow" size="small">
             <i class="el-icon-finished is-primary" />
             导出/导入
           </el-button>
@@ -22,7 +30,7 @@
           </el-dropdown-menu>
         </el-dropdown>
         <el-dropdown>
-          <el-button @click="onDelete" type="default" class="is-shadow" size="mini">
+          <el-button @click="onDelete" type="default" class="is-shadow" size="small">
             <i class="el-icon-finished is-primary" />
             批 量<i class="el-icon-arrow-down el-icon--right" />
           </el-button>
@@ -40,23 +48,21 @@
         </el-dropdown>
       </div>
     </div>
-    <el-scrollbar class="is-vertical" style="flex: 1">
-      <div class="el-row el-row--flex sp-container" style="margin-top:32px;">
-        <t-sidebar />
-        <div class="main">
-          <t-main />
-          <div class="sp-container__footer">
-            <el-pagination
-              :total="pagination.total"
-              :page-size="pagination.size"
-              :current-page="pagination.page"
-              background
-              layout="prev, pager, next, sizes, total"
-            />
-          </div>
+    <div class="el-row el-row--flex">
+      <t-sidebar />
+      <div class="main">
+        <t-main />
+        <div class="sp-container__footer">
+          <el-pagination
+            :total="pagination.total"
+            :page-size="pagination.size"
+            :current-page="pagination.page"
+            background
+            layout="prev, pager, next, sizes, total"
+          />
         </div>
       </div>
-    </el-scrollbar>
+    </div>
   </div>
 </template>
 <script>
@@ -66,6 +72,7 @@ export default {
   components: { TSidebar, TMain },
   data () {
     return {
+      keyword: '',
       pagination: {
         total: 0,
         page: 0,
@@ -76,7 +83,8 @@ export default {
   mounted () {
   },
   methods: {
-    onDelete () {}
+    onDelete () {},
+    onSearch () {}
   }
 }
 </script>

@@ -101,9 +101,16 @@
     - path: diagram
       name: diagram
       label: 架构图
-    - path: post
+    - path: post/manage
       name: post
       label: 岗位管理
+      children:
+      - path: manage
+        name: manage
+        label: 岗位管理
+      - path: category
+        name: category
+        label: 岗位类别
     - path: duty/manage
       name: duty
       label: 职务体系

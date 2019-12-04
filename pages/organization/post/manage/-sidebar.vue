@@ -43,7 +43,7 @@ export default {
   overflow: hidden;
   .title{
     line-height: 22px;
-    padding: 16px 32px;
+    padding: 16px 32px 15px;
     background:rgba(241,242,244,0.5);
     color: rgba($color: #000000, $alpha: 0.39)
   }

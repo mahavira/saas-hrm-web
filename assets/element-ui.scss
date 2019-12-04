@@ -71,6 +71,13 @@
 .el-table::before{
   z-index: auto;
 }
+.el-table.blue{
+  th{
+    padding: 15px 0;
+    background-color: rgba(218, 229, 255, 1);
+    color: rgba(29, 77, 185, 0.5);
+  }
+}
 .el-scrollbar{
   &.is-horizontal{
     >.el-scrollbar__wrap{
@@ -104,7 +111,43 @@
 }
 .el-tree{
   background: transparent;
+  .el-tree-node__content{
+    padding: 4px 0;
+    transition: all 0.3s;
+    .sp-tree-node{
+      flex: 1;
+      display: flex;
+      justify-content: space-between;
+      .label{
+        font-size: 14px;
+        font-weight: 500;
+        color:rgba(0,0,0,0.85);
+      }
+      .icon{
+        visibility: hidden;
+        opacity: 0;
+        i {
+          margin: 0 5px;
+        }
+      }
+    }
+    &:hover{
+      background:rgba(0,0,0,0.05);
+      border-radius:10px;
+      .sp-tree-node{
+        .icon{
+          transition: all 0.3s;
+          visibility: visible;
+          opacity: 1;
+        }
+      }
+    }
+  }
 }
+
+
+
+
 .el-loading-mask{
   background-color: rgba(255, 255, 255, 0.6);
 }

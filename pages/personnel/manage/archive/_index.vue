@@ -7,8 +7,8 @@
       width="820px"
     >
       <div class="el-container is-justify-space-around" style="padding:40px 60px 80px">
-        <a class="sp-upload-card__file" href="http://172.16.17.106:9590/api/hrEducationInfo/template/export" download="export.excel">
-          <div @click="onImport" class="icon-file file-upload" />
+        <a class="sp-upload-card__file" href="http://172.16.17.106:9590/hrEducationInfo/template/export" download="export.excel">
+          <div class="icon-file file-upload" />
           <div class="label">{{ isImportUpdate?'导出记录':'导出模版' }}</div>
           <div class="hint">{{ isImportUpdate?'导出已有信息进行编辑':'导出标准模版，支持批量导入与员工教育经历' }}</div>
           <div class="point">1</div>
@@ -17,6 +17,7 @@
           :show-file-list="false"
           :headers="headers"
           :action="uploadUrl"
+          :on-success="onImportSuccess"
           class="sp-upload-card__file"
           name="uploadFile"
           drag
@@ -80,14 +81,40 @@ export default {
       },
       visibleImportDialog: false,
       visibleSelectDialog: false,
-      isImportUpdate: false
+      isImportUpdate: false,
+      importing: false
     }
   },
   mounted () {
   },
   methods: {
-    onImport () {
-      this.$axios.get('hrEducationInfo/template/export')
+    async onImportSuccess (response, file, fileList) {
+      console.log(response)
+      if (response.data && response.data.status === 0 && response.data.status === 200) {
+        return this.$message.success('导入成功')
+      }
+      try {
+        this.importing = true
+        const res = await this.$axios.post('hrEducationInfo/export', response.data, {
+          responseType: 'blob'
+        })
+        const fileName = '导出错误说明.xls'
+        const blob = new Blob([res.data], { type: 'application/x-xls' })
+        if (window.navigator.msSaveOrOpenBlob) {
+          navigator.msSaveBlob(blob, fileName)
+        } else {
+          const link = document.createElement('a')
+          link.href = window.URL.createObjectURL(blob)
+          link.download = fileName
+          link.click()
+          window.URL.revokeObjectURL(link.href)
+        }
+      } catch (e) {
+        console.error(e)
+        this.$message.error(e.message || e)
+      } finally {
+        this.importing = false
+      }
     },
     showImport () {
       this.visibleSelectDialog = true

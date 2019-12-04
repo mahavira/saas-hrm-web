@@ -68,7 +68,20 @@
           </div>
           <div class="tree">
             <el-scrollbar class="is-vertical" style="height:100%">
-              <el-tree :data="data" :props="defaultProps" :default-expand-all="true" :show-checkbox="showCheckbox" @node-click="handleNodeClick" />
+              <el-tree :data="data" :props="defaultProps" :default-expand-all="true" :show-checkbox="showCheckbox" @node-click="handleNodeClick">
+                <span slot-scope="{ node }" class="custom-tree-node">
+                  <span>{{ node.label }} 1111</span>
+                  <span />
+                </span>
+                <div slot-scope="{ node }" class="sp-tree-node">
+                  <span class="label">{{ node.label }}</span>
+                  <div class="icon">
+                    <i class="el-icon-plus" />
+                    <i class="el-icon-edit" />
+                    <i class="el-icon-delete" />
+                  </div>
+                </div>
+              </el-tree>
             </el-scrollbar>
           </div>
         </div>
