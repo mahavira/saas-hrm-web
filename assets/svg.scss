@@ -1,0 +1,183 @@
+.icon-svg{
+  font-family: 'element-icons' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-feature-settings: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  vertical-align: baseline;
+  display: inline-block;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  vertical-align: bottom;
+  width: 24px;
+  height: 24px;
+  background: url(./svg/form_btn_add_icon.svg) center no-repeat;
+  background-size: contain;
+  &.form_More_icon{
+    background-image: url(./svg/form_More_icon.svg);
+  }
+  &.form_Retract_icon{
+    background-image: url(./svg/form_Retract_icon.svg);
+  }
+  &.form_Return_icon{
+    background-image: url(./svg/form_Return_icon.svg);
+  }
+  &.form_btn_addBlank_icon{
+    background-image: url(./svg/form_btn_addBlank_icon.svg);
+  }
+  &.form_btn_add_icon{
+    background-image: url(./svg/form_btn_add_icon.svg);
+  }
+  &.form_btn_confirm_icon{
+    background-image: url(./svg/form_btn_confirm_icon.svg);
+  }
+  &.form_btn_deleteBlank_icon{
+    background-image: url(./svg/form_btn_deleteBlank_icon.svg);
+  }
+  &.form_btn_delete_icon{
+    background-image: url(./svg/form_btn_delete_icon.svg);
+    width: 14px;
+    height: 14px;
+  }
+  &.form_btn_edit_Blankicon{
+    background-image: url(./svg/form_btn_edit_Blankicon.svg);
+  }
+  &.form_btn_edit_icon{
+    background-image: url(./svg/form_btn_edit_icon.svg);
+  }
+  &.form_btn_exportBlank_icon{
+    background-image: url(./svg/form_btn_exportBlank_icon.svg);
+  }
+  &.form_btn_export_icon{
+    background-image: url(./svg/form_btn_export_icon.svg);
+  }
+  &.form_btn_eye_icon{
+    background-image: url(./svg/form_btn_eye_icon.svg);
+  }
+  &.form_btn_form_btn_eye_icon_icon{
+    background-image: url(./svg/form_btn_form_btn_eye_icon_icon.svg);
+  }
+  &.header_Headportrait_pic{
+    background-image: url(./svg/header_Headportrait_pic.svg);
+  }
+  &.header_Search_delete_icon{
+    background-image: url(./svg/header_Search_delete_icon.svg);
+  }
+  &.header_Search_icon{
+    background-image: url(./svg/header_Search_icon.svg);
+  }
+  &.header_notice_icon{
+    background-image: url(./svg/header_notice_icon.svg);
+  }
+  &.nav_Pay_Default{
+    background-image: url(./svg/nav_Pay_Default.svg);
+  }
+  &.nav_Pay_Selected{
+    background-image: url(./svg/nav_Pay_Selected.svg);
+  }
+  &.nav_attendance_Default{
+    background-image: url(./svg/nav_attendance_Default.svg);
+  }
+  &.nav_attendance_Selected{
+    background-image: url(./svg/nav_attendance_Selected.svg);
+  }
+  &.nav_logo{
+    background-image: url(./svg/nav_logo.svg);
+  }
+  &.nav_organization_Default{
+    background-image: url(./svg/nav_organization_Default.svg);
+  }
+  &.nav_organization_Selected{
+    background-image: url(./svg/nav_organization_Selected.svg);
+  }
+  &.nav_recruit_Default{
+    background-image: url(./svg/nav_recruit_Default.svg);
+  }
+  &.nav_recruit_Selected{
+    background-image: url(./svg/nav_recruit_Selected.svg);
+  }
+  &.nav_staff_Default{
+    background-image: url(./svg/nav_staff_Default.svg);
+  }
+  &.nav_staff_Selected{
+    background-image: url(./svg/nav_staff_Selected.svg);
+  }
+  &.nav_workbench_Default{
+    background-image: url(./svg/nav_workbench_Default.svg);
+  }
+  &.nav_workbench_Selected{
+    background-image: url(./svg/nav_workbench_Selected.svg);
+  }
+  &.notice_bell_icon{
+    background-image: url(./svg/notice_bell_icon.svg);
+  }
+  &.notice_horn_icon{
+    background-image: url(./svg/notice_horn_icon.svg);
+  }
+  &.workbench_Agency_Add_icon{
+    background-image: url(./svg/workbench_Agency_Add_icon.svg);
+  }
+  &.workbench_Agency_Other_icon{
+    background-image: url(./svg/workbench_Agency_Other_icon.svg);
+  }
+  &.workbench_Agency_bigTips_icon{
+    background-image: url(./svg/workbench_Agency_bigTips_icon.svg);
+  }
+  &.workbench_Agency_birthday_icon{
+    background-image: url(./svg/workbench_Agency_birthday_icon.svg);
+  }
+  &.workbench_Agency_delete_icon{
+    background-image: url(./svg/workbench_Agency_delete_icon.svg);
+  }
+  &.workbench_Agency_edit_icon{
+    background-image: url(./svg/workbench_Agency_edit_icon.svg);
+  }
+  &.workbench_Agency_smallTips_icon{
+    background-image: url(./svg/workbench_Agency_smallTips_icon.svg);
+  }
+  &.workbench_Shortcut_Addarchives_bg{
+    background-image: url(./svg/workbench_Shortcut_Addarchives_bg.svg);
+  }
+  &.workbench_Shortcut_Addcontract_bg{
+    background-image: url(./svg/workbench_Shortcut_Addcontract_bg.svg);
+  }
+  &.workbench_Shortcut_Addcontract_icon{
+    background-image: url(./svg/workbench_Shortcut_Addcontract_icon.svg);
+  }
+  &.workbench_Shortcut_Addinterview_bg{
+    background-image: url(./svg/workbench_Shortcut_Addinterview_bg.svg);
+  }
+  &.workbench_Shortcut_Addinterview_icon{
+    background-image: url(./svg/workbench_Shortcut_Addinterview_icon.svg);
+  }
+  &.workbench_Shortcut_Addorganization_bg{
+    background-image: url(./svg/workbench_Shortcut_Addorganization_bg.svg);
+  }
+  &.workbench_Shortcut_Addorganization_icon{
+    background-image: url(./svg/workbench_Shortcut_Addorganization_icon.svg);
+  }
+  &.workbench_Shortcut_Addpersonnel_bg{
+    background-image: url(./svg/workbench_Shortcut_Addpersonnel_bg.svg);
+  }
+  &.workbench_Shortcut_Addpersonnel_icon{
+    background-image: url(./svg/workbench_Shortcut_Addpersonnel_icon.svg);
+  }
+  &.workbench_Shortcut_Addrecruitment_bg{
+    background-image: url(./svg/workbench_Shortcut_Addrecruitment_bg.svg);
+  }
+  &.workbench_Shortcut_Addrecruitment_icon{
+    background-image: url(./svg/workbench_Shortcut_Addrecruitment_icon.svg);
+  }
+  &.workbench_Shortcut_Addstaff_bg{
+    background-image: url(./svg/workbench_Shortcut_Addstaff_bg.svg);
+  }
+  &.workbench_Shortcut_Addstaff_icon{
+    background-image: url(./svg/workbench_Shortcut_Addstaff_icon.svg);
+  }
+  &.workbench_illustration_bg{
+    background-image: url(./svg/workbench_illustration_bg.svg);
+  }
+}

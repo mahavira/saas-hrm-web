@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar">
+  <div class="sp-material-sidebar">
     <div class="el-container is-justify-space-between">
       <el-button
         @click="onBack"
@@ -57,50 +57,3 @@ export default {
   }
 }
 </script>
-<style lang='scss' scoped>
-.sidebar{
-  flex: 0 0 283px;
-  padding: 24px;
-  border-right: 1px solid rgba(233,233,233,1);
-.intro{
-    padding: 16px;
-    margin-top: 10px;
-    .headimg{
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background: #eee;
-      display: block;
-    }
-    .username{
-      font-size:16px;
-      font-weight:500;
-      color:rgba(0,0,0,1);
-      margin: 10px 0 16px;
-    }
-    .number{
-      font-size:12px;
-      line-height: 20px;
-      color:rgba(0,0,0,0.425);
-      padding: 2px 0;
-      margin: 16px 0;
-    }
-    .info{
-      >div{
-        padding: 4px 0;
-        color:rgba(0,0,0,0.85);
-      }
-      i{
-        width: 24px;
-      }
-    }
-    .handler{
-      position: absolute;
-      bottom: 32px;
-      .is-shadow{
-        margin-top: 12px;
-      }
-    }
-  }
-}
-</style>

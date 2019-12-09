@@ -1,9 +1,11 @@
 import { Message } from 'element-ui'
-
-export default function ({ $axios, store, redirect }) {
+const requestToken = []
+export default function ({ $axios, store, redirect, app }) {
   $axios.onRequest((config) => {
-    console.log('Making request to ' + config.url)
     config.headers.token = store.state.authorization || ''
+    const source = $axios.CancelToken.source()
+    requestToken.push(source)
+    config.cancelToken = source.token
   }, (error) => {
     Message.error({
       message: '加载超时'
@@ -12,11 +14,17 @@ export default function ({ $axios, store, redirect }) {
   })
   $axios.onError((error) => {
     const code = parseInt(error.response && error.response.status)
-    if (error.response.data && error.response.data.message) {
+    if (error.response && error.response.data && error.response.data.message) {
       Message.error(error.response.data.message)
     }
     if (code === 400) {
       // redirect('/400')
     }
+  })
+  app.router.beforeEach((to, from, next) => {
+    while (requestToken.length > 0) {
+      requestToken.shift().cancel()
+    }
+    next()
   })
 }

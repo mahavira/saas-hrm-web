@@ -78,15 +78,22 @@
     color: rgba(29, 77, 185, 0.5);
   }
 }
+
 .el-scrollbar{
   &.is-horizontal{
     >.el-scrollbar__wrap{
       overflow-y: hidden
     }
+    >.el-scrollbar__bar.is-vertical{
+      display: none;
+    }
   }
   &.is-vertical{
     >.el-scrollbar__wrap{
       overflow-x: hidden
+    }
+    >.el-scrollbar__bar.is-horizontal{
+      display: none;
     }
   }
 }
@@ -108,6 +115,8 @@
 }
 .el-popover{
   border-radius: 10px;
+  padding: 0;
+  overflow: hidden;
 }
 .el-tree{
   background: transparent;
@@ -144,13 +153,26 @@
     }
   }
 }
-
-
-
+.el-message-box__title{
+  font-size: 16px;
+}
+.el-message-box__status{
+  top: 36px;
+  left: 10px;
+}
+.el-message-box__status + .el-message-box__message{
+  padding: 22px 17px 22px 57px;
+}
 
 .el-loading-mask{
   background-color: rgba(255, 255, 255, 0.6);
 }
 .v-modal, .el-dialog__wrapper{
   left: 80px;
+}
+.el-button + .el-dropdown,
+.el-dropdown + .el-button,
+.el-button + .el-button,
+.el-dropdown + .el-dropdown{
+  margin-left: 6px;
 }

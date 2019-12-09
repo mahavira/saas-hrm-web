@@ -31,8 +31,9 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '@/plugins/resize',
+    { src: '@/plugins/resize', ssr: false },
     { src: '@/plugins/element-ui', ssr: false },
+    { src: '~/plugins/mock', ssr: false },
     '@/plugins/moment',
     '@/plugins/axios',
     '@/plugins/vuex-router-sync',
@@ -73,6 +74,10 @@ export default {
     }
   },
   proxy: {
+    '/api/mock': {
+      target: 'http://localhost:3001/',
+      pathRewrite: { '^/api/mock': '' }
+    },
     '/api': {
       target: 'http://172.16.17.106:9590/',
       pathRewrite: { '^/api': '' }

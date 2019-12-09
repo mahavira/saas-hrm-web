@@ -21,6 +21,7 @@
 .is-white-bg{
   background-color: #FFF !important;
 }
+
 .is-justify-center{
   justify-content: center;
 }
@@ -32,6 +33,12 @@
 }
 .is-justify-space-around{
   justify-content: space-around;
+}
+.is-rotate-90{
+  transform: rotate(90deg);
+}
+.is-rotate-180{
+  transform: rotate(180deg);
 }
 /* transform-x */
 .transform-x-leave-active,

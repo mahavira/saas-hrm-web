@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+    <title>icon_ic_organization</title>
+    <desc>Created with Sketch.</desc>
+    <g id="icon_ic_organization" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="矩形" fill="#FFFFFF" x="12" y="3" width="8" height="8" rx="2"></rect>
+        <path d="M26,15 L26,24 C26,24.5522847 25.5522847,25 25,25 C24.4477153,25 24,24.5522847 24,24 L24,16 L17,16 L17,24 C17,24.5522847 16.5522847,25 16,25 C15.4477153,25 15,24.5522847 15,24 L15,16 L8,16 L8,24 C8,24.5522847 7.55228475,25 7,25 C6.44771525,25 6,24.5522847 6,24 L6,15 C6,14.4477153 6.44771525,14 7,14 L15,14 L15,9 C15,8.44771525 15.4477153,8 16,8 C16.5522847,8 17,8.44771525 17,9 L17,14 L25,14 C25.5522847,14 26,14.4477153 26,15 Z" id="形状结合" fill="#FFFFFF"></path>
+        <rect id="矩形" fill="#FFFFFF" x="12" y="21" width="8" height="8" rx="2"></rect>
+        <rect id="矩形" fill="#FFFFFF" x="21" y="21" width="8" height="8" rx="2"></rect>
+        <rect id="矩形" fill="#FFFFFF" x="3" y="21" width="8" height="8" rx="2"></rect>
+    </g>
+</svg>

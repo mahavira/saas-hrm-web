@@ -16,14 +16,16 @@
     "element-ui": "^2.4.11",
     "normalize.css": "^8.0.1",
     "nuxt": "^2.0.0",
-    "vue-hoc": "^0.4.7",
-    "vue-moment": "^4.0.0"
+    "print-js": "^1.0.63",
+    "vue-moment": "^4.0.0",
+    "vue-organization-chart": "^1.1.6"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^1.0.1",
     "@nuxtjs/eslint-module": "^1.0.0",
     "@nuxtjs/proxy": "^1.3.3",
     "babel-eslint": "^10.0.1",
+    "better-mock": "^0.1.5",
     "eslint": "^6.1.0",
     "eslint-plugin-nuxt": ">=0.4.2",
     "json-loader": "^0.5.7",

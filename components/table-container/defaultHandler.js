@@ -1,19 +1,17 @@
 export default [{
-  type: 'button',
   color: 'primary',
   icon: 'el-icon-plus',
-  handler: 'ADD',
+  action: 'dialog:create',
+  refresh: true,
   label: '新 增'
 }, {
-  type: 'dropdown',
   color: 'default',
-  handler: 'DROPDOWN',
   label: '批量操作',
   options: [{
     label: '批量删除',
-    value: 'DELETE'
+    action: 'table:selected'
   }, {
     label: '批量导入',
-    value: 'showImport'
+    action: 'showImport'
   }]
 }]

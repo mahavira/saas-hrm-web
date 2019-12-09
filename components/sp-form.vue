@@ -1,16 +1,24 @@
 <template>
-  <el-form ref="form" :model="value" :rules="rules" class="sp-form" label-width="100px">
+  <el-form
+    ref="form"
+    :model="value"
+    :class="mode"
+    :rules="rules"
+    class="sp-form"
+    label-width="124px"
+  >
     <el-form-item
       v-for="(item, name) in fields"
       :key="name"
       :prop="name"
       :label="item.label"
-      :class="{full: item.isFull, 'top-align': item.isTopAlign}"
+      :class="{full: (item.isFull || item.divider), 'top-align': item.isTopAlign, divider: item.divider, line: item.line}"
       class="item"
     >
-      <div v-if="!edited" class="inner">{{ value[name] || '/' }}</div>
+      <div v-if="item.divider" />
+      <div v-else-if="!edited" class="inner">{{ value[name] || '/' }}</div>
       <div v-else>
-        <el-input v-if="INPUT === item.formType" v-model="value[name]" :placeholder="item.placeholder||'请输入'" size="small" />
+        <el-input v-if="!item.formType||INPUT === item.formType" v-model="value[name]" :placeholder="item.placeholder||'请输入'" size="small" />
         <el-date-picker
           v-if="DATE_PICKER === item.formType"
           v-model="value[name]"
@@ -35,17 +43,44 @@
           :placeholder="item.placeholder||'请输入'"
           type="textarea"
         />
+        <el-input-number
+          v-if="INPUT_NUMBER === item.formType"
+          v-model="value[name]"
+          :placeholder="item.placeholder||'请输入'"
+          size="small"
+        />
+        <el-checkbox-group
+          v-if="CHECKBOX === item.formType"
+          v-model="value[name]"
+          :placeholder="item.placeholder||'请选择'"
+          size="small"
+          class="checkbox-group"
+        >
+          <el-checkbox v-for="(label, key) in opts[name]" :label="key" :key="key">{{ label }}</el-checkbox>
+        </el-checkbox-group>
+        <el-radio-group
+          v-if="RADIO === item.formType"
+          v-model="value[name]"
+          :placeholder="item.placeholder||'请选择'"
+          size="small"
+          class="radio-group"
+        >
+          <el-radio v-for="(label, key) in opts[name]" :label="key" :key="key">{{ label }}</el-radio>
+        </el-radio-group>
       </div>
     </el-form-item>
   </el-form>
 </template>
 <script>
-import * as formtype from '~/utils/formType'
+import * as formtype from '~/config/formItemType'
 import { isArray, isObject, isString } from '~/utils'
 
 export default {
-  // functional: true,
   props: {
+    mode: {
+      type: String,
+      default: 'double'
+    },
     fields: {
       type: [Object, Array],
       default: () => {}
@@ -103,3 +138,15 @@ export default {
   }
 }
 </script>
+<style scoped lang="scss">
+.divider{
+  margin: 0 0 14px 0;
+  padding-top: 10px;
+  &.line{
+    border-top: 1px solid rgba(215,214,230,1);
+  }
+}
+.checkbox-group{
+  height: 32px;
+}
+</style>

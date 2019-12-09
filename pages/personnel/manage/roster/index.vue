@@ -1,11 +1,10 @@
 <template>
   <div class="el-container is-vertical">
     <summary-header :data="total" />
-    <table-container ref="tableContainer" v-bind="conf" />
+    <table-container ref="tableContainer" />
   </div>
 </template>
 <script>
-import * as conf from './.conf'
 import SummaryHeader from '~/components/summary-header'
 import TableContainer from '~/components/table-container'
 
@@ -13,7 +12,6 @@ export default {
   components: { SummaryHeader, TableContainer },
   data () {
     return {
-      conf,
       total: [{
         label: '在职',
         value: 9

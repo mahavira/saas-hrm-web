@@ -4,7 +4,15 @@
     <div class="">
       <el-collapse v-model="activeNames" @change="handleChange" accordion>
         <el-collapse-item v-for="i in 6" :key="i" :name="i" title="销售部">
-          <el-tree :data="data" :default-expand-all="true" />
+          <el-tree
+            ref="tree"
+            :data="data"
+            :default-expand-all="true"
+            :highlight-current="true"
+            :expand-on-click-node="false"
+            :current-node-key="0"
+            @node-click="onTapNode"
+          />
         </el-collapse-item>
       </el-collapse>
     </div>
@@ -31,8 +39,14 @@ export default {
       }]
     }
   },
+  mounted () {
+    console.log(this.$refs.tree)
+  },
   methods: {
-    handleChange () {}
+    handleChange () {},
+    onTapNode (a, b, c) {
+      console.log(a, b, c)
+    }
   }
 }
 </script>
@@ -43,11 +57,15 @@ export default {
   overflow: hidden;
   .title{
     line-height: 22px;
-    padding: 16px 32px 15px;
+    padding: 16px 32px 16px;
     background:rgba(241,242,244,0.5);
-    color: rgba($color: #000000, $alpha: 0.39)
+    color: rgba($color: #000000, $alpha: 0.39);
+    font-weight: 500;
   }
   /deep/{
+    .el-collapse{
+      border: none
+    }
     .el-collapse-item__header{
       padding: 0 10px 0 32px;
       background: transparent

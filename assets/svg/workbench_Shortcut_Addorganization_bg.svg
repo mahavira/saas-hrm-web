@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="96px" height="130px" viewBox="0 0 96 130" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+    <title>workbench_Shortcut_Addorganization_bg</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="86" height="120" rx="10"></rect>
+        <filter x="-9.9%" y="-5.4%" width="119.8%" height="114.2%" filterUnits="objectBoundingBox" id="filter-3">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.05 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="切图" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g transform="translate(-430.000000, -427.000000)" id="workbench_Shortcut_Addorganization_bg">
+            <g transform="translate(435.000000, 430.000000)">
+                <g id="icon_导出excel">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <g id="蒙版">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-3)" xlink:href="#path-1"></use>
+                        <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    </g>
+                    <g opacity="0.1" mask="url(#mask-2)" fill="#220EDB" id="形状结合">
+                        <g transform="translate(59.000000, 72.000000)">
+                            <path d="M23.6,0.96 C24.7045695,0.96 25.6,1.8554305 25.6,2.96 L25.6,10.16 C25.6,11.2645695 24.7045695,12.16 23.6,12.16 L21.456,12.16 L21.456,16.771 L33.56,16.7717647 C34.1122847,16.7717647 34.56,17.21948 34.56,17.7717647 L34.56,27.84 L37.04,27.84 C38.1445695,27.84 39.04,28.7354305 39.04,29.84 L39.04,37.04 C39.04,38.1445695 38.1445695,39.04 37.04,39.04 L29.84,39.04 C28.7354305,39.04 27.84,38.1445695 27.84,37.04 L27.84,29.84 C27.84,28.7354305 28.7354305,27.84 29.84,27.84 L31.648,27.84 L31.648,19.802 L21.456,19.802 L21.456,27.84 L23.6,27.84 C24.7045695,27.84 25.6,28.7354305 25.6,29.84 L25.6,37.04 C25.6,38.1445695 24.7045695,39.04 23.6,39.04 L16.4,39.04 C15.2954305,39.04 14.4,38.1445695 14.4,37.04 L14.4,29.84 C14.4,28.7354305 15.2954305,27.84 16.4,27.84 L18.544,27.84 L18.544,19.802 L8.352,19.802 L8.351,27.84 L10.16,27.84 C11.2645695,27.84 12.16,28.7354305 12.16,29.84 L12.16,37.04 C12.16,38.1445695 11.2645695,39.04 10.16,39.04 L2.96,39.04 C1.8554305,39.04 0.96,38.1445695 0.96,37.04 L0.96,29.84 C0.96,28.7354305 1.8554305,27.84 2.96,27.84 L5.439,27.84 L5.44,17.7717647 C5.44,17.21948 5.88771525,16.7717647 6.44,16.7717647 L7.352,16.7717647 L18.544,16.771 L18.544,12.16 L16.4,12.16 C15.2954305,12.16 14.4,11.2645695 14.4,10.16 L14.4,2.96 C14.4,1.8554305 15.2954305,0.96 16.4,0.96 L23.6,0.96 Z"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

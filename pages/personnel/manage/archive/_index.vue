@@ -1,16 +1,16 @@
 <template>
   <div>
-    <table-container ref="tableContainer" v-bind="conf" />
+    <table-container ref="tableContainer" />
     <el-dialog
       :visible.sync="visibleImportDialog"
-      :title="isImportUpdate?'批量导入':'批量导入更新'"
+      :title="isImportUpdate?'批量导入更新':'批量导入'"
       width="820px"
     >
       <div class="el-container is-justify-space-around" style="padding:40px 60px 80px">
         <a class="sp-upload-card__file" href="http://172.16.17.106:9590/hrEducationInfo/template/export" download="export.excel">
           <div class="icon-file file-upload" />
-          <div class="label">{{ isImportUpdate?'导出记录':'导出模版' }}</div>
-          <div class="hint">{{ isImportUpdate?'导出已有信息进行编辑':'导出标准模版，支持批量导入与员工教育经历' }}</div>
+          <div class="label">{{ isImportUpdate?'导出模版':'导出记录' }}</div>
+          <div class="hint">{{ isImportUpdate?'导出标准模版，支持批量导入与员工教育经历':'导出已有信息进行编辑' }}</div>
           <div class="point">1</div>
         </a>
         <el-upload
@@ -25,7 +25,7 @@
         >
           <div class="icon-file file-download" />
           <div class="label">{{ isImportUpdate?'导入文件':'导入文件' }}</div>
-          <div class="hint">{{ isImportUpdate?'导入编辑更新后的信息':'导入员工教育经历，完成新增' }}</div>
+          <div class="hint">{{ isImportUpdate?'导入员工教育经历，完成新增':'导入编辑更新后的信息' }}</div>
           <div class="point">2</div>
         </el-upload>
       </div>
@@ -35,46 +35,18 @@
         </div>
       </div>
     </el-dialog>
-
-    <transition name="fade">
-      <div v-if="visibleSelectDialog" @click="visibleSelectDialog=false" class="select-dialog">
-        <div @click.stop="showImportDialog(false)" class="item">
-          <div class="sp-wave-svg" style="height:180px;">
-            <div class="wave-svg-shape">
-              <svg id="738255fe-a9fa-4a5e-963a-8e97f59370ad" class="wave-svg" xmlns="http://www.w3.org/2000/svg" data-name="3-waves" viewBox="0 0 600 215.43"><path class="871c1787-a7ef-4a54-ad03-3cd50e05767a" d="M639,986.07c-17-1-27.33-.33-40.5,2.67s-24.58,11.84-40.46,15c-13.56,2.69-31.27,2.9-46.2,1.35-17.7-1.83-35-9.06-35-9.06S456,987.07,439,986.07s-27.33-.33-40.5,2.67-24.58,11.84-40.46,15c-13.56,2.69-31.27,2.9-46.2,1.35-17.7-1.83-35-9.06-35-9.06S256,987.07,239,986.07s-27.33-.33-40.5,2.67-24.58,11.84-40.46,15c-13.56,2.69-31.27,2.9-46.2,1.35-17.7-1.83-35-9.06-35-9.06v205.06h600V996S656,987.07,639,986.07Z" transform="translate(-76 -985)" /></svg>
-            </div>
-          </div>
-          <div class="wrp">
-            <img src="~/assets/icon/scene_add_staff@2x.png" alt="">
-            <h3 class="title">批量导入新增</h3>
-            <p>适用于首次批量导入添加员工信息，支持导入在职，离职员工.</p>
-          </div>
-        </div>
-        <div @click.stop="showImportDialog(true)" class="item">
-          <div class="sp-wave-svg" style="height:180px;">
-            <div class="wave-svg-shape">
-              <svg id="738255fe-a9fa-4a5e-963a-8e97f59370ad" class="wave-svg" xmlns="http://www.w3.org/2000/svg" data-name="3-waves" viewBox="0 0 600 215.43"><path class="871c1787-a7ef-4a54-ad03-3cd50e05767a" d="M639,986.07c-17-1-27.33-.33-40.5,2.67s-24.58,11.84-40.46,15c-13.56,2.69-31.27,2.9-46.2,1.35-17.7-1.83-35-9.06-35-9.06S456,987.07,439,986.07s-27.33-.33-40.5,2.67-24.58,11.84-40.46,15c-13.56,2.69-31.27,2.9-46.2,1.35-17.7-1.83-35-9.06-35-9.06S256,987.07,239,986.07s-27.33-.33-40.5,2.67-24.58,11.84-40.46,15c-13.56,2.69-31.27,2.9-46.2,1.35-17.7-1.83-35-9.06-35-9.06v205.06h600V996S656,987.07,639,986.07Z" transform="translate(-76 -985)" /></svg>
-            </div>
-          </div>
-          <div class="wrp">
-            <img src="~/assets/icon/scene_update_staff@2x.png" alt="">
-            <h3 class="title">批量导入更新</h3>
-            <p>适用于批量更新，修改系统已存在人员的信息.</p>
-          </div>
-        </div>
-      </div>
-    </transition>
+    <select-imput-dialog :visible.sync="visibleSelectDialog" @select="showImportDialog" />
   </div>
 </template>
+
 <script>
-import { getConf } from './.conf/index'
 import TableContainer from '~/components/table-container'
+import selectImputDialog from '~/components/select-import-dialog'
 
 export default {
-  components: { TableContainer },
+  components: { TableContainer, selectImputDialog },
   data () {
     return {
-      conf: getConf(this.$route.params.index),
       uploadUrl: `${this.$axios.defaults.baseURL}/hrEducationInfo/import`,
       headers: {
         token: this.$store.state.authorization
@@ -89,7 +61,6 @@ export default {
   },
   methods: {
     async onImportSuccess (response, file, fileList) {
-      console.log(response)
       if (response.data && response.data.status === 0 && response.data.status === 200) {
         return this.$message.success('导入成功')
       }
@@ -98,7 +69,7 @@ export default {
         const res = await this.$axios.post('hrEducationInfo/export', response.data, {
           responseType: 'blob'
         })
-        const fileName = '导出错误说明.xls'
+        const fileName = '导入错误说明.xls'
         const blob = new Blob([res.data], { type: 'application/x-xls' })
         if (window.navigator.msSaveOrOpenBlob) {
           navigator.msSaveBlob(blob, fileName)
@@ -120,51 +91,10 @@ export default {
       this.visibleSelectDialog = true
     },
     showImportDialog (e) {
-      this.isImportUpdate = e
+      this.isImportUpdate = !!e
       this.visibleSelectDialog = false
       this.visibleImportDialog = true
     }
   }
 }
 </script>
-<style lang="scss" scoped>
-  .select-dialog{
-    position: fixed;
-    left: 80px;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    background:rgba(0,0,0,0.25);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 99999;
-    .item{
-      width: 300px;
-      height: 300px;
-      background:rgba(255,255,255,1);
-      border-radius:10px;
-      padding: 50px;
-      margin: 0 10px;
-      color: rgba(0, 0, 0, 0.85);
-      position: relative;
-      cursor: pointer;
-      .wrp{
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-      }
-      img{
-        width: 180px;
-        height: 180px;
-      }
-      p{
-        color:rgba(0,0,0,0.85 * 0.5);
-        line-height: 22px;
-        text-align: center;
-      }
-    }
-  }
-</style>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="96px" height="130px" viewBox="0 0 96 130" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+    <title>workbench_Shortcut_Addarchives_bg</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="86" height="120" rx="10"></rect>
+        <filter x="-9.9%" y="-5.4%" width="119.8%" height="114.2%" filterUnits="objectBoundingBox" id="filter-3">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.05 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="切图" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g transform="translate(-540.000000, -427.000000)" id="workbench_Shortcut_Addarchives_bg">
+            <g transform="translate(545.000000, 430.000000)">
+                <g id="icon_导出excel">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <g id="蒙版">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-3)" xlink:href="#path-1"></use>
+                        <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    </g>
+                    <g id="编组" opacity="0.1" mask="url(#mask-2)">
+                        <g transform="translate(43.000000, 65.000000)">
+                            <path d="M0,36.483871 L0,74 C2.705415e-16,76.209139 1.790861,78 4,78 L54,78 C56.209139,78 58,76.209139 58,74 L58,66.6774194 L58,66.6774194 L58,36.483871 L58,12.4095484 L43.2934855,0 L4,0 C1.790861,-4.82366169e-16 -2.705415e-16,1.790861 0,4 L0,15.0967742 L0,15.0967742 L0,36.483871 Z" id="Fill-4" fill="#F6E62E"></path>
+                            <path d="M43.9547031,0 L42.037694,11.029587 C41.6594035,13.206096 43.1171477,15.2771702 45.2936567,15.6554606 C45.8261078,15.7480039 46.3717903,15.7316906 46.8977623,15.6075057 L58,12.9862061 L58,12.9862061 L43.9547031,0 Z" id="Fill-10" fill="#AFA9E6"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

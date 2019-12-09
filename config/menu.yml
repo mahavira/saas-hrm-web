@@ -6,175 +6,214 @@
   label: 人事
   redirect: /personnel/manage/roster
   children:
-    - path: manage/roster
-      name: manage
-      label: 员工管理
+  - path: manage/roster
+    name: manage
+    label: 员工管理
+    children:
+    - name: roster
+      path: roster
+      label: 员工花名册
+    - name: archive
+      path: archive/education
+      label: 员工档案库
       children:
-        - name: roster
-          path: roster
-          label: 员工花名册
-        - name: archive
-          path: archive/education
-          label: 员工档案库
-          children:
-            - path: education
-              name: education
-              label: 教育经历
-            - path: work
-              name: work
-              label: 工作经历
-            - path: cert
-              name: cert
-              label: 证书/证件
-            - path: contact
-              name: contact
-              label: 紧急联系人
-            - path: family
-              name: family
-              label: 家庭成员
-            - path: position
-              name: position
-              label: 职称
-            - path: skill
-              name: skill
-              label: 工作技能
-            - path: language
-              name: language
-              label: 语言能力
-    - path: relation/enrollment/wait
-      name: relation
-      label: 员工关系
-      redirect: relation/enrollment/wait
+      - path: education
+        name: education
+        label: 教育经历
+      - path: work
+        name: work
+        label: 工作经历
+      - path: cert
+        name: cert
+        label: 证书/证件
+      - path: contact
+        name: contact
+        label: 紧急联系人
+      - path: family
+        name: family
+        label: 家庭成员
+      - path: position
+        name: position
+        label: 职称
+      - path: skill
+        name: skill
+        label: 工作技能
+      - path: language
+        name: language
+        label: 语言能力
+  - path: relation/enrollment/wait
+    name: relation
+    label: 员工关系
+    redirect: relation/enrollment/wait
+    children:
+    - path: enrollment/wait
+      name: enrollment
+      label: 入职管理
       children:
-        - path: enrollment/wait
-          name: enrollment
-          label: 入职管理
-          children:
-            - path: wait
-              name: wait
-              label: 待入职
-            - path: new
-              name: new
-              label: 最近入职
-            - path: abandon
-              name: abandon
-              label: 放弃入职
-        - path: probation
-          name: probation
-          label: 转正管理
-        - path: resignation/wait
-          name: resignation
-          label: 离职管理
-          children:
-            - path: wait
-              name: wait
-              label: 待离职
-            - path: abandon
-              name: abandon
-              label: 已离职
-        - path: transfer
-          name: transfer
-          label: 人事调动
-        - path: contract/info
-          name: contract
-          label: 合同管理
-          children:
-            - path: sign
-              name: sign
-              label: 已签订合同
-            - path: not
-              name: not
-              label: 未签订合同
-            - path: log
-              name: log
-              label: 合同签订记录
-            - path: info
-              name: info
-              label: 合同概况
+      - path: wait
+        name: wait
+        label: 待入职
+      - path: new
+        name: new
+        label: 最近入职
+      - path: abandon
+        name: abandon
+        label: 放弃入职
+    - path: probation
+      name: probation
+      label: 转正管理
+    - path: resignation/wait
+      name: resignation
+      label: 离职管理
+      children:
+      - path: wait
+        name: wait
+        label: 待离职
+      - path: abandon
+        name: abandon
+        label: 已离职
+    - path: transfer
+      name: transfer
+      label: 人事调动
+    - path: contract/info
+      name: contract
+      label: 合同管理
+      children:
+      - path: sign
+        name: sign
+        label: 已签订合同
+      - path: not
+        name: not
+        label: 未签订合同
+      - path: log
+        name: log
+        label: 合同签订记录
+      - path: info
+        name: info
+        label: 合同概况
 - path: /organization/manage
   name: organization
   label: 组织
   children:
+  - path: manage
+    name: manage
+    label: 组织管理
+  - path: diagram
+    name: diagram
+    label: 架构图
+  - path: post/manage
+    name: post
+    label: 岗位管理
+    children:
     - path: manage
       name: manage
-      label: 组织管理
-    - path: diagram
-      name: diagram
-      label: 架构图
-    - path: post/manage
-      name: post
       label: 岗位管理
-      children:
-      - path: manage
-        name: manage
-        label: 岗位管理
-      - path: category
-        name: category
-        label: 岗位类别
-    - path: duty/manage
-      name: duty
-      label: 职务体系
-      # redirect: /organization/duty/manage
-      children:
-        - path: manage
-          name: manage
-          label: 职级管理
-        - path: level
-          name: level
-          label: 职等管理
-        - path: post
-          name: post
-          label: 职务管理
+    - path: category
+      name: category
+      label: 岗位类别
+  - path: duty/manage
+    name: duty
+    label: 职务体系
+    children:
+    - path: manage
+      name: manage
+      label: 职级管理
+    - path: level
+      name: level
+      label: 职等管理
+    - path: post
+      name: post
+      label: 职务管理
 - path: /recruit
   name: recruit
   label: 招聘
   redirect: /recruit/candidate
   children:
-    - path: candidate
-      name: candidate
-      label: 候选人
-    - path: post/begin
-      name: post
-      label: 招聘职位
-      children:
-      - path: begin
-        name: begin
-        label: 招聘中
-      - path: cease
-        name: cease
-        label: 停止招聘
-    - path: interview
-      name: interview
-      label: 面试日程
-    - path: offer/all
-      name: offer
-      label: offer管理
-      children:
-      - path: all
-        name: all
-        label: 全部
-      - path: accepted
-        name: accepted
-        label: 已接受offer
-      - path: invalid
-        name: invalid
-        label: 失效offer
-    - path: talent
-      name: talent
-      label: 人才库
-- path: /attendance/current
+  - path: candidate
+    name: candidate
+    label: 候选人
+  - path: post/begin
+    name: post
+    label: 招聘职位
+    children:
+    - path: begin
+      name: begin
+      label: 招聘中
+    - path: cease
+      name: cease
+      label: 停止招聘
+  - path: interview
+    name: interview
+    label: 面试日程
+  - path: offer/all
+    name: offer
+    label: offer管理
+    children:
+    - path: all
+      name: all
+      label: 全部
+    - path: accepted
+      name: accepted
+      label: 已接受offer
+    - path: invalid
+      name: invalid
+      label: 失效offer
+  - path: talent
+    name: talent
+    label: 人才库
+- path: /attendance/current/summary
   name: attendance
   label: 考勤
   children:
-  - path: current
+  - path: current/summary
     name: current
     label: 当月考勤
+    children:
+    - path: summary
+      name: summary
+      label: 月考勤汇总表
+    - path: leave
+      name: leave
+      label: 请假记录
+    - path: outgo
+      name: outgo
+      label: 外出记录
+    - path: business-trip
+      name: business-trip
+      label: 出差记录
+    - path: overtime
+      name: overtime
+      label: 加班记录
   - path: history
     name: history
     label: 历史考勤
-  - path: vacation
+  - path: vacation/annual
     name: vacation
     label: 假期
-- path: /salary
+    children:
+    - path: annual
+      name: annual
+      label: 年假管理
+    - path: leave
+      name: leave
+      label: 调休管理
+- path: /salary/manage/payroll
   name: salary
   label: 薪酬
+  children:
+  - path: manage/payroll
+    name: manage
+    label: 薪酬管理
+    children:
+    - path: payroll
+      name: payroll
+      label: 工资表
+    - path: archive
+      name: archive
+      label: 薪资档案
+    - path: record
+      name: record
+      label: 薪酬记录
+  - path: paystub
+    name: paystub
+    label: 电子工资条

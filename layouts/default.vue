@@ -10,8 +10,25 @@
     .lay-header
       a.item.search
       a.item.bell
-      a.item.user
-        img(src="~/assets/images/logo.png")
+      el-dropdown
+        a.item.user
+          img(src="~/assets/images/logo.png")
+        el-dropdown-menu(slot="dropdown",class='dropdown')
+          el-dropdown-item.dropdown-item.avater
+            img(src="~/assets/images/logo.png")
+            span 欧阳飞雪
+          el-dropdown-item.dropdown-item.line
+            i.el-icon-user-solid
+            span 个人信息
+          el-dropdown-item.dropdown-item
+            i.el-icon-s-goods
+            span 修改密码
+          el-dropdown-item.dropdown-item.line
+            i.el-icon-s-shop
+            span 进入官网
+          el-dropdown-item.dropdown-item
+            i.el-icon-switch-button
+            span 退出登录
     nuxt.lay-main(v-if="!menus[1]||!menus[1].length")
     tab-level-one.lay-main(v-else :tabs="menus[1]" :active="currentPaths[1]" :prefix="[...currentPaths].splice(0,1).join('/')")
       nuxt.el-container.is-vertical(v-if="!menus[2]||!menus[2].length")
@@ -19,20 +36,20 @@
         nuxt(v-if="!menus[3]||!menus[3].length")
         tab-level-three(v-else :tabs="menus[3]" :active="currentPaths[3]" :prefix="[...currentPaths].splice(0,3).join('/')")
           nuxt
-  dialog-add
+  dialog-create
 </template>
 <script>
 import TabLevelOne from '~/components/level-tab/one'
 import TabLevelTwo from '~/components/level-tab/two'
 import TabLevelThree from '~/components/level-tab/three'
-import DialogAdd from '~/components/dialog/add'
+import DialogCreate from '~/components/dialog/create.vue'
 export default {
   provide () {
     return {
       $app: this
     }
   },
-  components: { TabLevelOne, TabLevelTwo, TabLevelThree, DialogAdd },
+  components: { TabLevelOne, TabLevelTwo, TabLevelThree, DialogCreate },
   computed: {
     menus () {
       return this.$store.getters['route/currentMenus']
@@ -78,6 +95,46 @@ export default {
     }
   }
 }
+  .dropdown{
+    padding: 0;
+    min-width: 190px;
+    box-shadow:0px 2px 20px 0px rgba(0,0,0,0.2);
+    /deep/{
+      .el-dropdown-menu__item{
+        padding: 16px 0 16px 24px;
+        color:rgba(0,0,0,0.5);
+        line-height: 20px;
+        &.avater{
+          display: flex;
+          align-items: center;
+          padding: 30px 10px 30px 20px;
+          font-size:18px;
+          color:rgba(0,0,0,0.85);
+          img{
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #000000;
+            display: block;
+            margin-right: 15px;
+          }
+        }
+        i{
+          margin-right: 36px;
+          color: $color-primary;
+        }
+        &.line{
+          border-top: 1px solid rgba(233,233,233,1);
+        }
+        &:last-of-type{
+          background: rgba(250,250,250,1);
+          border-radius: 0 0 10px 10px;
+          margin-top: 20px;
+        }
+      }
+    }
+
+  }
 .lay-sidebar{
   height: 100vh;
   flex: 0 0 80px;
@@ -111,7 +168,6 @@ export default {
   text-align: center;
   text-decoration: none;
   margin-left: 8px;
-  transition: all 0.2s;
   transition: all 0.3s ease-in;
   border-radius: 10px 0 0 10px;
   .anibg{
@@ -121,9 +177,9 @@ export default {
     left: 0;
     top: 0;
     bottom: 0;
-    right: 0;
+    right: -10px;
     transform: translateX(100%);
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(.25,.1,.3,1.5);
   }
   &:after {
     content: '';

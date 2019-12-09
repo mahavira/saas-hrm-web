@@ -1,7 +1,6 @@
 export default [{
-  type: 'button',
   color: 'default',
   icon: 'el-icon-edit',
-  handler: 'EDIT',
+  action: 'detail:edited',
   label: '快速编辑'
 }]

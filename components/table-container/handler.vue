@@ -1,24 +1,28 @@
 <template>
-  <span>
+  <span class="item">
     <el-button
-      v-if="item.type==='button'"
-      @click="onHandler(item.handler)"
+      v-if="!item.options"
+      @click="onHandler(item)"
       :type="item.color || 'primary'"
       class="is-shadow"
       size="small"
     >
       <i :class="item.icon" /> {{ item.label }}
     </el-button>
-    <el-dropdown v-if="item.type==='dropdown'" @command="onDorpdownHandler(item.handler, $event)">
+    <el-dropdown v-else @command="onDorpdownHandler(item, $event)">
       <el-button :type="item.color || 'primary'" :icon="item.icon" size="small" class="is-shadow">{{ item.label }}
         <i class="el-icon-arrow-down el-icon--right" /></el-button>
       <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item v-for="(option, i) in item.options" :key="i" :command="option.value">{{ option.label }}</el-dropdown-item>
+        <el-dropdown-item v-for="(option, i) in item.options" :key="i" :command="option">
+          <i :class="option.icon" class="dropdown-item-icon" />
+          {{ option.label }}
+        </el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
   </span>
 </template>
 <script>
+import { isFunction } from '~/utils'
 export default {
   inject: ['parent'],
   props: {
@@ -29,20 +33,31 @@ export default {
     }
   },
   methods: {
-    onHandler (e) {
-      console.log(this.parent, e)
-      if (e === 'ADD') {
-        this.parent.openAddDialog()
-      } else if (e === 'DELETE') {
-        this.parent.selected = true
-      } else if (e === 'EDIT') {
-        this.$parent.editing = true
-      } else
-      // if (this.$parent[e]) {
-      //   this.$parent[e]()
-      // } else
-      if (this.parent.$parent[e]) {
-        this.parent.$parent[e](this.parent)
+    onHandler ({ action = null, refresh = false }) {
+      if (!action) { return }
+      if (isFunction(action)) {
+        return action(this.parent)
+      }
+      const [ type, prop ] = action.split(':')
+      if (type === 'dialog') {
+        const dialog = this.parent.dialog
+        if (!dialog) { return }
+        const config = dialog[prop]
+        if (!config) { return }
+        if (config.refresh) {
+          config.callback = (e) => {
+            if (e === 'confirm' || e === 'next') {
+              this.parent.fetch()
+            }
+          }
+        }
+        this.$bus.$emit('dialog:create', config)
+      } else if (type === 'table') {
+        this.parent[prop] = !this.parent[prop]
+      } else if (type === 'detail') {
+        this.parent[prop] = !this.parent[prop]
+      } else if (this.parent.$parent[type]) {
+        this.parent.$parent[type](this.parent)
       }
     },
     onDorpdownHandler (type, e) {
@@ -51,3 +66,13 @@ export default {
   }
 }
 </script>
+<style scoped lang="scss">
+@import '~/assets/var.scss';
+.item {
+  margin-left: 8px;
+  display: inline-block
+}
+.dropdown-item-icon{
+  color: $color-primary
+}
+</style>

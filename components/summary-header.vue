@@ -62,15 +62,16 @@ export default {
 <style lang="scss" scoped>
 @import '~/assets/var.scss';
 .header{
-  padding: 28px 24px 20px;
+  padding: 30px 32px 0;
+  position: relative;
+  bottom: -8px;
   .item{
     display: inline-block;
     font-size: 14px;
-    font-weight:400;
+    font-weight: 400;
     color:rgba(0,0,0,0.45);
     line-height: 28px;
     padding: 0 32px;
-    margin: 5px 0;
     position: relative;
     .num{
       font-size: 16px;
@@ -107,10 +108,16 @@ export default {
   display: flex;
   justify-content: space-between;
   .item{
-    padding: 10px 22px;
     color: rgba(0,0,0,0.45);
     text-align: center;
     cursor: pointer;
+    padding: 26px 0;
+    flex: 1;
+    transition: background 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
     div:first-of-type{
       margin-bottom: 10px;
     }
@@ -118,6 +125,9 @@ export default {
       color: #0BAFB7;
       font-size: 16px;
       font-weight: 500;
+    }
+    &:hover{
+      background: lighten( $color-primary, 53%);
     }
   }
 }
