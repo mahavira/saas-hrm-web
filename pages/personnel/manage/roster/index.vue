@@ -14,7 +14,8 @@ export default {
     return {
       total: [{
         label: '在职',
-        value: 9
+        value: 9,
+        isPrimary: true
       }, {
         label: '全职',
         value: 9,

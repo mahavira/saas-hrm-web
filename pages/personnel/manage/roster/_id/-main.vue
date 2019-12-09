@@ -1,10 +1,17 @@
 <template>
-  <div class="content">
-    无数据
-  </div>
+  <el-scrollbar class="content is-vertical">
+    <!-- eslint-disable-next-line vue/require-component-is -->
+    <component v-bind:is="mod" />
+  </el-scrollbar>
 </template>
 <script>
+import modA from './mods/-a'
 export default {
+  /* eslint-disable vue/no-unused-components */
+  components: { modA },
+  props: {
+    mod: { type: String, default: 'mod-a' }
+  },
   data () {
     return {
     }
@@ -15,7 +22,6 @@ export default {
 </script>
 <style lang='scss' scoped>
 .content{
-  text-align: center;
-  color: #888
+  height: 100%;
 }
 </style>

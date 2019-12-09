@@ -7,11 +7,10 @@
         class="is-shadow"
         plain
         size="small"
-        round
       >
         <i class="el-icon-arrow-left is-primary" />
       </el-button>
-      <el-button type="default" class="is-shadow" size="small" round>
+      <el-button type="default" class="is-shadow" size="small">
         <i class="el-icon-delete is-primary" />
       </el-button>
     </div>

@@ -111,7 +111,7 @@ body{
       color:rgba(0,0,0,0.8);
     }
     .el-form-item__content{
-      margin-right:18px;
+      // margin-right:18px;
       line-height: 32px;
       .inner{
         color:rgba(0,0,0,0.65);
@@ -264,7 +264,7 @@ body{
   /deep/{
     .el-tabs__header{
       border-radius: 0 10px 0px 0px;
-      background: #E5E8EC;
+      background: rgba(229, 232, 236, 1);
       .el-tabs__nav{
         border: none
       }
@@ -272,8 +272,12 @@ body{
         padding: 6px 40px !important;
         height: auto;
         border: none;
+        font-weight: 400;
+        color: rgba(0, 0, 0, 0.8);
         &.is-active{
           background: #FFF;
+          color: rgba(0, 0, 0, 1);
+          font-weight: 500;
           border-radius: 10px 10px 0px 0px;
         }
         &:first-of-type{

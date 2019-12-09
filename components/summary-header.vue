@@ -1,7 +1,7 @@
 <template>
   <div class="header">
-    <div v-for="(item,index) in data" :key="index" :class="{'is-primary':index==0}" class="item">
-      {{ item.label }} <span :class="{'is-primary':index==0}" class="num">{{ item.value }} {{ unit }}</span>
+    <div v-for="(item,index) in data" :key="index" :class="{'is-primary':item.isPrimary}" class="item">
+      {{ item.label }} <span :class="{'is-primary':item.isPrimary}" class="num">{{ item.value }}</span> {{ item.unit || unit }}
       <el-popover
         v-if="item.children && item.children.length"
         placement="bottom"
@@ -11,7 +11,7 @@
         <div class="popover">
           <div v-for="(citem,i) in item.children" :key="i" class="item">
             <div>{{ citem.label }}</div>
-            <div><span>{{ item.value }}</span> {{ unit }}</div>
+            <div><span>{{ item.value }}</span> {{ item.unit || unit }}</div>
           </div>
         </div>
         <i slot="reference" class="el-icon-caret-bottom" />
@@ -78,13 +78,11 @@ export default {
       color: #0BAFB7;
       display: inline-block;
       text-align: right;
-      min-width: 38px;
+      padding-left: 16px;
     }
     &.is-primary{
-      padding-left: 0;
       .num{
         font-size: 32px;
-        min-width: 80px;
       }
     }
     &:before{
@@ -98,6 +96,9 @@ export default {
     }
     &:last-of-type:before{
       content: none;
+    }
+    &:first-of-type{
+      padding-left: 10px;
     }
     &.active{
       color: $color-primary;

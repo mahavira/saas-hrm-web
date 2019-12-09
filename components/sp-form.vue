@@ -72,7 +72,7 @@
   </el-form>
 </template>
 <script>
-import * as formtype from '~/config/formItemType'
+import * as formtype from '~/constant/formItemType'
 import { isArray, isObject, isString } from '~/utils'
 
 export default {
@@ -116,6 +116,17 @@ export default {
     this.form = this.$refs.form
   },
   methods: {
+    validate () {
+      return new Promise((resolve, reject) => {
+        this.form.validate((valid) => {
+          if (valid) {
+            resolve()
+          } else {
+            reject(new Error('验证不通过'))
+          }
+        })
+      })
+    },
     setOpts () {
       Object.keys(this.fields).forEach((name) => {
         const item = this.fields[name]

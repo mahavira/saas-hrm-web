@@ -1,4 +1,4 @@
-import { SELECT, INPUT, INPUT_NUMBER, DATE_PICKER, CHECKBOX } from '~/config/formItemType'
+import { SELECT, INPUT, INPUT_NUMBER, DATE_PICKER, CHECKBOX } from '~/constant/formItemType'
 
 export const urls = {
   create: '/mock/recruit/offer/all/create',

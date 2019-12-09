@@ -10,7 +10,7 @@
           :label="item.label"
         />
       </el-tabs>
-      <t-main />
+      <t-main :mod="`mod-${activeTab}`" />
     </div>
   </div>
 </template>

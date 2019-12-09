@@ -49,7 +49,7 @@
 <script>
 import { isObject } from '~/utils'
 import SpForm from '~/components/sp-form'
-import * as formItemType from '~/config/formItemType'
+import * as formItemType from '~/constant/formItemType'
 /**
  * 可传参数
  */
@@ -138,14 +138,13 @@ export default {
     onCannel () {
       this.close()
     },
-    onSave (isNext) {
-      this.$refs.ltform.form.validate((valid) => {
-        if (valid) {
-          this.save(isNext)
-        } else {
-          return false
-        }
-      })
+    async onSave (isNext) {
+      try {
+        await this.$refs.ltform.validate()
+        this.save(isNext)
+      } catch (e) {
+        console.error(e)
+      }
     },
     async save (isNext) {
       if (!this.url) { throw new Error('需提供url') }

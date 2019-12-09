@@ -53,8 +53,8 @@
                 <el-dropdown @command="onDropdown($event)">
                   <i class="el-icon-more is-rotate-90" />
                   <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item command="update"><i class="el-icon-plus is-primary" /> 查看发放详情</el-dropdown-item>
-                    <el-dropdown-item command="import"><i class="el-icon-edit is-primary" /> 查看工资条</el-dropdown-item>
+                    <el-dropdown-item command="detail"><i class="el-icon-plus is-primary" /> 查看发放详情</el-dropdown-item>
+                    <el-dropdown-item command=""><i class="el-icon-edit is-primary" /> 查看工资条</el-dropdown-item>
                     <el-dropdown-item command="delete"><i class="el-icon-delete is-primary" /> 删除工资条</el-dropdown-item>
                   </el-dropdown-menu>
                 </el-dropdown>
@@ -77,13 +77,23 @@ export default {
   computed: {
     date () {
       const year = this.$moment().add(this.yearInx, 'year').format('YYYY')
-      return `${year}年工资表`
+      return `${year}年工资条`
     }
   },
   methods: {
-    onDelete () {},
+    onDelete () {
+      this.$confirm('确定删除该工资条', '提示', {
+        type: 'warning'
+      })
+    },
     onSearch () {},
-    onDropdown () {},
+    onDropdown (e) {
+      if (e === 'detail') {
+        this.$router.push(`/salary/paystub/detail?date=2019-09`)
+      } else if (e === 'delete') {
+        this.onDelete()
+      }
+    },
     onYear (e) {
       this.yearInx = this.yearInx + e
     }

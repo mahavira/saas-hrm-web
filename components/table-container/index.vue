@@ -1,6 +1,6 @@
 <template>
   <div class="sp-container">
-    <div class="sp-filter">
+    <div v-if="!hideHeader" class="sp-filter">
       <div class="search">
         <el-input
           v-model="keyword"
@@ -36,9 +36,7 @@
           v-bind="item"
         >
           <template slot-scope="scope">
-            <span v-if="name!=='handler'" :class="item['cell-class-name']">
-              {{ scope.row[scope.column.property] }}
-            </span>
+            <span v-if="name!=='handler'" :class="item['cell-class-name']" v-html="formatter(scope, item)" />
             <span v-else :class="item['cell-class-name']">
               <el-button
                 v-for="(action,index) in item.actions"
@@ -99,6 +97,7 @@ import TDetail from './detail'
 import defaultHandler from './defaultHandler'
 import defaultEditHandler from './defaultEditHandler'
 import getConf from '~/config/mods'
+import { isString, isArray, isObject } from '~/utils'
 
 /**
  * 该组件提供常规增删改查
@@ -116,6 +115,7 @@ export default {
     return {
       tableFields: null,
       searchPlaceholder: '',
+      hideHeader: false,
       loading: true,
       keyword: '',
       visibleDetail: false,
@@ -131,6 +131,7 @@ export default {
         size: 10
       },
       pageSizes: [10, 20, 30, 50],
+      opts: {},
       ...conf
     }
   },
@@ -148,6 +149,7 @@ export default {
     }
   },
   created () {
+    this.setOpts(this.tableFields)
     this.fetch()
   },
   methods: {
@@ -177,6 +179,26 @@ export default {
           this.currentRow = data.data
         }
       } catch (e) {}
+    },
+    setOpts (fields) {
+      if (!fields) { return }
+      Object.keys(fields).forEach((name) => {
+        const item = fields[name]
+        if (isString(item.options) && item.options) {
+          const opts = this.$store.state.dict[item.options]
+          if (opts && Object.keys(opts).length) {
+            this.$set(this.opts, name, opts)
+          } else {
+            this.$store.dispatch('dict/fetch', item.options).then(() => {
+              this.$set(this.opts, name, this.$store.state.dict[item.options])
+            })
+          }
+        } else if (isArray(item.options)) {
+          this.$set(this.opts, name, item.options)
+        } else if (isObject(item.options)) {
+          this.$set(this.opts, name, item.options)
+        }
+      })
     },
     onRowClick (row) {
       if (this.visibleDetail) {
@@ -225,6 +247,19 @@ export default {
       this.pagination.page = 1
       this.pagination.size = e
       this.fetch()
+    },
+    formatter ({ row, column, $index }, item) {
+      const { property } = column
+      const value = row[property]
+      if (item.options) {
+        if (this.opts[property] && this.opts[property][value]) {
+          return this.opts[property][value]
+        }
+      }
+      if (item.formatter) {
+        return item.formatter(row)
+      }
+      return value
     }
   }
 }

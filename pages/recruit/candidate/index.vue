@@ -16,7 +16,8 @@ export default {
     return {
       total: [{
         label: '全部',
-        value: 129
+        value: 129,
+        isPrimary: true
       }, {
         label: '新候选',
         value: 9

@@ -1,4 +1,4 @@
-import { SELECT, DATE_PICKER } from '~/config/formItemType'
+import { SELECT, DATE_PICKER } from '~/constant/formItemType'
 
 export const urls = {
   create: '/mock/salary/manage/payroll/detail/create',

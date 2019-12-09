@@ -4,7 +4,7 @@ import {
   TEXTAREA,
   INPUT,
   DATE_PICKER
-} from '~/config/formItemType'
+} from '~/constant/formItemType'
 
 export const urls = {
   query: '/hrEducationInfo/list',
@@ -34,7 +34,8 @@ export const tableFields = {
     label: fields.gongzuoxingzhi
   },
   education: {
-    label: fields.xueli
+    label: fields.xueli,
+    options: 'education'
   },
   graduatedSchool: {
     label: fields.biyeyuanxiao

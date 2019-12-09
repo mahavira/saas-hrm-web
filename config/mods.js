@@ -6,7 +6,7 @@ requireContext.keys().forEach((key) => {
   const data = context.default || context
   mods[name] = data
 })
-
+console.table(mods, 'index')
 export default function get (key, name = null) {
   const mod = mods[key]
   if (!mod) {

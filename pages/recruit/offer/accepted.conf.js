@@ -1,4 +1,4 @@
-import { SELECT, INPUT, DATE_PICKER } from '~/config/formItemType'
+import { SELECT, INPUT, DATE_PICKER } from '~/constant/formItemType'
 
 export const urls = {
   create: '/mock/recruit/offer/accepted/create',

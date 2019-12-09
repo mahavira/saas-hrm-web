@@ -1,4 +1,4 @@
-import { SELECT, INPUT, INPUT_NUMBER, DATE_PICKER, CHECKBOX, RADIO } from '~/config/formItemType'
+import { SELECT, INPUT, INPUT_NUMBER, DATE_PICKER, CHECKBOX, RADIO } from '~/constant/formItemType'
 
 export const urls = {
   create: '/mock/recruit/candidate/create',
@@ -16,9 +16,9 @@ const commonField = {
   isTalent: {
     label: '',
     hidden: true,
-    'cell-class-name': 'el-tag el-tag--warning el-tag--small',
-    formatter: (row, column, cellValue, index) => {
-      return index % 2 === 0 ? '人才' : ''
+    formType: SELECT,
+    formatter: (row) => {
+      return row.isTalent ? '<span class="el-tag el-tag--warning el-tag--small">人才</span>' : ''
     }
   },
   job: {

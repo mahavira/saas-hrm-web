@@ -1,12 +1,12 @@
 import Mock from 'better-mock'
 import getConf from '~/config/mods'
-import { SELECT, INPUT, DATE_PICKER, INPUT_NUMBER } from '~/config/formItemType'
+import { SELECT, INPUT, DATE_PICKER, INPUT_NUMBER } from '~/constant/formItemType'
 
 function setTemplate (fields, template = {}) {
   Object.keys(fields).forEach((name) => {
     const { formType } = fields[name]
     if (formType === SELECT) {
-      template[`${name}`] = '@integer(1,1)'
+      template[`${name}`] = '@integer(0,5)'
     } else if (formType === INPUT) {
       template[`${name}`] = '@cname'
     } else if (formType === DATE_PICKER) {
