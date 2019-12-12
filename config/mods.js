@@ -1,3 +1,4 @@
+// import './png-tool'
 export const mods = {}
 const requireContext = require.context('../pages', true, /\.conf\.js$/)
 requireContext.keys().forEach((key) => {

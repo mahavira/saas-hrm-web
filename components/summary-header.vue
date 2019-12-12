@@ -14,7 +14,7 @@
             <div><span>{{ item.value }}</span> {{ item.unit || unit }}</div>
           </div>
         </div>
-        <i slot="reference" class="el-icon-caret-bottom" />
+        <i slot="reference" class="icon-ico_drop-down" />
       </el-popover>
     </div>
   </div>

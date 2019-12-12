@@ -40,6 +40,10 @@
 .is-rotate-180{
   transform: rotate(180deg);
 }
+.is-large-padding{
+  padding-left: 36px;
+  padding-right: 36px;
+}
 /* transform-x */
 .transform-x-leave-active,
 .transform-x-enter-active {
@@ -74,7 +78,20 @@
 .slide-left-enter-to {
   transform: translateX(0);
 }
-/*fade-transform*/
+/* transform-x */
+.slide-left-fade-leave-active,
+.slide-left-fade-enter-active {
+  transition: transform .3s ease-in-out, opacity .3s ease-in-out;
+}
+.slide-left-fade-enter, .slide-left-fade-leave-to {
+  transform: translateX(5%);
+  opacity: 0;
+}
+.slide-left-fade-enter-to {
+  transform: translateX(0);
+  opacity: 1;
+}
+/*fade*/
 .fade-leave-active,
 .fade-enter-active {
   transition: all .3s;

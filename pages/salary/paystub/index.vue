@@ -53,9 +53,9 @@
                 <el-dropdown @command="onDropdown($event)">
                   <i class="el-icon-more is-rotate-90" />
                   <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item command="detail"><i class="el-icon-plus is-primary" /> 查看发放详情</el-dropdown-item>
-                    <el-dropdown-item command=""><i class="el-icon-edit is-primary" /> 查看工资条</el-dropdown-item>
-                    <el-dropdown-item command="delete"><i class="el-icon-delete is-primary" /> 删除工资条</el-dropdown-item>
+                    <el-dropdown-item command="detail"><i class="icon-ico_new-additions is-primary" /> 查看发放详情</el-dropdown-item>
+                    <el-dropdown-item command=""><i class="icon-ico_edit is-primary" /> 查看工资条</el-dropdown-item>
+                    <el-dropdown-item command="delete"><i class="icon-ico_delete is-primary" /> 删除工资条</el-dropdown-item>
                   </el-dropdown-menu>
                 </el-dropdown>
               </div>

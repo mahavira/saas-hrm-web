@@ -4,8 +4,8 @@
     :model="value"
     :class="mode"
     :rules="rules"
+    :label-width="labelWidth+'px'"
     class="sp-form"
-    label-width="124px"
   >
     <el-form-item
       v-for="(item, name) in fields"
@@ -96,6 +96,10 @@ export default {
     value: {
       type: [String, Array, Boolean, Number, Date, Object],
       default: () => {}
+    },
+    labelWidth: {
+      type: Number,
+      default: 124
     }
   },
   data () {

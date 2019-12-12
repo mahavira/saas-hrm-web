@@ -74,7 +74,7 @@ export const editFields = {
 export const handler = [{
   type: 'button',
   color: 'default',
-  icon: 'el-icon-delete is-primary',
+  icon: 'icon-ico_delete is-primary',
   action: 'table:selected',
   label: '批量删除'
 }]
@@ -82,7 +82,7 @@ export const handler = [{
 export const editHandler = [{
   type: 'button',
   color: 'default',
-  icon: 'el-icon-document is-primary',
+  icon: 'icon-ico_file is-primary',
   action: '',
   label: '资料档案'
 }, {

@@ -11,11 +11,15 @@ export default {
   components: { TableContainer },
   data () {
     return {
+      dialogStopRecruit: false
     }
   },
   mounted () {
   },
   methods: {
+    onStopRecruit () {
+      this.dialogStopRecruit = true
+    }
   }
 }
 </script>

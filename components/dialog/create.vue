@@ -14,7 +14,7 @@
       :rules="formRules"
       :fields="fields"
       :edited="true"
-      style="padding: 24px;"
+      :labelWidth="labelWidth"
     />
     <div slot="footer">
       <el-button
@@ -22,6 +22,7 @@
         @click="onCannel"
         type="default"
         size="small"
+        class="is-large-padding"
       >
         {{ cancelButtonText }}
       </el-button>
@@ -40,6 +41,7 @@
         :loading="loading"
         type="primary"
         size="small"
+        class="is-large-padding"
       >
         {{ confirmButtonText }}
       </el-button>
@@ -65,7 +67,8 @@ const defaultOpts = {
   confirmButtonText: '保存',
   confirmButtonNextText: '保存，继续录入',
   callback: null,
-  url: ''
+  url: '',
+  labelWidth: 124
 }
 
 export default {

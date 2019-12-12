@@ -20,15 +20,15 @@
     <div class="handler el-container is-vertical">
       <div>
         <a href="javascript:;">
-          <i class="el-icon-plus" />
+          <i class="icon-ico_new-additions" />
         </a>
         <a href="javascript:;">
-          <i class="el-icon-edit" />
+          <i class="icon-ico_edit" />
         </a>
       </div>
       <div>
         <a href="javascript:;">
-          <i class="el-icon-delete-solid" />
+          <i class="icon-ico_delete" />
         </a>
       </div>
     </div>
@@ -42,9 +42,9 @@
           <div slot-scope="{ node }" class="sp-tree-node">
             <span class="label">{{ node.label }}</span>
             <div class="icon">
-              <i class="el-icon-plus" />
-              <i class="el-icon-edit" />
-              <i class="el-icon-delete" />
+              <i class="icon-ico_new-additions" />
+              <i class="icon-ico_edit" />
+              <i class="icon-ico_delete" />
             </div>
           </div>
         </el-tree>

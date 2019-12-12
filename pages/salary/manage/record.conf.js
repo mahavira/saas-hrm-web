@@ -90,16 +90,16 @@ export const handler = [{
   label: '办理调薪',
   options: [{
     color: 'default',
-    icon: 'el-icon-edit is-primary',
+    icon: 'icon-ico_edit is-primary',
     label: '单个调薪'
   }, {
     color: 'default',
-    icon: 'el-icon-edit is-primary',
+    icon: 'icon-ico_edit is-primary',
     label: '批量调薪'
   }]
 }, {
   color: 'default',
-  icon: 'el-icon-delete is-primary',
+  icon: 'icon-ico_delete is-primary',
   action: 'table:selected',
   label: '批量删除'
 }]
@@ -111,7 +111,7 @@ export const editHandler = [{
   label: '打印核定表'
 }, {
   color: 'default',
-  icon: 'el-icon-delete is-primary',
+  icon: 'icon-ico_delete is-primary',
   action: 'detail:delete',
   label: '删除'
 }]

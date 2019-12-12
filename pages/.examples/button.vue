@@ -29,11 +29,11 @@
 
     <el-row>
       <el-button icon="el-icon-search" circle />
-      <el-button type="primary" icon="el-icon-edit" circle />
+      <el-button type="primary" icon="icon-ico_edit" circle />
       <el-button type="success" icon="el-icon-check" circle />
       <el-button type="info" icon="el-icon-message" circle />
       <el-button type="warning" icon="el-icon-star-off" circle />
-      <el-button type="danger" icon="el-icon-delete" circle />
+      <el-button type="danger" icon="icon-ico_delete" circle />
     </el-row>
     <el-row>
       <el-button disabled>默认按钮</el-button>
@@ -54,9 +54,9 @@
     </el-row>
 
     <el-row>
-      <el-button type="primary" icon="el-icon-edit" />
+      <el-button type="primary" icon="icon-ico_edit" />
       <el-button type="primary" icon="el-icon-share" />
-      <el-button type="primary" icon="el-icon-delete" />
+      <el-button type="primary" icon="icon-ico_delete" />
       <el-button type="primary" icon="el-icon-search">搜索</el-button>
       <el-button type="primary">上传<i class="el-icon-upload el-icon--right" /></el-button>
     </el-row>
@@ -70,9 +70,9 @@
 
     <el-row>
       <el-button-group>
-        <el-button type="primary" icon="el-icon-edit" />
+        <el-button type="primary" icon="icon-ico_edit" />
         <el-button type="primary" icon="el-icon-share" />
-        <el-button type="primary" icon="el-icon-delete" />
+        <el-button type="primary" icon="icon-ico_delete" />
       </el-button-group>
     </el-row>
     <el-row>

@@ -86,30 +86,30 @@ export const editFields = {
 export const searchPlaceholder = '职位名称'
 
 export const handler = [{
-  color: 'default',
-  icon: 'el-icon-plus is-primary',
+  color: 'primary',
+  icon: 'icon-ico_new-additions',
   action: 'dialog:create',
   label: '添加职位'
 }, {
   color: 'default',
-  icon: 'el-icon-download is-primary',
+  icon: 'icon-ico_import is-primary',
   action: 'table:selected',
-  label: '导出'
+  label: '导 出'
 }, {
   color: 'default',
-  icon: 'el-icon-delete is-primary',
+  icon: 'is-primary icon-ico_batch',
   action: 'table:selected',
-  label: '批量'
+  label: '批 量'
 }]
 
 export const editHandler = [{
   color: 'primary',
-  icon: 'el-icon-circle-close',
+  icon: 'icon-ico_withdraw-account',
   action: '',
   label: '重启招聘'
 }, {
   color: 'default',
-  icon: 'el-icon-edit is-primary',
+  icon: 'icon-ico_edit is-primary',
   action: 'detail:edited',
   label: '快速编辑'
 }]

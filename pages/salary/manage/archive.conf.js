@@ -88,10 +88,10 @@ export const searchPlaceholder = '姓名/工号'
 export const handler = [{
   color: 'default',
   label: '添加薪资',
-  icon: 'el-icon-plus is-primary',
+  icon: 'icon-ico_new-additions is-primary',
   options: [{
     color: 'default',
-    icon: 'el-icon-plus is-primary',
+    icon: 'icon-ico_new-additions is-primary',
     label: '单个调薪'
   }, {
     color: 'default',
@@ -107,17 +107,17 @@ export const handler = [{
 
 export const editHandler = [{
   color: 'default',
-  icon: 'el-icon-edit is-primary',
+  icon: 'icon-ico_edit is-primary',
   action: '',
   label: '调薪'
 }, {
   color: 'default',
-  icon: 'el-icon-document is-primary',
+  icon: 'icon-ico_file is-primary',
   action: 'detail:delete',
   label: '定薪详情'
 }, {
   color: 'default',
-  icon: 'el-icon-document is-primary',
+  icon: 'icon-ico_file is-primary',
   action: 'detail:delete',
   label: '调薪详情'
 }]

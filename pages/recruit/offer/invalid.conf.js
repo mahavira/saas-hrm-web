@@ -52,6 +52,7 @@ export const tableFields = {
   ...commonField,
   handler: {
     label: '操作',
+    width: 60,
     actions: ['EDIT']
   }
 }
@@ -79,7 +80,7 @@ export const searchPlaceholder = '姓名/手机号/邮箱'
 export const handler = [{
   type: 'button',
   color: 'default',
-  icon: 'el-icon-delete is-primary',
+  icon: 'icon-ico_delete is-primary',
   action: 'table:selected',
   label: '批量删除'
 }]
@@ -87,13 +88,13 @@ export const handler = [{
 export const editHandler = [{
   type: 'button',
   color: 'default',
-  icon: 'el-icon-document is-primary',
-  action: '',
+  icon: 'icon-ico_file is-primary',
+  action: 'openArchive',
   label: '资料档案'
 }, {
   type: 'button',
   color: 'default',
-  icon: 'el-icon-view is-primary',
+  icon: 'icon-ico_eye is-primary',
   action: 'openOffer',
   label: '查看offer'
 }]

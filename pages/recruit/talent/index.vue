@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <table-container ref="tableContainer" />
-  </div>
+  <el-scrollbar class="is-vertical sp-fixed-height__one">
+    <table-container />
+  </el-scrollbar>
 </template>
 
 <script>
@@ -18,7 +18,7 @@ export default {
   methods: {
     async onRemove () {
       await this.$confirm('确定移出人才库？ 该操作只会从人才库中移出人才，TA 在候选人中的应聘记录不会被移出。', '移出人才库', {
-        confirmButtonText: '确 定',
+        confirmButtonText: '确 认',
         cancelButtonText: '取 消',
         type: 'warning'
       })

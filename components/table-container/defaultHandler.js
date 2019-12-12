@@ -1,6 +1,6 @@
 export default [{
   color: 'primary',
-  icon: 'el-icon-plus',
+  icon: 'icon-ico_new-additions',
   action: 'dialog:create',
   refresh: true,
   label: '新 增'

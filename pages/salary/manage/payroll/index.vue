@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="sp-filter">
+    <div class="sp-filter" style="padding: 24px 32px">
       <div class="sp-date-selection">
         <div @click="onYear(-1)" class="handle-left">
           <i class="el-icon-arrow-left" />
@@ -53,7 +53,7 @@
               </div>
             </div>
             <div @click="$router.push('payroll/detail?date=2019-09')" class="list-block view">
-              <i class="el-icon-view" />
+              <i class="icon-ico_eye" />
             </div>
           </div>
         </div>

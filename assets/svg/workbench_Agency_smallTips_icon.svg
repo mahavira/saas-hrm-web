@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
-    <title>icon_ic_warning</title>
-    <desc>Created with Sketch.</desc>
-    <g id="icon_ic_warning" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <path d="M12,3 C16.9705627,3 21,7.02943725 21,12 C21,16.9705627 16.9705627,21 12,21 C7.02943725,21 3,16.9705627 3,12 C3,7.02943725 7.02943725,3 12,3 Z M12,15 C11.4477153,15 11,15.4477153 11,16 C11,16.5522847 11.4477153,17 12,17 C12.5522847,17 13,16.5522847 13,16 C13,15.4477153 12.5522847,15 12,15 Z M12,7 C11.4871642,7 11.0644928,7.38604019 11.0067277,7.88337887 L11,8 L11,13 C11,13.5522847 11.4477153,14 12,14 C12.5128358,14 12.9355072,13.6139598 12.9932723,13.1166211 L13,13 L13,8 C13,7.44771525 12.5522847,7 12,7 Z" id="形状结合" fill="#E35711"></path>
-    </g>
-</svg>

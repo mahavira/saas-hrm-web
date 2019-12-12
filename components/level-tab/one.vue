@@ -42,6 +42,7 @@ export default {
       position: relative;
       transition: color 0.3s;
       margin-top: 10px;
+      min-width: 130px;
       span{
         position: relative;
       }

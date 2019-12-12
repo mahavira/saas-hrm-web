@@ -85,7 +85,8 @@ const moveCandidateFormItems = {
   entryDt: {
     label: '应聘职位',
     formType: SELECT,
-    options: 'entryDt'
+    options: 'entryDt',
+    rules: [{ required: true, message: '请选择应聘职位' }]
   },
   entryDep: {
     label: '应聘渠道',
@@ -98,7 +99,8 @@ const changeJobFormItems = {
   entryDt: {
     label: '应聘职位',
     formType: SELECT,
-    options: 'entryDt'
+    options: 'entryDt',
+    rules: [{ required: true, message: '请选择应聘职位' }]
   }
 }
 
@@ -131,6 +133,8 @@ export const dialog = {
     fields: moveCandidateFormItems,
     url: urls.create,
     refresh: true,
+    labelWidth: 80,
+    confirmButtonText: '确 认',
     mode: 'single'
   },
   changeJobFormItems: {
@@ -138,30 +142,36 @@ export const dialog = {
     fields: changeJobFormItems,
     url: urls.create,
     mode: 'single',
+    confirmButtonText: '确 认',
+    labelWidth: 80,
     callback: (data, context) => {
     }
   }
 }
 export const handler = [{
   color: 'primary',
-  icon: 'el-icon-plus',
+  icon: 'icon-ico_new-additions',
   label: '添加人才',
   options: [{
     label: '单个添加人才',
+    icon: 'icon-ico_new-additions',
     action: 'dialog:create'
   }, {
     label: '批量导入简历',
+    icon: 'icon-ico_import',
     action: 'dialog:import'
   }]
 }, {
   color: 'default',
-  icon: 'el-icon-finished is-primary',
+  icon: 'icon-ico_export-and-import is-primary',
   label: '导出/导入',
   options: [{
     label: '批量导出人才',
+    icon: 'icon-ico_import',
     action: ''
   }, {
     label: '批量导入人才',
+    icon: 'icon-ico_export',
     action: ''
   }]
 }, {
@@ -170,34 +180,40 @@ export const handler = [{
   label: '批量',
   options: [{
     label: '批量更改应聘',
+    icon: 'icon-ico_import',
     action: ''
   }, {
     label: '批量下载简历',
+    icon: 'icon-ico_export',
     action: ''
   }, {
     label: '更改应聘职位',
+    icon: 'icon-ico_edit',
     action: 'dialog:changeJobFormItems'
   }]
 }]
 
 export const editHandler = [{
   color: 'default',
-  icon: 'el-icon-document is-primary',
+  icon: 'icon-ico_file is-primary',
   action: context => context.$router.push(`/recruit/talent/${context.currentRow.id}`),
   label: '人员档案'
 }, {
   color: 'default',
+  icon: 'icon-ico_transformation is-primary',
   label: '移动人才',
   options: [{
     label: '移动到候选人',
+    icon: 'icon-ico_revoke',
     action: 'dialog:moveCandidate'
   }, {
     label: '移出人才库',
+    icon: 'icon-ico_revoke',
     action: 'onRemove'
   }]
 }, {
   color: 'default',
-  icon: 'el-icon-edit is-primary',
+  icon: 'icon-ico_edit is-primary',
   action: 'detail:edited',
   label: '快速编辑'
 }, {
@@ -205,9 +221,11 @@ export const editHandler = [{
   label: '更多功能',
   options: [{
     label: '导出人才简历',
+    icon: 'icon-ico_export',
     action: ''
   }, {
     label: '发送offer',
+    icon: 'icon-ico_send-out',
     action: ''
   }]
 }]

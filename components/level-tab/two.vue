@@ -50,6 +50,7 @@ export default {
       font-weight: 400;
       position: relative;
       transition: color 0.3s;
+      min-width: 98px;
       span{
         position: relative;
       }

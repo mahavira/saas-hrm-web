@@ -8,7 +8,7 @@
     >
       <div class="el-container is-justify-space-around" style="padding:40px 60px 80px">
         <a class="sp-upload-card__file" href="http://172.16.17.106:9590/hrEducationInfo/template/export" download="export.excel">
-          <div class="icon-file file-upload" />
+          <div class="icon-png icon_ic_import_excel" />
           <div class="label">下载年假数据导入模版</div>
           <div class="hint">下载年假数据导入模板，填写发放的年假数量及生效时间等。</div>
           <div class="point">1</div>
@@ -23,7 +23,7 @@
           drag
           multiple
         >
-          <div class="icon-file file-download" />
+          <div class="icon-png icon_ic_export_excel" />
           <div class="label">上传年假数据表格</div>
           <div class="hint">将填写好的Excel导入系统。发放是在当前的剩余假期值上增加额度。</div>
           <div class="point">2</div>

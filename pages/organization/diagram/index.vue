@@ -3,8 +3,8 @@
     <div class="sp-filter is-white-bg">
       <div />
       <div>
-        <el-button type="primary" size="small" class="is-shadow"><i class="el-icon-setting" /> 设置</el-button>
-        <el-button @click="onExport" type="default" size="small" class="is-shadow"><i class="el-icon-download is-primary" /> 下载</el-button>
+        <el-button type="primary" size="small" class="is-shadow"><i class="icon-ico_set-up" /> 设置</el-button>
+        <el-button @click="onExport" type="default" size="small" class="is-shadow"><i class="icon-ico_download is-primary" /> 下载</el-button>
       </div>
     </div>
     <organization-chart

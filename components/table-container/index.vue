@@ -7,7 +7,7 @@
           @keyup.enter.native="onSearch"
           :placeholder="searchPlaceholder || '请输入搜索关键词'"
           size="small"
-          suffix-icon="el-icon-search"
+          suffix-icon="icon-ico_Search"
         />
       </div>
       <div v-if="!selected" class="handler">
@@ -37,17 +37,17 @@
         >
           <template slot-scope="scope">
             <span v-if="name!=='handler'" :class="item['cell-class-name']" v-html="formatter(scope, item)" />
-            <span v-else :class="item['cell-class-name']">
-              <el-button
-                v-for="(action,index) in item.actions"
-                :key="index"
-                @click="openDetail(scope.row)"
-                size="mini"
-                type="primary"
-                class="detail-btn"
-                icon="el-icon-arrow-right"
-              />
-            </span>
+            <a
+              v-else
+              :class="item['cell-class-name']"
+              v-for="(action,index) in item.actions"
+              :key="index"
+              @click="openDetail(scope.row)"
+              href="javascript:;"
+              class="handler-icon is-primary"
+            >
+              <i class="icon-ico_next2" />
+            </a>
           </template>
         </el-table-column>
       </el-table>
@@ -75,7 +75,7 @@
             size="small"
             class="is-shadow"
           >
-            <i class="el-icon-delete" /> 确认删除
+            <i class="icon-ico_delete" /> 确认删除
           </el-button>
         </div>
       </transition>
@@ -212,7 +212,7 @@ export default {
     cancelDelete () {
       this.selected = false
       this.selectedRows = []
-      this.$refs.table.clearSelection()
+      if (this.$refs.table) { this.$refs.table.clearSelection() }
     },
     async confirmDelete () {
       if (!this.urls || !this.urls.delete) { throw new Error('需要提供Url') }
@@ -226,7 +226,7 @@ export default {
           console.table(data)
           this.selected = false
           this.selectedRows = []
-          this.$refs.table.clearSelection()
+          if (this.$refs.table) { this.$refs.table.clearSelection() }
           this.fetch()
         } catch (e) {} finally {
           this.loading = false

@@ -8,7 +8,7 @@
           </div>
         </div>
         <div class="wrp">
-          <img src="~/assets/icon/scene_add_staff@2x.png" alt="">
+          <img src="~/assets/icon/scene_addstaff.png" alt="">
           <h3 class="title">批量导入新增</h3>
           <p>适用于首次批量导入添加员工信息，支持导入在职，离职员工.</p>
         </div>
@@ -20,7 +20,7 @@
           </div>
         </div>
         <div class="wrp">
-          <img src="~/assets/icon/scene_update_staff@2x.png" alt="">
+          <img src="~/assets/icon/scene_modifyinformation.png" alt="">
           <h3 class="title">批量导入更新</h3>
           <p>适用于批量更新，修改系统已存在人员的信息.</p>
         </div>

@@ -1,0 +1,719 @@
+.icon-png{
+  font-family: 'element-icons' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-feature-settings: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  vertical-align: baseline;
+  display: inline-block;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  vertical-align: bottom;
+  width: 24px;
+  height: 24px;
+  background: url(./icon/bg_workbench.png) center no-repeat;
+  background-size: contain;
+  &.ico_Search_blue{
+    background-image: url(./icon/ico_Search_blue.png);
+  }
+  &.ico_Search_blue2{
+    background-image: url(./icon/ico_Search_blue2.png);
+  }
+  &.ico_Search_gray{
+    background-image: url(./icon/ico_Search_gray.png);
+  }
+  &.ico_Search_gray2{
+    background-image: url(./icon/ico_Search_gray2.png);
+  }
+  &.ico_Search_white{
+    background-image: url(./icon/ico_Search_white.png);
+  }
+  &.ico_Search_white2{
+    background-image: url(./icon/ico_Search_white2.png);
+  }
+  &.ico_add_blue{
+    background-image: url(./icon/ico_add_blue.png);
+  }
+  &.ico_add_blue2{
+    background-image: url(./icon/ico_add_blue2.png);
+  }
+  &.ico_add_gray{
+    background-image: url(./icon/ico_add_gray.png);
+  }
+  &.ico_add_white2{
+    background-image: url(./icon/ico_add_white2.png);
+  }
+  &.ico_back_blue{
+    background-image: url(./icon/ico_back_blue.png);
+  }
+  &.ico_back_blue2{
+    background-image: url(./icon/ico_back_blue2.png);
+  }
+  &.ico_back_gray{
+    background-image: url(./icon/ico_back_gray.png);
+  }
+  &.ico_back_gray2{
+    background-image: url(./icon/ico_back_gray2.png);
+  }
+  &.ico_back_white{
+    background-image: url(./icon/ico_back_white.png);
+  }
+  &.ico_back_white2{
+    background-image: url(./icon/ico_back_white2.png);
+  }
+  &.ico_batch_blue{
+    background-image: url(./icon/ico_batch_blue.png);
+  }
+  &.ico_batch_blue2{
+    background-image: url(./icon/ico_batch_blue2.png);
+  }
+  &.ico_batch_white{
+    background-image: url(./icon/ico_batch_white.png);
+  }
+  &.ico_birthday_blue{
+    background-image: url(./icon/ico_birthday_blue.png);
+  }
+  &.ico_birthday_blue2{
+    background-image: url(./icon/ico_birthday_blue2.png);
+  }
+  &.ico_birthday_white{
+    background-image: url(./icon/ico_birthday_white.png);
+  }
+  &.ico_birthday_white2{
+    background-image: url(./icon/ico_birthday_white2.png);
+  }
+  &.ico_calendar_blue{
+    background-image: url(./icon/ico_calendar_blue.png);
+  }
+  &.ico_calendar_blue2{
+    background-image: url(./icon/ico_calendar_blue2.png);
+  }
+  &.ico_calendar_white{
+    background-image: url(./icon/ico_calendar_white.png);
+  }
+  &.ico_calendar_white2{
+    background-image: url(./icon/ico_calendar_white2.png);
+  }
+  &.ico_calendar_white3{
+    background-image: url(./icon/ico_calendar_white3.png);
+  }
+  &.ico_cancel_gray{
+    background-image: url(./icon/ico_cancel_gray.png);
+  }
+  &.ico_cancel_gray2{
+    background-image: url(./icon/ico_cancel_gray2.png);
+  }
+  &.ico_cancel_green{
+    background-image: url(./icon/ico_cancel_green.png);
+  }
+  &.ico_cancel_green2{
+    background-image: url(./icon/ico_cancel_green2.png);
+  }
+  &.ico_cancel_white{
+    background-image: url(./icon/ico_cancel_white.png);
+  }
+  &.ico_cancel_white2{
+    background-image: url(./icon/ico_cancel_white2.png);
+  }
+  &.ico_choice_sure_blue{
+    background-image: url(./icon/ico_choice_sure_blue.png);
+  }
+  &.ico_choice_sure_blue2{
+    background-image: url(./icon/ico_choice_sure_blue2.png);
+  }
+  &.ico_choice_sure_blue3{
+    background-image: url(./icon/ico_choice_sure_blue3.png);
+  }
+  &.ico_choice_sure_white{
+    background-image: url(./icon/ico_choice_sure_white.png);
+  }
+  &.ico_choice_sure_white2{
+    background-image: url(./icon/ico_choice_sure_white2.png);
+  }
+  &.ico_choice_sure_white3{
+    background-image: url(./icon/ico_choice_sure_white3.png);
+  }
+  &.ico_clear_blue{
+    background-image: url(./icon/ico_clear_blue.png);
+  }
+  &.ico_clear_blue2{
+    background-image: url(./icon/ico_clear_blue2.png);
+  }
+  &.ico_clear_white{
+    background-image: url(./icon/ico_clear_white.png);
+  }
+  &.ico_clear_white2{
+    background-image: url(./icon/ico_clear_white2.png);
+  }
+  &.ico_contract_blue2{
+    background-image: url(./icon/ico_contract_blue2.png);
+  }
+  &.ico_contract_gray2{
+    background-image: url(./icon/ico_contract_gray2.png);
+  }
+  &.ico_contract_white2{
+    background-image: url(./icon/ico_contract_white2.png);
+  }
+  &.ico_delete_blue{
+    background-image: url(./icon/ico_delete_blue.png);
+  }
+  &.ico_delete_blue2{
+    background-image: url(./icon/ico_delete_blue2.png);
+  }
+  &.ico_delete_gray{
+    background-image: url(./icon/ico_delete_gray.png);
+  }
+  &.ico_delete_gray2{
+    background-image: url(./icon/ico_delete_gray2.png);
+  }
+  &.ico_delete_white{
+    background-image: url(./icon/ico_delete_white.png);
+  }
+  &.ico_delete_white2{
+    background-image: url(./icon/ico_delete_white2.png);
+  }
+  &.ico_doubt_white{
+    background-image: url(./icon/ico_doubt_white.png);
+  }
+  &.ico_doubt_white2{
+    background-image: url(./icon/ico_doubt_white2.png);
+  }
+  &.ico_doubt_yellow{
+    background-image: url(./icon/ico_doubt_yellow.png);
+  }
+  &.ico_doubt_yellow2{
+    background-image: url(./icon/ico_doubt_yellow2.png);
+  }
+  &.ico_download_blue{
+    background-image: url(./icon/ico_download_blue.png);
+  }
+  &.ico_download_blue2{
+    background-image: url(./icon/ico_download_blue2.png);
+  }
+  &.ico_download_white{
+    background-image: url(./icon/ico_download_white.png);
+  }
+  &.ico_download_white2{
+    background-image: url(./icon/ico_download_white2.png);
+  }
+  &.ico_drop-down_blue2{
+    background-image: url(./icon/ico_drop-down_blue2.png);
+  }
+  &.ico_drop-down_gray{
+    background-image: url(./icon/ico_drop-down_gray.png);
+  }
+  &.ico_drop-down_gray2{
+    background-image: url(./icon/ico_drop-down_gray2.png);
+  }
+  &.ico_drop-down_white{
+    background-image: url(./icon/ico_drop-down_white.png);
+  }
+  &.ico_drop-down_white2{
+    background-image: url(./icon/ico_drop-down_white2.png);
+  }
+  &.ico_edit_blue{
+    background-image: url(./icon/ico_edit_blue.png);
+  }
+  &.ico_edit_blue2{
+    background-image: url(./icon/ico_edit_blue2.png);
+  }
+  &.ico_edit_gray{
+    background-image: url(./icon/ico_edit_gray.png);
+  }
+  &.ico_edit_gray2{
+    background-image: url(./icon/ico_edit_gray2.png);
+  }
+  &.ico_edit_white{
+    background-image: url(./icon/ico_edit_white.png);
+  }
+  &.ico_edit_white2{
+    background-image: url(./icon/ico_edit_white2.png);
+  }
+  &.ico_eliminate_blue{
+    background-image: url(./icon/ico_eliminate_blue.png);
+  }
+  &.ico_eliminate_blue2{
+    background-image: url(./icon/ico_eliminate_blue2.png);
+  }
+  &.ico_eliminate_white{
+    background-image: url(./icon/ico_eliminate_white.png);
+  }
+  &.ico_eliminate_white2{
+    background-image: url(./icon/ico_eliminate_white2.png);
+  }
+  &.ico_emll_blue{
+    background-image: url(./icon/ico_emll_blue.png);
+  }
+  &.ico_emll_blue2{
+    background-image: url(./icon/ico_emll_blue2.png);
+  }
+  &.ico_emll_white{
+    background-image: url(./icon/ico_emll_white.png);
+  }
+  &.ico_emll_white2{
+    background-image: url(./icon/ico_emll_white2.png);
+  }
+  &.ico_export_blue{
+    background-image: url(./icon/ico_export_blue.png);
+  }
+  &.ico_export_blue2{
+    background-image: url(./icon/ico_export_blue2.png);
+  }
+  &.ico_export_white{
+    background-image: url(./icon/ico_export_white.png);
+  }
+  &.ico_export_white2{
+    background-image: url(./icon/ico_export_white2.png);
+  }
+  &.ico_exportandimport_blue{
+    background-image: url(./icon/ico_exportandimport_blue.png);
+  }
+  &.ico_exportandimport_blue2{
+    background-image: url(./icon/ico_exportandimport_blue2.png);
+  }
+  &.ico_exportandimport_white{
+    background-image: url(./icon/ico_exportandimport_white.png);
+  }
+  &.ico_exportandimport_white2{
+    background-image: url(./icon/ico_exportandimport_white2.png);
+  }
+  &.ico_eye_blue{
+    background-image: url(./icon/ico_eye_blue.png);
+  }
+  &.ico_eye_blue2{
+    background-image: url(./icon/ico_eye_blue2.png);
+  }
+  &.ico_eye_white{
+    background-image: url(./icon/ico_eye_white.png);
+  }
+  &.ico_eye_white2{
+    background-image: url(./icon/ico_eye_white2.png);
+  }
+  &.ico_file_blue{
+    background-image: url(./icon/ico_file_blue.png);
+  }
+  &.ico_file_blue2{
+    background-image: url(./icon/ico_file_blue2.png);
+  }
+  &.ico_file_gray{
+    background-image: url(./icon/ico_file_gray.png);
+  }
+  &.ico_file_gray2{
+    background-image: url(./icon/ico_file_gray2.png);
+  }
+  &.ico_file_white{
+    background-image: url(./icon/ico_file_white.png);
+  }
+  &.ico_file_white2{
+    background-image: url(./icon/ico_file_white2.png);
+  }
+  &.ico_history_blue{
+    background-image: url(./icon/ico_history_blue.png);
+  }
+  &.ico_history_blue2{
+    background-image: url(./icon/ico_history_blue2.png);
+  }
+  &.ico_history_white{
+    background-image: url(./icon/ico_history_white.png);
+  }
+  &.ico_history_white2{
+    background-image: url(./icon/ico_history_white2.png);
+  }
+  &.ico_import_blue{
+    background-image: url(./icon/ico_import_blue.png);
+  }
+  &.ico_import_blue2{
+    background-image: url(./icon/ico_import_blue2.png);
+  }
+  &.ico_import_white{
+    background-image: url(./icon/ico_import_white.png);
+  }
+  &.ico_import_white2{
+    background-image: url(./icon/ico_import_white2.png);
+  }
+  &.ico_iphone2_blue{
+    background-image: url(./icon/ico_iphone2_blue.png);
+  }
+  &.ico_iphone2_blue2{
+    background-image: url(./icon/ico_iphone2_blue2.png);
+  }
+  &.ico_iphone2_gray{
+    background-image: url(./icon/ico_iphone2_gray.png);
+  }
+  &.ico_iphone2_gray2{
+    background-image: url(./icon/ico_iphone2_gray2.png);
+  }
+  &.ico_iphone2_white{
+    background-image: url(./icon/ico_iphone2_white.png);
+  }
+  &.ico_iphone2_white2{
+    background-image: url(./icon/ico_iphone2_white2.png);
+  }
+  &.ico_iphone_blue{
+    background-image: url(./icon/ico_iphone_blue.png);
+  }
+  &.ico_iphone_blue2{
+    background-image: url(./icon/ico_iphone_blue2.png);
+  }
+  &.ico_iphone_white{
+    background-image: url(./icon/ico_iphone_white.png);
+  }
+  &.ico_iphone_white2{
+    background-image: url(./icon/ico_iphone_white2.png);
+  }
+  &.ico_morefunctions_blue{
+    background-image: url(./icon/ico_morefunctions_blue.png);
+  }
+  &.ico_morefunctions_blue2{
+    background-image: url(./icon/ico_morefunctions_blue2.png);
+  }
+  &.ico_morefunctions_gray{
+    background-image: url(./icon/ico_morefunctions_gray.png);
+  }
+  &.ico_morefunctions_gray2{
+    background-image: url(./icon/ico_morefunctions_gray2.png);
+  }
+  &.ico_morefunctions_white{
+    background-image: url(./icon/ico_morefunctions_white.png);
+  }
+  &.ico_morefunctions_white2{
+    background-image: url(./icon/ico_morefunctions_white2.png);
+  }
+  &.ico_newadditions_blue{
+    background-image: url(./icon/ico_newadditions_blue.png);
+  }
+  &.ico_newadditions_blue2{
+    background-image: url(./icon/ico_newadditions_blue2.png);
+  }
+  &.ico_newadditions_gray{
+    background-image: url(./icon/ico_newadditions_gray.png);
+  }
+  &.ico_newadditions_gray2{
+    background-image: url(./icon/ico_newadditions_gray2.png);
+  }
+  &.ico_newadditions_white{
+    background-image: url(./icon/ico_newadditions_white.png);
+  }
+  &.ico_newadditions_white2{
+    background-image: url(./icon/ico_newadditions_white2.png);
+  }
+  &.ico_next2_white{
+    background-image: url(./icon/ico_next2_white.png);
+  }
+  &.ico_next2_white2{
+    background-image: url(./icon/ico_next2_white2.png);
+  }
+  &.ico_next_blue{
+    background-image: url(./icon/ico_next_blue.png);
+  }
+  &.ico_next_blue2{
+    background-image: url(./icon/ico_next_blue2.png);
+  }
+  &.ico_next_white{
+    background-image: url(./icon/ico_next_white.png);
+  }
+  &.ico_next_white2{
+    background-image: url(./icon/ico_next_white2.png);
+  }
+  &.ico_occupation_blue{
+    background-image: url(./icon/ico_occupation_blue.png);
+  }
+  &.ico_occupation_blue2{
+    background-image: url(./icon/ico_occupation_blue2.png);
+  }
+  &.ico_occupation_white{
+    background-image: url(./icon/ico_occupation_white.png);
+  }
+  &.ico_occupation_white2{
+    background-image: url(./icon/ico_occupation_white2.png);
+  }
+  &.ico_password_blue{
+    background-image: url(./icon/ico_password_blue.png);
+  }
+  &.ico_password_white{
+    background-image: url(./icon/ico_password_white.png);
+  }
+  &.ico_personalinformation_blue{
+    background-image: url(./icon/ico_personalinformation_blue.png);
+  }
+  &.ico_printing_white{
+    background-image: url(./icon/ico_printing_white.png);
+  }
+  &.ico_printing_white2{
+    background-image: url(./icon/ico_printing_white2.png);
+  }
+  &.ico_quit_blue{
+    background-image: url(./icon/ico_quit_blue.png);
+  }
+  &.ico_quit_blue2{
+    background-image: url(./icon/ico_quit_blue2.png);
+  }
+  &.ico_quit_white{
+    background-image: url(./icon/ico_quit_white.png);
+  }
+  &.ico_quit_white2{
+    background-image: url(./icon/ico_quit_white2.png);
+  }
+  &.ico_reduce_blue{
+    background-image: url(./icon/ico_reduce_blue.png);
+  }
+  &.ico_reduce_white{
+    background-image: url(./icon/ico_reduce_white.png);
+  }
+  &.ico_reduce_white2{
+    background-image: url(./icon/ico_reduce_white2.png);
+  }
+  &.ico_revoke_blue{
+    background-image: url(./icon/ico_revoke_blue.png);
+  }
+  &.ico_revoke_blue2{
+    background-image: url(./icon/ico_revoke_blue2.png);
+  }
+  &.ico_revoke_white{
+    background-image: url(./icon/ico_revoke_white.png);
+  }
+  &.ico_revoke_white2{
+    background-image: url(./icon/ico_revoke_white2.png);
+  }
+  &.ico_sendout_blue{
+    background-image: url(./icon/ico_sendout_blue.png);
+  }
+  &.ico_sendout_blue2{
+    background-image: url(./icon/ico_sendout_blue2.png);
+  }
+  &.ico_sendout_white{
+    background-image: url(./icon/ico_sendout_white.png);
+  }
+  &.ico_sendout_white2{
+    background-image: url(./icon/ico_sendout_white2.png);
+  }
+  &.ico_setup_blue{
+    background-image: url(./icon/ico_setup_blue.png);
+  }
+  &.ico_setup_blue2{
+    background-image: url(./icon/ico_setup_blue2.png);
+  }
+  &.ico_setup_gray{
+    background-image: url(./icon/ico_setup_gray.png);
+  }
+  &.ico_setup_gray2{
+    background-image: url(./icon/ico_setup_gray2.png);
+  }
+  &.ico_setup_white{
+    background-image: url(./icon/ico_setup_white.png);
+  }
+  &.ico_setup_white2{
+    background-image: url(./icon/ico_setup_white2.png);
+  }
+  &.ico_sure_blue{
+    background-image: url(./icon/ico_sure_blue.png);
+  }
+  &.ico_sure_blue2{
+    background-image: url(./icon/ico_sure_blue2.png);
+  }
+  &.ico_sure_white{
+    background-image: url(./icon/ico_sure_white.png);
+  }
+  &.ico_sure_white2{
+    background-image: url(./icon/ico_sure_white2.png);
+  }
+  &.ico_tips_white{
+    background-image: url(./icon/ico_tips_white.png);
+  }
+  &.ico_tips_white2{
+    background-image: url(./icon/ico_tips_white2.png);
+  }
+  &.ico_tips_yellow{
+    background-image: url(./icon/ico_tips_yellow.png);
+  }
+  &.ico_tips_yellow2{
+    background-image: url(./icon/ico_tips_yellow2.png);
+  }
+  &.ico_toupdate_blue{
+    background-image: url(./icon/ico_toupdate_blue.png);
+  }
+  &.ico_toupdate_blue2{
+    background-image: url(./icon/ico_toupdate_blue2.png);
+  }
+  &.ico_toupdate_white{
+    background-image: url(./icon/ico_toupdate_white.png);
+  }
+  &.ico_toupdate_white2{
+    background-image: url(./icon/ico_toupdate_white2.png);
+  }
+  &.ico_transformation_blue{
+    background-image: url(./icon/ico_transformation_blue.png);
+  }
+  &.ico_transformation_blue2{
+    background-image: url(./icon/ico_transformation_blue2.png);
+  }
+  &.ico_transformation_white{
+    background-image: url(./icon/ico_transformation_white.png);
+  }
+  &.ico_transformation_white2{
+    background-image: url(./icon/ico_transformation_white2.png);
+  }
+  &.ico_warning_red{
+    background-image: url(./icon/ico_warning_red.png);
+  }
+  &.ico_warning_red2{
+    background-image: url(./icon/ico_warning_red2.png);
+  }
+  &.ico_warning_white{
+    background-image: url(./icon/ico_warning_white.png);
+  }
+  &.ico_warning_white2{
+    background-image: url(./icon/ico_warning_white2.png);
+  }
+  &.ico_withdrawaccount_blue{
+    background-image: url(./icon/ico_withdrawaccount_blue.png);
+  }
+  &.ico_withdrawaccount_blue2{
+    background-image: url(./icon/ico_withdrawaccount_blue2.png);
+  }
+  &.ico_withdrawaccount_white{
+    background-image: url(./icon/ico_withdrawaccount_white.png);
+  }
+  &.ico_withdrawaccount_white2{
+    background-image: url(./icon/ico_withdrawaccount_white2.png);
+  }
+  &.icon_export_excel{
+    background-image: url(./icon/icon_export_excel.png);
+  }
+  &.icon_ic_addstaff{
+    background-image: url(./icon/icon_ic_addstaff.png);
+  }
+  &.icon_ic_addstaff2{
+    background-image: url(./icon/icon_ic_addstaff2.png);
+  }
+  &.icon_ic_addstaff3{
+    background-image: url(./icon/icon_ic_addstaff3.png);
+  }
+  &.icon_ic_bankcard{
+    background-image: url(./icon/icon_ic_bankcard.png);
+  }
+  &.icon_ic_bankcard2{
+    background-image: url(./icon/icon_ic_bankcard2.png);
+    width: 50px;
+    height: 50px;
+  }
+  &.icon_ic_bankcard3{
+    background-image: url(./icon/icon_ic_bankcard3.png);
+  }
+  &.icon_ic_bankcard4{
+    background-image: url(./icon/icon_ic_bankcard4.png);
+    width: 50px;
+    height: 50px;
+  }
+  &.icon_ic_employeeinformation{
+    background-image: url(./icon/icon_ic_employeeinformation.png);
+    width: 50px;
+    height: 50px;
+  }
+  &.icon_ic_employeeinformation2{
+    background-image: url(./icon/icon_ic_employeeinformation2.png);
+  }
+  &.icon_ic_export_excel{
+    background-image: url(./icon/icon_ic_export_excel.png);
+    width: 50px;
+    height: 50px;
+  }
+  &.icon_ic_export_excel3{
+    background-image: url(./icon/icon_ic_export_excel3.png);
+  }
+  &.icon_ic_import_excel{
+    background-image: url(./icon/icon_ic_import_excel.png);
+    width: 50px;
+    height: 50px;
+  }
+  &.icon_ic_import_excel3{
+    background-image: url(./icon/icon_ic_import_excel3.png);
+  }
+  &.icon_ic_picture{
+    background-image: url(./icon/icon_ic_picture.png);
+    width: 50px;
+    height: 50px;
+  }
+  &.icon_ic_picture2{
+    background-image: url(./icon/icon_ic_picture2.png);
+  }
+  &.icon_ic_popup_reentry{
+    background-image: url(./icon/icon_ic_popup_reentry.png);
+  }
+  &.iico_personalinformation_white{
+    background-image: url(./icon/iico_personalinformation_white.png);
+  }
+
+  &.notice_bell_icon{
+    background-image: url(./icon/notice_bell_icon.png);
+  }
+  &.notice_bell_icon_white{
+    background-image: url(./icon/notice_bell_icon_white.png);
+  }
+  &.notice_horn_icon{
+    background-image: url(./icon/notice_horn_icon.png);
+  }
+  &.notice_horn_icon_white{
+    background-image: url(./icon/notice_horn_icon_white.png);
+  }
+  &.scene_addstaff{
+    background-image: url(./icon/scene_addstaff.png);
+  }
+  &.scene_addstaff2{
+    background-image: url(./icon/scene_addstaff2.png);
+  }
+  &.scene_addstaff3{
+    background-image: url(./icon/scene_addstaff3.png);
+  }
+  &.scene_modifyinformation{
+    background-image: url(./icon/scene_modifyinformation.png);
+  }
+  &.scene_modifyinformation2{
+    background-image: url(./icon/scene_modifyinformation2.png);
+  }
+  &.scene_modifyinformation3{
+    background-image: url(./icon/scene_modifyinformation3.png);
+  }
+  &.workbench_Shortcut_Addarchives_bg{
+    background-image: url(./icon/workbench_Shortcut_Addarchives_bg.png);
+  }
+  &.workbench_Shortcut_Addcontract_bg{
+    background-image: url(./icon/workbench_Shortcut_Addcontract_bg.png);
+  }
+  &.workbench_Shortcut_Addcontract_icon{
+    background-image: url(./icon/workbench_Shortcut_Addcontract_icon.png);
+  }
+  &.workbench_Shortcut_Addcontract_icon2{
+    background-image: url(./icon/workbench_Shortcut_Addcontract_icon2.png);
+  }
+  &.workbench_Shortcut_Addcontract_icon3{
+    background-image: url(./icon/workbench_Shortcut_Addcontract_icon3.png);
+  }
+  &.workbench_Shortcut_Addcontract_icon4{
+    background-image: url(./icon/workbench_Shortcut_Addcontract_icon4.png);
+  }
+  &.workbench_Shortcut_Addinterview_bg{
+    background-image: url(./icon/workbench_Shortcut_Addinterview_bg.png);
+  }
+  &.workbench_Shortcut_Addorganization_bg{
+    background-image: url(./icon/workbench_Shortcut_Addorganization_bg.png);
+  }
+  &.workbench_Shortcut_Addpersonnel_bg{
+    background-image: url(./icon/workbench_Shortcut_Addpersonnel_bg.png);
+  }
+  &.workbench_Shortcut_Addrecruitment_bg{
+    background-image: url(./icon/workbench_Shortcut_Addrecruitment_bg.png);
+  }
+  &.workbench_Shortcut_Addstaff_bg{
+    background-image: url(./icon/workbench_Shortcut_Addstaff_bg.png);
+  }
+  &.workbench_Shortcut_roster_icon{
+    background-image: url(./icon/workbench_Shortcut_roster_icon.png);
+  }
+  &.图标{
+    background-image: url(./icon/图标.png);
+  }
+}

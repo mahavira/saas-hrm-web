@@ -62,6 +62,9 @@ export default {
     openOffer (row) {
       this.visibleOfferDialog = true
     },
+    openArchive (ref) {
+      this.$router.push(`/recruit/talent/${ref.currentRow.id}`)
+    },
     onPrint () {
       printJS('printJS-form', 'html')
     }

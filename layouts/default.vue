@@ -12,19 +12,19 @@
       a.item.bell
       el-dropdown
         a.item.user
-          img(src="~/assets/images/logo.png")
+          img(src="~/assets/icon/logo.png")
         el-dropdown-menu(slot="dropdown",class='dropdown')
           el-dropdown-item.dropdown-item.avater
-            img(src="~/assets/images/logo.png")
+            img(src="~/assets/icon/logo.png")
             span 欧阳飞雪
           el-dropdown-item.dropdown-item.line
-            i.el-icon-user-solid
+            i.icon-ico_personal-information
             span 个人信息
           el-dropdown-item.dropdown-item
-            i.el-icon-s-goods
+            i.icon-ico_password
             span 修改密码
           el-dropdown-item.dropdown-item.line
-            i.el-icon-s-shop
+            i.icon-ico_quit
             span 进入官网
           el-dropdown-item.dropdown-item
             i.el-icon-switch-button
@@ -85,10 +85,10 @@ export default {
       border-radius: 50%
     }
     &.search {
-      background: url(~assets/images/search.png) center no-repeat / 24px;
+      background: url(~assets/icon/search.png) center no-repeat / 24px;
     }
     &.bell {
-      background: url(~assets/images/bell.png) center no-repeat / 24px;
+      background: url(~assets/icon/notice_bell_icon_white.png) center no-repeat / 24px;
     }
     &.user {
       margin-left: 32px;
@@ -143,7 +143,7 @@ export default {
   background-color: $color-primary;
 }
 .logo {
-  background: url(~assets/images/logo.png) center top no-repeat / 100%;
+  background: url(~assets/icon/logo.png) center top no-repeat / 100%;
   height: 88px;
   width: 50px;
   margin: 10px 15px;
@@ -155,7 +155,7 @@ export default {
     bottom: 0;
     width: 100%;
     height: 38px;
-    background: url(~assets/images/logo-t.png) center top no-repeat / 100%;
+    background: url(~assets/icon/logo-t.png) center top no-repeat / 100%;
   }
 }
 .lay-sidebar .item{
@@ -188,7 +188,7 @@ export default {
     top: 18px;
     width: 100%;
     height: 32px;
-    background: url(~assets/images/workbench.png) center top no-repeat / 32px 32px;
+    background: url(~assets/icon/nav_workbench_Default.png) center top no-repeat / 32px 32px;
     transition: all 0.3s ease-out;
   }
   span {
@@ -205,42 +205,47 @@ export default {
     background: rgba($color: #000000, $alpha: 0.1);
   }
   &.active:after{
-    background-image: url(~assets/images/workbench-active.png);
+    background-image: url(~assets/icon/nav_workbench_Selected.png);
   }
   &.personnel{
     &:after{
-      background-image: url(~assets/images/personnel.png);
+      background-image: url(~assets/icon/nav_staff_Default.png);
     }
     &.active:after{
-      background-image: url(~assets/images/personnel-active.png);
+      background-image: url(~assets/icon/nav_staff_Selected.png);
     }
   }
   &.recruit{
     &:after{
-      background-image: url(~assets/images/recruit.png);
+      background-image: url(~assets/icon/nav_recruit_Default.png);
     }
     &.active:after{
-      background-image: url(~assets/images/recruit-active.png);
+      background-image: url(~assets/icon/nav_recruit_Selected.png);
     }
   }
   &.organization{
     &:after{
-      background-image: url(~assets/images/organization.png);
+      background-image: url(~assets/icon/nav_organization_Default.png);
     }
     &.active:after{
-      background-image: url(~assets/images/organization-active.png);
+      background-image: url(~assets/icon/nav_organization_Selected.png);
     }
   }
   &.attendance{
     &:after{
-      background-image: url(~assets/images/attendance.png);
+      background-image: url(~assets/icon/nav_attendance_Default.png);
     }
     &.active:after{
-      background-image: url(~assets/images/attendance-active.png);
+      background-image: url(~assets/icon/nav_attendance_Selected.png);
     }
   }
-  &.salary:after{
-    background-image: url(~assets/images/salary.png);
+  &.salary{
+    &:after{
+      background-image: url(~assets/icon/nav_Pay_Default.png);
+    }
+    &.active:after{
+      background-image: url(~assets/icon/nav_Pay_Selected.png);
+    }
   }
 }
 </style>

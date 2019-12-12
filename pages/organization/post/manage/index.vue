@@ -7,24 +7,24 @@
           @keyup.enter.native="onSearch"
           size="small"
           placeholder="岗位名称/编码"
-          suffix-icon="el-icon-search"
+          suffix-icon="icon-ico_Search"
         />
       </div>
       <div class="handler">
-        <el-button @click="onDelete" type="primary" class="is-shadow" size="small"><i class="el-icon-plus" /> 新增岗位</el-button>
+        <el-button @click="onDelete" type="primary" class="is-shadow" size="small"><i class="icon-ico_new-additions" /> 新增岗位</el-button>
         <el-dropdown @command="onDropdownImport">
           <el-button @click="onDelete" type="default" class="is-shadow" size="small">
             <i class="el-icon-arrow-down el-icon--left" />导出/导入
           </el-button>
           <el-dropdown-menu>
             <el-dropdown-item>
-              <i class="el-icon-plus is-primary" command="import1" /> 导入岗位编制
+              <i class="icon-ico_new-additions is-primary" command="import1" /> 导入岗位编制
             </el-dropdown-item>
             <el-dropdown-item>
-              <i class="el-icon-edit is-primary" command="import2" /> 导出岗位编制表
+              <i class="icon-ico_edit is-primary" command="import2" /> 导出岗位编制表
             </el-dropdown-item>
             <el-dropdown-item>
-              <i class="el-icon-delete is-primary" command="import3" /> 导出岗位信息表
+              <i class="icon-ico_delete is-primary" command="import3" /> 导出岗位信息表
             </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
@@ -34,13 +34,13 @@
           </el-button>
           <el-dropdown-menu>
             <el-dropdown-item command="add">
-              <i class="el-icon-plus is-primary" /> 批量新增
+              <i class="icon-ico_new-additions is-primary" /> 批量新增
             </el-dropdown-item>
             <el-dropdown-item command="update">
-              <i class="el-icon-edit is-primary" /> 批量修改
+              <i class="icon-ico_edit is-primary" /> 批量修改
             </el-dropdown-item>
             <el-dropdown-item command="delete">
-              <i class="el-icon-delete is-primary" /> 批量删除
+              <i class="icon-ico_delete is-primary" /> 批量删除
             </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
@@ -131,7 +131,7 @@ export default {
   bottom: 0;
   left: 0;
   width: 100%;
-  padding: 16px 32px;
+  padding: 16px 24px;
   background: #FFF;
   align-items: center;
   box-shadow: -2px -5px 5px rgba($color: #000000, $alpha: 0.05);

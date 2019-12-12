@@ -137,12 +137,12 @@ export const dialog = {
 }
 export const handler = [{
   color: 'primary',
-  icon: 'el-icon-plus',
+  icon: 'icon-ico_new-additions',
   label: '新增职级',
   action: 'dialog:create'
 }, {
   color: 'default',
-  icon: 'el-icon-delete is-primary',
+  icon: 'icon-ico_delete is-primary',
   action: 'table:selected',
   label: '批量删除'
 }]

@@ -15,11 +15,11 @@
           class="search"
           size="small"
           placeholder="请输入姓名搜索"
-          suffix-icon="el-icon-search"
+          suffix-icon="icon-ico_Search"
         />
       </div>
       <div class="handler">
-        <el-button @click="onDelete" type="default" class="is-shadow" size="small"><i class="el-icon-s-claim is-primary" /> 面试安排</el-button>
+        <el-button @click="onDelete" type="default" class="is-shadow" size="small"><i class="icon-ico_calendar is-primary" /> 安排面试</el-button>
       </div>
     </div>
     <timeline :weekInx="weekInx" />

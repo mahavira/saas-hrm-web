@@ -11,7 +11,7 @@
     </el-button>
     <el-dropdown v-else @command="onDorpdownHandler(item, $event)">
       <el-button :type="item.color || 'primary'" :icon="item.icon" size="small" class="is-shadow">{{ item.label }}
-        <i class="el-icon-arrow-down el-icon--right" /></el-button>
+        <i class="icon-ico_drop-down el-icon--right" /></el-button>
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item v-for="(option, i) in item.options" :key="i" :command="option">
           <i :class="option.icon" class="dropdown-item-icon" />
@@ -33,7 +33,13 @@ export default {
     }
   },
   methods: {
+    getContext () {
+      const matched = this.$route.matched
+      if (!matched.length) { return null }
+      return matched[matched.length - 1].instances.default
+    },
     onHandler ({ action = null, refresh = false }) {
+      const context = this.getContext()
       if (!action) { return }
       if (isFunction(action)) {
         return action(this.parent)
@@ -56,8 +62,8 @@ export default {
         this.parent[prop] = !this.parent[prop]
       } else if (type === 'detail') {
         this.parent[prop] = !this.parent[prop]
-      } else if (this.parent.$parent[type]) {
-        this.parent.$parent[type](this.parent)
+      } else if (context[type]) {
+        context[type](this.parent)
       }
     },
     onDorpdownHandler (type, e) {

@@ -77,14 +77,14 @@ export const isCondensed = true
 
 export const handler = [{
   color: 'default',
-  icon: 'el-icon-position is-primary',
+  icon: 'icon-ico_send-out is-primary',
   action: 'dialog:create',
   label: '发放工资条'
 }]
 
 export const editHandler = [{
   color: 'default',
-  icon: 'el-icon-circle-close is-primary',
+  icon: 'icon-ico_eye is-primary',
   action: '',
   label: '员工档案'
 }]

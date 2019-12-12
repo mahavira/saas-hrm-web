@@ -8,7 +8,7 @@
     >
       <div class="el-container is-justify-space-around" style="padding:40px 60px 80px">
         <a class="sp-upload-card__file" href="http://172.16.17.106:9590/hrEducationInfo/template/export" download="export.excel">
-          <div class="icon-file file-upload" />
+          <div class="icon-png icon_ic_import_excel" />
           <div class="label">{{ isImportUpdate?'导出模版':'导出记录' }}</div>
           <div class="hint">{{ isImportUpdate?'导出标准模版，支持批量导入与员工教育经历':'导出已有信息进行编辑' }}</div>
           <div class="point">1</div>
@@ -23,7 +23,7 @@
           drag
           multiple
         >
-          <div class="icon-file file-download" />
+          <div class="icon-png icon_ic_export_excel" />
           <div class="label">{{ isImportUpdate?'导入文件':'导入文件' }}</div>
           <div class="hint">{{ isImportUpdate?'导入员工教育经历，完成新增':'导入编辑更新后的信息' }}</div>
           <div class="point">2</div>

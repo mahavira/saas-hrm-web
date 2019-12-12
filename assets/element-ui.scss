@@ -40,7 +40,7 @@
 .el-input, .el-textarea{
   .el-input__inner, .el-textarea__inner{
     border: none;
-    background: rgba(0, 0, 0, 0.03);
+    background: rgba(248,248,250,1);
   }
 }
 .el-select, .el-input, .el-textarea{
@@ -57,6 +57,13 @@
   }
 }
 .el-table th, .el-table td{
+  padding: 16px 0;
+  &.is-leaf{
+    border-bottom: none;
+  }
+  >.cell{
+    line-height: 24px;
+  }
   &:first-of-type{
     .cell{
       padding-left: 32px;
@@ -99,19 +106,21 @@
 }
 .el-dialog{
   border-radius: 10px;
-  .el-dialog__header{
-    border-bottom: 1px solid rgba(233,233,233,1);
-    padding: 16px 24px;
-    box-sizing: border-box;
-  }
-  .el-dialog__body{
-    padding: 0;
-  }
-  .el-dialog__footer{
-    // border-top: 1px solid rgba(233,233,233,1);
-    padding: 24px;
-    padding-top: 12px;
-  }
+}
+.el-dialog__header{
+  border-bottom: 1px solid rgba(233,233,233,1);
+  padding: 16px 24px;
+  box-sizing: border-box;
+}
+.el-dialog__body{
+  padding: 0;
+}
+.el-dialog__footer{
+  padding: 24px;
+  padding-top: 12px;
+}
+.el-dialog__title{
+  font-weight: 500;
 }
 .el-popover{
   border-radius: 10px;
@@ -175,4 +184,7 @@
 .el-button + .el-button,
 .el-dropdown + .el-dropdown{
   margin-left: 6px;
+}
+.el-button [class*="icon-"] + span{
+  margin-left: 5px;
 }

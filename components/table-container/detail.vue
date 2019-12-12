@@ -15,7 +15,6 @@
         :fields="fields"
         :edited="parent.edited"
         :class="{condensed:parent.isCondensed}"
-        style="padding-top:24px"
       />
     </el-scrollbar>
     <transition name="transform-y">

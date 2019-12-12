@@ -177,25 +177,25 @@ export const handler = [{
   label: '添加员工',
   options: [{
     label: '单个添加候选人',
-    icon: 'el-icon-plus',
+    icon: 'icon-ico_new-additions',
     action: 'dialog:create'
   }, {
     label: '批量导入简历',
-    icon: 'el-icon-plus',
+    icon: 'icon-ico_import',
     action: 'showImport'
   }, {
     label: 'Excel导入候选人',
-    icon: 'el-icon-plus',
+    icon: 'icon-ico_import',
     action: 'showImport'
   }]
 }, {
   color: 'default',
-  icon: 'el-icon-finished is-primary',
+  icon: 'icon-ico_export is-primary',
   action: 'EXPORT',
   label: '导 出'
 }, {
   color: 'default',
-  icon: 'el-icon-brush is-primary',
+  icon: 'icon-ico_clear is-primary',
   action: 'EXPORT',
   label: '一键清理'
 }]
@@ -207,11 +207,12 @@ export const editHandler = [{
   label: '确认入职'
 }, {
   color: 'default',
-  icon: 'el-icon-edit is-primary',
+  icon: 'icon-ico_edit is-primary',
   action: 'detail:edited',
   label: '快速编辑'
 }, {
   color: 'default',
+  icon: 'icon-ico_file is-primary',
   action: 'showDetail',
   label: '员工档案'
 }]

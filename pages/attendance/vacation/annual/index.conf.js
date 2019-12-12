@@ -99,15 +99,15 @@ export const handler = [{
   label: '批量',
   options: [{
     label: '批量发放',
-    icon: 'el-icon-plus',
+    icon: 'icon-ico_export',
     action: 'dialog:create'
   }, {
     label: '批量清零',
-    icon: 'el-icon-s-open',
+    icon: 'icon-ico_clear',
     action: 'showImport'
   }, {
     label: '批量修改',
-    icon: 'el-icon-edit',
+    icon: 'icon-ico_edit',
     action: 'showImport'
   }]
 }, {
@@ -115,34 +115,34 @@ export const handler = [{
   label: '导 出',
   options: [{
     label: '导出年假明细',
-    icon: 'el-icon-plus',
+    icon: 'icon-ico_export',
     action: 'dialog:create'
   }, {
     label: '导出发放记录',
-    icon: 'el-icon-s-open',
+    icon: 'icon-ico_export',
     action: 'showImport'
   }, {
     label: '操作记录',
-    icon: 'el-icon-edit',
+    icon: 'icon-ico_history',
     action: 'showImport'
   }]
 }]
 
 export const editHandler = [{
   color: 'default',
-  icon: 'el-icon-check',
+  icon: 'icon-ico_eye is-primary',
   action: '',
   label: '员工档案'
 }, {
   color: 'default',
-  icon: 'el-icon-edit is-primary',
+  icon: 'icon-ico_send-out is-primary',
   label: '发放年假'
 }, {
   color: 'default',
-  icon: 'el-icon-s-open is-primary',
+  icon: 'icon-ico_clear is-primary',
   label: '清零年假'
 }, {
   color: 'default',
-  icon: 'el-icon-edit is-primary',
+  icon: 'icon-ico_history is-primary',
   label: '查看记录'
 }]

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="sp-fixed-height__one">
     <div class="sp-filter is-white-bg">
       <div class="selection">
         <div class="title">架构师</div>
@@ -29,57 +29,49 @@
       <div class="handler">
         <el-dropdown @command="onDropdown($event)">
           <el-button type="default" size="small" class="is-shadow">
-            <i class="el-icon-finished is-primary" /> 移动人才
+            <i class="icon-ico_transformation is-primary" /> 移动人才
           </el-button>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item command="update"><i class="el-icon-plus is-primary" /> 移动到初选通过</el-dropdown-item>
-            <el-dropdown-item command="import"><i class="el-icon-edit is-primary" /> 移动到面试通过</el-dropdown-item>
-            <el-dropdown-item command="delete"><i class="el-icon-delete is-primary" /> 添加到待入职</el-dropdown-item>
+            <el-dropdown-item command="update"><i class="icon-ico_revoke is-primary" /> 移动到初选通过</el-dropdown-item>
+            <el-dropdown-item command="import"><i class="icon-ico_revoke is-primary" /> 移动到面试通过</el-dropdown-item>
+            <el-dropdown-item command="delete"><i class="icon-ico_revoke is-primary" /> 添加到待入职</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
-        <el-button @click="onDelete" type="default" class="is-shadow" size="small"><i class="el-icon-s-claim is-primary" /> 淘汰/流失</el-button>
-        <el-button @click="onDelete" type="default" class="is-shadow" size="small"><i class="el-icon-delete is-primary" /> 删除候选</el-button>
+        <el-button @click="onDelete" type="default" class="is-shadow" size="small"><i class="icon-ico_eliminate is-primary" /> 淘汰/流失</el-button>
+        <el-button @click="onDelete" type="default" class="is-shadow" size="small"><i class="icon-ico_delete is-primary" /> 删除候选</el-button>
       </div>
     </div>
-    <div class="el-row el-row--flex sp-container" style="height: calc(100vh - 192px)">
+    <tab-warp :tabs="tabs" :show-delete="false" style="flex: 1;">
       <t-sidebar />
-      <div class="sp-material">
-        <el-tabs v-model="activeTab" @tab-click="onTab" class="sp-material-tabs" type="card">
-          <el-tab-pane
-            v-for="(item,index) in tabs"
-            :key="index"
-            :name="item.name"
-            :label="item.label"
-          />
-        </el-tabs>
-        <t-main />
-      </div>
-    </div>
+    </tab-warp>
   </div>
 </template>
 <script>
 import TSidebar from './-sidebar'
-import TMain from './-main'
+import modA from './.mods/a.vue'
+import modB from './.mods/b.vue'
+import modC from './.mods/c.vue'
+import TabWarp from '~/components/tab-warp'
+
 const tabs = [{
-  label: '个人信息', name: 'b'
+  label: '个人信息', name: 'a', comp: modA
 }, {
-  label: '简历材料', name: 'c'
+  label: '简历材料', name: 'b', comp: modB
 }, {
-  label: '操作记录', name: 'h'
+  label: '操作记录', name: 'c', comp: modC
 }]
 export default {
-  components: { TSidebar, TMain },
+  components: { TSidebar, TabWarp },
   data () {
     return {
-      tabs,
-      activeTab: 'a'
+      tabs
     }
   },
   created () {
   },
   methods: {
-    onTab () {},
-    onDropdown () {}
+    onDropdown () {},
+    onDelete () {}
   }
 }
 </script>
