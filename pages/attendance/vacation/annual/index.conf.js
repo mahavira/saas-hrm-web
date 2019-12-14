@@ -100,7 +100,7 @@ export const handler = [{
   options: [{
     label: '批量发放',
     icon: 'icon-ico_export',
-    action: 'dialog:create'
+    action: 'showImportDialog'
   }, {
     label: '批量清零',
     icon: 'icon-ico_clear',

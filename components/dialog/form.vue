@@ -7,6 +7,9 @@
     :width="(mode==='double'?820:408)+'px'"
     :showClose="showClose"
   >
+    <p v-if="beforeText" class="before-text">
+      {{ beforeText }}
+    </p>
     <sp-form
       ref="ltform"
       :mode="mode"
@@ -67,6 +70,7 @@ const defaultOpts = {
   confirmButtonText: '保存',
   confirmButtonNextText: '保存，继续录入',
   callback: null,
+  beforeText: '',
   url: '',
   labelWidth: 124
 }
@@ -84,11 +88,23 @@ export default {
   },
   watch: {
     $route () {
+      if (this.visible === false) { return }
       this.visible = false
     }
   },
   created () {
-    this.$bus.$on('dialog:create', (data) => {
+    this.$bus.$on('dialog:form', (data) => {
+      this.resetAttrs(data)
+      this.resetFields()
+      this.visible = true
+      this.$nextTick(() => this.$refs.ltform.form.resetFields())
+    })
+  },
+  beforeDestroy () {
+    this.$bus.$off('dialog:form')
+  },
+  methods: {
+    resetAttrs (data) {
       Object.keys(defaultOpts).forEach((key) => {
         const defaultVal = defaultOpts[key]
         const val = data[key]
@@ -102,6 +118,8 @@ export default {
           this[key] = val
         }
       })
+    },
+    resetFields () {
       const formRules = {}
       const formData = {}
       if (this.fields) {
@@ -121,16 +139,7 @@ export default {
       this.formData = formData
       this.formData.staffId = '0c8c3af0a4744d81b54a11511870734c'
       this.$set(this, 'formData', this.formData)
-      this.visible = true
-      this.$nextTick(() => {
-        this.$refs.ltform.form.resetFields()
-      })
-    })
-  },
-  beforeDestroy () {
-    this.$bus.$off('dialog:create')
-  },
-  methods: {
+    },
     close () {
       this.visible = false
       this.runCallback('cancel')
@@ -174,3 +183,10 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.before-text{
+  color:rgba(0,0,0,0.85 * 0.4);
+  line-height:22px;
+  padding: 4px 24px 0;
+}
+</style>

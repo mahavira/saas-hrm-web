@@ -57,7 +57,7 @@ export default {
             }
           }
         }
-        this.$bus.$emit('dialog:create', config)
+        this.$bus.$emit('dialog:form', config)
       } else if (type === 'table') {
         this.parent[prop] = !this.parent[prop]
       } else if (type === 'detail') {

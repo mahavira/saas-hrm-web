@@ -11,26 +11,26 @@
         />
       </div>
       <div class="handler">
-        <el-button @click="onDelete" type="primary" class="is-shadow" size="small"><i class="icon-ico_new-additions" /> 新增岗位</el-button>
-        <el-dropdown @command="onDropdownImport">
+        <el-button @click="onCreate" type="primary" class="is-shadow" size="small"><i class="icon-ico_new-additions" /> 新增岗位</el-button>
+        <el-dropdown @command="onDropdown">
           <el-button @click="onDelete" type="default" class="is-shadow" size="small">
-            <i class="el-icon-arrow-down el-icon--left" />导出/导入
+            <i class="icon-ico_drop-down el-icon--left" />导出/导入
           </el-button>
           <el-dropdown-menu>
-            <el-dropdown-item>
-              <i class="icon-ico_new-additions is-primary" command="import1" /> 导入岗位编制
+            <el-dropdown-item command="import">
+              <i class="icon-ico_import is-primary" /> 导入岗位编制
             </el-dropdown-item>
-            <el-dropdown-item>
-              <i class="icon-ico_edit is-primary" command="import2" /> 导出岗位编制表
+            <el-dropdown-item command="import2">
+              <i class="icon-ico_export is-primary" /> 导出岗位编制表
             </el-dropdown-item>
-            <el-dropdown-item>
-              <i class="icon-ico_delete is-primary" command="import3" /> 导出岗位信息表
+            <el-dropdown-item command="import3">
+              <i class="icon-ico_export is-primary" /> 导出岗位信息表
             </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
-        <el-dropdown @command="onDropdownBatch">
+        <el-dropdown @command="onDropdown">
           <el-button type="default" class="is-shadow" size="small">
-            <i class="el-icon-arrow-down el-icon--left" /> 批 量
+            <i class="icon-ico_drop-down el-icon--left" /> 批 量
           </el-button>
           <el-dropdown-menu>
             <el-dropdown-item command="add">
@@ -61,7 +61,27 @@
         </div>
       </div>
     </div>
-    <select-imput-dialog :visible.sync="visibleSelectImput" @select="showImportDialog" />
+    <select-import-dialog
+      :visible.sync="visibleSelectImport"
+      @select="onSelectImport"
+      :items="[{title: '方法一：在线修改', intro: '通过在线修改的方式批量修改岗位'}, {title: '方法二：导入岗位信息', intro: '适用于批量修改系统已存在岗位信息.'}]"
+    />
+    <dialog-import :visible.sync="visibleImport" :title="isImportUpdate?'导入岗位信息':'批量修改岗位信息'">
+      <file-card
+        :label="isImportUpdate?'导出空模版':'导出岗位列表'"
+        :desc="isImportUpdate?'导出标准模板':'录入需要修改的岗位类别信息'"
+        href="http://172.16.17.106:9590/hrEducationInfo/template/export"
+        download="export.excel"
+        guide="1"
+        icon="icon_ic_import_excel"
+      />
+      <file-card
+        label="导入文件"
+        desc="导入文件，针对存在的岗位，修改岗位信息"
+        guide="2"
+        icon="icon_ic_export_excel"
+      />
+    </dialog-import>
     <transition name="transform-y">
       <div v-if="showCheckbox" class="footer el-container is-justify-space-between">
         <div>已选择 <span class="count">0</span> 条</div>
@@ -76,15 +96,21 @@
 <script>
 import TSidebar from './-sidebar'
 import TMain from './-main'
-import SelectImputDialog from '~/components/select-import-dialog'
+import { dialog } from './index.conf'
+import SelectImportDialog from '~/components/select-import-dialog'
+import DialogImport from '~/components/dialog/import'
+import FileCard from '~/components/file-card'
 
 export default {
-  components: { TSidebar, TMain, SelectImputDialog },
+  components: { TSidebar, TMain, SelectImportDialog, DialogImport, FileCard },
   data () {
     return {
-      visibleSelectImput: false,
+      visibleSelectImport: false,
+      visibleImport: false,
+      isImportUpdate: 0,
       showCheckbox: false,
       keyword: '',
+      loading: false,
       pagination: {
         total: 0,
         page: 0,
@@ -95,20 +121,27 @@ export default {
   mounted () {
   },
   methods: {
+    onCreate () {
+      this.$bus.$emit('dialog:form', dialog.create)
+    },
+    onUpdate () {
+      this.$bus.$emit('dialog:form', dialog.update)
+    },
     onDelete () {},
     onSearch () {},
-    showImportDialog (e) {
-      this.visibleSelectImput = false
-    },
-    onDropdownImport (e) {
-
-    },
-    onDropdownBatch (e) {
+    onDropdown (e) {
       if (e === 'delete') {
         this.showCheckbox = true
       } else if (e === 'update') {
-        this.visibleSelectImput = true
+        this.onUpdate()
+      } else if (e === 'import') {
+        this.visibleSelectImport = true
       }
+    },
+    onSelectImport (e) {
+      this.isImportUpdate = e
+      this.visibleImport = true
+      this.visibleSelectImport = false
     },
     cancelDelete () {
       this.showCheckbox = false

@@ -49,6 +49,10 @@
           :placeholder="item.placeholder||'请输入'"
           size="small"
         />
+        <el-switch
+          v-if="SWITCH === item.formType"
+          v-model="value[name]"
+        />
         <el-checkbox-group
           v-if="CHECKBOX === item.formType"
           v-model="value[name]"

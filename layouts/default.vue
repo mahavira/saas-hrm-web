@@ -36,20 +36,20 @@
         nuxt(v-if="!menus[3]||!menus[3].length")
         tab-level-three(v-else :tabs="menus[3]" :active="currentPaths[3]" :prefix="[...currentPaths].splice(0,3).join('/')")
           nuxt
-  dialog-create
+  dialog-form
 </template>
 <script>
 import TabLevelOne from '~/components/level-tab/one'
 import TabLevelTwo from '~/components/level-tab/two'
 import TabLevelThree from '~/components/level-tab/three'
-import DialogCreate from '~/components/dialog/create.vue'
+import DialogForm from '~/components/dialog/form.vue'
 export default {
   provide () {
     return {
       $app: this
     }
   },
-  components: { TabLevelOne, TabLevelTwo, TabLevelThree, DialogCreate },
+  components: { TabLevelOne, TabLevelTwo, TabLevelThree, DialogForm },
   computed: {
     menus () {
       return this.$store.getters['route/currentMenus']
@@ -141,9 +141,11 @@ export default {
   box-sizing: border-box;
   padding-top: 10px;
   background-color: $color-primary;
+  z-index: 9999;
 }
 .logo {
-  background: url(~assets/icon/logo.png) center top no-repeat / 100%;
+  background: url(~assets/icon/logo.png) center top no-repeat;
+  background-size: 100%;
   height: 88px;
   width: 50px;
   margin: 10px 15px;
@@ -155,7 +157,8 @@ export default {
     bottom: 0;
     width: 100%;
     height: 38px;
-    background: url(~assets/icon/logo-t.png) center top no-repeat / 100%;
+    background: url(~assets/icon/logo-t.png) center top no-repeat;
+    background-size: 100%;
   }
 }
 .lay-sidebar .item{
@@ -188,7 +191,10 @@ export default {
     top: 18px;
     width: 100%;
     height: 32px;
-    background: url(~assets/icon/nav_workbench_Default.png) center top no-repeat / 32px 32px;
+    background: url(~assets/icon/nav_workbench_Default.png);
+    background-size: 32px 32px;
+    background-repeat: no-repeat;
+    background-position: center;
     transition: all 0.3s ease-out;
   }
   span {
