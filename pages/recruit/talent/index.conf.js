@@ -1,62 +1,41 @@
-import { SELECT, INPUT, INPUT_NUMBER, DATE_PICKER, CHECKBOX } from '~/constant/formItemType'
+import { SELECT, INPUT, DATE_PICKER, SWITCH } from '~/constant/formItemType'
+import { toBooble } from '~/utils'
 
 export const urls = {
-  create: '/mock/recruit/offer/all/create',
-  query: '/mock/recruit/offer/all/query',
-  update: '/mock/recruit/offer/all/update',
-  delete: 'mock/recruit/offer/all/delete',
-  read: '/mock/recruit/offer/all/read',
+  create: '/hrTalentArchives/add',
+  query: '/hrTalentArchives/list',
+  update: '/hrTalentArchives/update',
+  delete: '/hrTalentArchives/remove',
+  // read: '/mock/recruit/offer/all/read',
   moveCandidate: ''
 }
-export const primaryKey = ''
-const commonField = {
+export const primaryKey = 'talentId'
+
+export const tableFields = {
   name: {
     label: '姓名',
     'class-name': 'is-blod'
   },
-  job: {
-    label: '招聘职位',
-    formType: SELECT,
-    options: 'job'
-  },
-  gender: {
+  sex: {
     label: '性别',
-    formType: CHECKBOX,
     options: 'gender'
   },
   age: {
-    label: '年龄',
-    formType: INPUT_NUMBER
+    label: '年龄'
   },
-  work_age: {
-    label: '工作年限',
-    formType: INPUT_NUMBER
+  homeTown: {
+    label: '籍贯'
   },
-  education: {
-    label: '学历',
-    formType: SELECT,
-    options: 'education'
+  mobile: {
+    label: '手机号'
   },
-  graduate_school: {
-    label: '毕业院校',
-    formType: INPUT
+  personalEmail: {
+    label: '个人邮箱'
   },
-  offState: {
-    label: '毕业专业',
-    formType: SELECT,
-    options: 'offState'
+  workNature: {
+    label: '工作性质',
+    options: 'work_nature'
   },
-  offerSendDt: {
-    label: '最近工作单位',
-    formType: INPUT
-  },
-  phone: {
-    label: '手机号',
-    formType: INPUT
-  }
-}
-export const tableFields = {
-  ...commonField,
   handler: {
     label: '操作',
     actions: ['EDIT']
@@ -64,20 +43,91 @@ export const tableFields = {
 }
 
 const createFields = {
-  ...commonField,
-  entryDt: {
-    label: '入职日期',
-    formType: DATE_PICKER
+  name: {
+    label: '姓名',
+    formType: INPUT,
+    'class-name': 'is-blod',
+    rules: [{ required: true, message: '请输入姓名', trigger: 'blur' }]
   },
-  entryDep: {
-    label: '入职部门',
+  sex: {
+    label: '性别',
     formType: SELECT,
-    options: 'dep'
+    options: 'sex',
+    rules: [{ required: true, message: '请选择性别', trigger: 'blur' }]
   },
-  entryJob: {
-    label: '入职岗位',
+  birthday: {
+    label: '生日',
+    formType: DATE_PICKER,
+    rules: [{ required: true, message: '请选择生日', trigger: 'blur' }]
+  },
+  address: {
+    label: '现居住地',
+    formType: INPUT,
+    rules: [{
+      required: true,
+      message: '请输入现居住地'
+    }]
+  },
+  homeTown: {
+    label: '籍贯',
+    formType: INPUT
+  },
+  paperworkType: {
+    label: '证件类型',
     formType: SELECT,
-    options: 'job'
+    options: 'certificate_type'
+  },
+  idNumber: {
+    label: '证件号码',
+    formType: INPUT
+  },
+  mobile: {
+    label: '手机号',
+    formType: INPUT,
+    rules: [{ required: true, message: '请输入手机号', trigger: 'blur' }]
+  },
+  personalEmail: {
+    label: '个人邮箱',
+    formType: INPUT
+  },
+  politicalFeatures: {
+    label: '政治面貌',
+    formType: INPUT
+  },
+  residenceAddress: {
+    label: '户籍地址',
+    formType: INPUT
+  },
+  workNature: {
+    label: '工作性质',
+    formType: SELECT,
+    options: 'work_nature'
+  },
+  enabled: {
+    label: '启用状态',
+    formType: SWITCH,
+    props: {
+      class: 'inner-txt',
+      activeText: '启动',
+      inactiveText: '禁用',
+      width: 56
+    },
+    handler: (row) => {
+      return toBooble(row.enabled) ? 1 : 0
+    }
+  },
+  status: {
+    label: '状态',
+    formType: SWITCH,
+    props: {
+      class: 'inner-txt',
+      activeText: '是',
+      inactiveText: '否',
+      width: 56
+    },
+    handler: (row) => {
+      return toBooble(row.status) ? 1 : 0
+    }
   }
 }
 
@@ -105,20 +155,97 @@ const changeJobFormItems = {
 }
 
 export const editFields = {
-  ...commonField,
-  entryDt: {
-    label: '入职日期',
-    formType: DATE_PICKER
+  name: {
+    label: '姓名',
+    formType: INPUT,
+    'class-name': 'is-blod',
+    rules: [{ required: true, message: '请输入姓名', trigger: 'blur' }]
   },
-  entryDep: {
-    label: '入职部门',
+  sex: {
+    label: '性别',
     formType: SELECT,
-    options: 'dep'
+    options: 'sex',
+    rules: [{ required: true, message: '请选择性别', trigger: 'blur' }]
   },
-  entryJob: {
-    label: '入职岗位',
+  birthday: {
+    label: '生日',
+    formType: DATE_PICKER,
+    rules: [{ required: true, message: '请选择生日', trigger: 'blur' }]
+  },
+  address: {
+    label: '现居住地',
+    formType: INPUT,
+    rules: [{
+      required: true,
+      message: '请输入现居住地'
+    }]
+  },
+  homeTown: {
+    label: '籍贯',
+    formType: INPUT
+  },
+  paperworkType: {
+    label: '证件类型',
     formType: SELECT,
-    options: 'job'
+    options: 'certificate_type'
+  },
+  idNumber: {
+    label: '证件号码',
+    formType: INPUT
+  },
+  mobile: {
+    label: '手机号',
+    formType: INPUT,
+    rules: [{ required: true, message: '请输入手机号', trigger: 'blur' }]
+  },
+  personalEmail: {
+    label: '个人邮箱',
+    formType: INPUT
+  },
+  politicalFeatures: {
+    label: '政治面貌',
+    formType: INPUT
+  },
+  residenceAddress: {
+    label: '户籍地址',
+    formType: INPUT
+  },
+  workNature: {
+    label: '工作性质',
+    formType: SELECT,
+    options: 'work_nature'
+  },
+  enabled: {
+    label: '启用状态',
+    formType: SWITCH,
+    props: {
+      class: 'inner-txt',
+      activeText: '启动',
+      inactiveText: '禁用',
+      width: 56
+    },
+    formatter: (row) => {
+      return toBooble(row.enabled) ? '已启用' : '已禁用'
+    },
+    handler: (row) => {
+      return toBooble(row.enabled) ? 1 : 0
+    }
+  },
+  status: {
+    label: '状态',
+    formType: SWITCH,
+    props: {
+      class: 'inner-txt',
+      activeText: '是',
+      inactiveText: '否',
+      width: 56
+    },
+    formatter: (row) => {
+      return toBooble(row.status) ? '是' : '否'
+    },
+    handler: (row) => {
+      return toBooble(row.status) ? 1 : 0
+    }
   }
 }
 export const dialog = {

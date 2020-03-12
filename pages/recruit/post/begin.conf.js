@@ -21,7 +21,7 @@ const commonField = {
   gender: {
     label: '工作性质',
     formType: SELECT,
-    options: 'gender'
+    options: 'work_nature'
   },
   age: {
     label: '学历要求',

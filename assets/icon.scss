@@ -716,4 +716,14 @@
   &.图标{
     background-image: url(./icon/图标.png);
   }
+  &.icon-verify{
+    width: 24px;
+    height: 24px;
+    background-image: url(./icon/icon-verify.png);
+  }
+  &.icon-verify-un{
+    width: 24px;
+    height: 24px;
+    background-image: url(./icon/icon-verify-un.png);
+  }
 }

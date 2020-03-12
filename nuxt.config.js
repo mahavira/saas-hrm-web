@@ -37,7 +37,8 @@ export default {
     '@/plugins/moment',
     '@/plugins/axios',
     '@/plugins/vuex-router-sync',
-    { src: '~/plugins/bus-inject', ssr: false }
+    { src: '~/plugins/bus-inject', ssr: false },
+    { src: '~/plugins/perfect-scrollbar', ssr: false }
   ],
   router: {
     // 在每页渲染前运行 middleware/user-agent.js 中间件的逻辑
@@ -58,7 +59,8 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/proxy'
+    '@nuxtjs/proxy',
+    '~/modules/conf'
   ],
   /*
   ** Axios module configuration
@@ -97,6 +99,7 @@ export default {
         use: [ 'json-loader', 'yaml-loader' ]
       })
     }
-  },
-  ignore: ['**/*.test.*', '**/*.spec.*', '**/*.conf.*']
+  }
+  // ignore: ['**/*.test.*', '**/*.spec.*', '**/*.conf.*']
+  // ignore: ['**/*.test.*', '**/*.spec.*']
 }

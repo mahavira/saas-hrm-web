@@ -1,5 +1,5 @@
 <template>
-  <el-table :data="tableData" :highlightCurrentRow="true" class="blue">
+  <el-table :data="tableData" class="blue">
     <el-table-column :show-overflow-tooltip="true" property="date" label="岗位名称" />
     <el-table-column :show-overflow-tooltip="true" property="name" label="在职人数" />
     <el-table-column :show-overflow-tooltip="true" property="name" label="全职人数" />

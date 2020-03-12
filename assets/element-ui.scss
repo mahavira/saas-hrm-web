@@ -45,7 +45,7 @@
 }
 .el-select, .el-input, .el-textarea{
   &.is-white{
-    .el-input__inner{
+    .el-input__inner, .el-textarea__inner{
       border: none;
       background: #FFF;
     }
@@ -151,7 +151,6 @@
     }
     &:hover{
       background:rgba(0,0,0,0.05);
-      border-radius:10px;
       .sp-tree-node{
         .icon{
           transition: all 0.3s;
@@ -187,4 +186,48 @@
 }
 .el-button [class*="icon-"] + span{
   margin-left: 5px;
+}
+
+.el-switch{
+  &.inner-txt{
+    z-index: 0;
+    .el-switch__label{
+      position: absolute;
+      font-size: 12px;
+      margin: 0;
+      height:14px;
+      line-height:14px;
+      transform : scale(0.8,0.8) ;
+      *font-size:10px;
+      opacity: 0;
+      transition: opacity 0.3s;
+      &.el-switch__label--left{
+        right: 8px;
+        color:rgba(105,114,114,1);
+        &.is-active{
+          visibility: visible;
+          opacity: 1;
+          z-index: 1;
+        }
+      }
+      &.el-switch__label--right{
+        left: 8px;
+        color:rgba(27,110,114,1);
+        &.is-active{
+          opacity: 1;
+          z-index: 1;
+        }
+      }
+    }
+  }
+}
+.el-dropdown-menu{
+  padding: 0;
+  .el-dropdown-menu__item {
+    padding: 5px 20px;
+    &:not(.is-disabled):hover,&:focus {
+      background-color: rgba(0,0,0,0.05);
+      color:rgba(0,0,0,0.65);
+    }
+  }
 }

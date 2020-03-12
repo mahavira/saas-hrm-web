@@ -5,10 +5,11 @@
         <el-input
           v-model="keyword"
           @keyup.enter.native="onSearch"
+          :placeholder="岗位名称/编码"
           size="small"
-          placeholder="岗位名称/编码"
-          suffix-icon="icon-ico_Search"
-        />
+        >
+          <el-button slot="append" @click="onSearch" icon="el-icon-search" />
+        </el-input>
       </div>
       <div class="handler">
         <el-button @click="onCreate" type="primary" class="is-shadow" size="small"><i class="icon-ico_new-additions" /> 新增岗位</el-button>

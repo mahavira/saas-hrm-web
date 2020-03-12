@@ -137,7 +137,7 @@ export default {
       }
       this.formRules = formRules
       this.formData = formData
-      this.formData.staffId = '0c8c3af0a4744d81b54a11511870734c'
+      // this.formData.staffId = '0c8c3af0a4744d81b54a11511870734c'
       this.$set(this, 'formData', this.formData)
     },
     close () {
@@ -161,18 +161,26 @@ export default {
     async save (isNext) {
       if (!this.url) { throw new Error('需提供url') }
       const formData = Object.assign({}, this.formData)
+      Object.keys(formData).forEach((key) => {
+        if (!this.fields[key]) { return }
+        const handler = this.fields[key].handler
+        if (handler) {
+          formData[key] = handler(formData)
+        }
+      })
       this.loading = true
       try {
-        await this.$axios.post(this.url, formData)
-        this.formData = {
-          staffId: '0c8c3af0a4744d81b54a11511870734c'
-        }
-        this.$refs.ltform.form.resetFields()
-        if (!isNext) {
-          this.visible = false
-          this.runCallback('confirm')
+        const { data } = await this.$axios.post(this.url, formData)
+        if (data.status === 200 || data.status === 0) {
+          this.$refs.ltform.form.resetFields()
+          if (!isNext) {
+            this.visible = false
+            this.runCallback('confirm')
+          } else {
+            this.runCallback('next')
+          }
         } else {
-          this.runCallback('next')
+          throw new Error(data.message)
         }
       } catch (e) {
         this.$message.error(e.message || e)

@@ -1,4 +1,5 @@
 // import './png-tool'
+// import mods from './mods-conf'
 export const mods = {}
 const requireContext = require.context('../pages', true, /\.conf\.js$/)
 requireContext.keys().forEach((key) => {

@@ -1,0 +1,29 @@
+<link rel="stylesheet" href="style.css"></head>
+<div class="items">
+<div class="item"><span class="icon-ico_contract"></span><input value="icon-ico_contract"></input></div><div class="item"><span class="icon-ico_system-switching"></span><input value="icon-ico_system-switching"></input></div><div class="item"><span class="icon-ico_add"></span><input value="icon-ico_add"></input></div><div class="item"><span class="icon-ico_Authentication-white"></span><input value="icon-ico_Authentication-white"></input></div><div class="item"><span class="icon-ico_back"></span><input value="icon-ico_back"></input></div><div class="item"><span class="icon-ico_batch"></span><input value="icon-ico_batch"></input></div><div class="item"><span class="icon-ico_birthday"></span><input value="icon-ico_birthday"></input></div><div class="item"><span class="icon-ico_calendar"></span><input value="icon-ico_calendar"></input></div><div class="item"><span class="icon-ico_cancel"></span><input value="icon-ico_cancel"></input></div><div class="item"><span class="icon-ico_choice_sure"></span><input value="icon-ico_choice_sure"></input></div><div class="item"><span class="icon-ico_clear"></span><input value="icon-ico_clear"></input></div><div class="item"><span class="icon-ico_delete"></span><input value="icon-ico_delete"></input></div><div class="item"><span class="icon-ico_doubt"></span><input value="icon-ico_doubt"></input></div><div class="item"><span class="icon-ico_download"></span><input value="icon-ico_download"></input></div><div class="item"><span class="icon-ico_download1"></span><input value="icon-ico_download1"></input></div><div class="item"><span class="icon-ico_drop-down"></span><input value="icon-ico_drop-down"></input></div><div class="item"><span class="icon-ico_edit"></span><input value="icon-ico_edit"></input></div><div class="item"><span class="icon-ico_eliminate"></span><input value="icon-ico_eliminate"></input></div><div class="item"><span class="icon-ico_emll"></span><input value="icon-ico_emll"></input></div><div class="item"><span class="icon-ico_export-and-import"></span><input value="icon-ico_export-and-import"></input></div><div class="item"><span class="icon-ico_export"></span><input value="icon-ico_export"></input></div><div class="item"><span class="icon-ico_eye"></span><input value="icon-ico_eye"></input></div><div class="item"><span class="icon-ico_file"></span><input value="icon-ico_file"></input></div><div class="item"><span class="icon-ico_history"></span><input value="icon-ico_history"></input></div><div class="item"><span class="icon-ico_import"></span><input value="icon-ico_import"></input></div><div class="item"><span class="icon-ico_iphone"></span><input value="icon-ico_iphone"></input></div><div class="item"><span class="icon-ico_iphone2"></span><input value="icon-ico_iphone2"></input></div><div class="item"><span class="icon-ico_more-functions"></span><input value="icon-ico_more-functions"></input></div><div class="item"><span class="icon-ico_new-additions"></span><input value="icon-ico_new-additions"></input></div><div class="item"><span class="icon-ico_next"></span><input value="icon-ico_next"></input></div><div class="item"><span class="icon-ico_next2"></span><input value="icon-ico_next2"></input></div><div class="item"><span class="icon-ico_no-Authentication-white"></span><input value="icon-ico_no-Authentication-white"></input></div><div class="item"><span class="icon-ico_occupation"></span><input value="icon-ico_occupation"></input></div><div class="item"><span class="icon-ico_password"></span><input value="icon-ico_password"></input></div><div class="item"><span class="icon-ico_personal-information"></span><input value="icon-ico_personal-information"></input></div><div class="item"><span class="icon-ico_printing"></span><input value="icon-ico_printing"></input></div><div class="item"><span class="icon-ico_quit"></span><input value="icon-ico_quit"></input></div><div class="item"><span class="icon-ico_reduce"></span><input value="icon-ico_reduce"></input></div><div class="item"><span class="icon-ico_revoke"></span><input value="icon-ico_revoke"></input></div><div class="item"><span class="icon-ico_Search"></span><input value="icon-ico_Search"></input></div><div class="item"><span class="icon-ico_send-out"></span><input value="icon-ico_send-out"></input></div><div class="item"><span class="icon-ico_set-up"></span><input value="icon-ico_set-up"></input></div><div class="item"><span class="icon-ico_sure"></span><input value="icon-ico_sure"></input></div><div class="item"><span class="icon-ico_tips"></span><input value="icon-ico_tips"></input></div><div class="item"><span class="icon-ico_to-update"></span><input value="icon-ico_to-update"></input></div><div class="item"><span class="icon-ico_transformation"></span><input value="icon-ico_transformation"></input></div><div class="item"><span class="icon-ico_warning"></span><input value="icon-ico_warning"></input></div><div class="item"><span class="icon-ico_withdraw-account"></span><input value="icon-ico_withdraw-account"></input></div><div class="item"><span class="icon-notice_bell_icon"></span><input value="icon-notice_bell_icon"></input></div><div class="item"><span class="icon-notice_horn_icon"></span><input value="icon-notice_horn_icon"></input></div>
+</div>
+<style>
+.items{
+  display:flex;
+  flex-wrap: wrap;
+  font-size: 16px;
+}
+.item{
+  flex: 0 0 200px;
+  margin: 10px;
+}
+.item input{
+  margin-left: 10px;
+  border: none;
+  outline: none;
+}
+</style>
+<script>
+document.body.addEventListener('click', function (e) {
+  const target = e.target
+  if (target.tagName === 'INPUT') {
+    target.select()
+    document.execCommand('Copy')
+  }
+});
+</script>

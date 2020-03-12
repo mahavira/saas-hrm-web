@@ -1,4 +1,4 @@
-import { SELECT, INPUT, INPUT_NUMBER, DATE_PICKER, CHECKBOX, RADIO } from '~/constant/formItemType'
+import { SELECT, INPUT, INPUT_NUMBER, DATE_PICKER, CHECKBOX } from '~/constant/formItemType'
 
 export const urls = {
   create: '/mock/recruit/candidate/create',
@@ -42,8 +42,8 @@ const commonField = {
   },
   gender: {
     label: '性别',
-    formType: RADIO,
-    options: 'gender'
+    formType: SELECT,
+    options: 'sex'
   },
   age: {
     label: '年龄',

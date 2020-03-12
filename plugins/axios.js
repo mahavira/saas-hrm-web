@@ -8,6 +8,7 @@ export default function ({ $axios, store, redirect, app }) {
     config.cancelToken = source.token
   }, (error) => {
     Message.error({
+      showClose: true,
       message: '加载超时'
     })
     Promise.reject(error)
@@ -15,7 +16,10 @@ export default function ({ $axios, store, redirect, app }) {
   $axios.onError((error) => {
     const code = parseInt(error.response && error.response.status)
     if (error.response && error.response.data && error.response.data.message) {
-      Message.error(error.response.data.message)
+      Message.error({
+        showClose: true,
+        message: `接口访问错误：${error.response.data.message}`
+      })
     }
     if (code === 400) {
       // redirect('/400')

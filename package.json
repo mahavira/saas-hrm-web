@@ -16,9 +16,11 @@
     "element-ui": "^2.4.11",
     "normalize.css": "^8.0.1",
     "nuxt": "^2.0.0",
+    "perfect-scrollbar": "^1.5.0",
     "print-js": "^1.0.63",
     "vue-moment": "^4.0.0",
-    "vue-organization-chart": "^1.1.6"
+    "vue-organization-chart": "^1.1.6",
+    "vuex-persistedstate": "^2.7.1"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^1.0.1",

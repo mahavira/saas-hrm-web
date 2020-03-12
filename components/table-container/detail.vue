@@ -80,7 +80,7 @@ export default {
         this.parent.edited = false
         this.$notify.success('已保存')
       } catch (e) {
-        this.$notify.success(e.message || '保存失败！')
+        this.$notify.error(e.message || '保存失败！')
       } finally {
         this.loading = false
       }

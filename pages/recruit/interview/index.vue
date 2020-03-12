@@ -12,11 +12,11 @@
         <el-input
           v-model="keyword"
           @keyup.enter.native="onSearch"
-          class="search"
+          :placeholder="请输入姓名搜索"
           size="small"
-          placeholder="请输入姓名搜索"
-          suffix-icon="icon-ico_Search"
-        />
+        >
+          <el-button slot="append" @click="onSearch" icon="el-icon-search" />
+        </el-input>
       </div>
       <div class="handler">
         <el-button @click="onDelete" type="default" class="is-shadow" size="small"><i class="icon-ico_calendar is-primary" /> 安排面试</el-button>

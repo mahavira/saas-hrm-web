@@ -5,6 +5,10 @@
 
 body{
   font-size: 14px;
+  font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .sp-fixed-height{
@@ -21,6 +25,10 @@ body{
   justify-content: space-between;
   .search{
     width: 272px;
+    .el-input-group__append{
+      border: none;
+      background: rgb(241, 242, 244)
+    }
   }
 }
 .sp-container{
@@ -30,7 +38,7 @@ body{
   position: relative;
   overflow: hidden;
   &__table{
-    min-height: 528px;
+    // min-height: 528px;
     .handler-icon {
       text-decoration: none;
       i{
@@ -61,6 +69,7 @@ body{
   top: 0;
   display: flex;
   flex-direction: column;
+  box-shadow: -1px 0 2px rgba(34, 13, 218, 0.12);
   .back{
     width: 32px;
     height: 32px;
@@ -86,7 +95,7 @@ body{
     text-align: right;
   }
   .sp-form{
-    .el-input__inner{
+    .el-input__inner, .el-textarea .el-textarea__inner{
       background: #FFF;
     }
   }
@@ -125,6 +134,9 @@ body{
     }
     .el-select, .el-input{
       width: 100%;
+    }
+    .el-cascader{
+      display: block;
     }
     &.full{
       flex: 0 0 100%;

@@ -7,8 +7,9 @@
           @keyup.enter.native="onSearch"
           :placeholder="searchPlaceholder || '请输入搜索关键词'"
           size="small"
-          suffix-icon="icon-ico_Search"
-        />
+        >
+          <el-button slot="append" @click="onSearch" icon="el-icon-search" />
+        </el-input>
       </div>
       <div v-if="!selected" class="handler">
         <t-handler v-for="(item, index) in handlerOptions" :key="index" :item="item" />
@@ -36,7 +37,14 @@
           v-bind="item"
         >
           <template slot-scope="scope">
-            <span v-if="name!=='handler'" :class="item['cell-class-name']" v-html="formatter(scope, item)" />
+            <div v-if="item.formType">
+              <el-switch
+                v-if="formtype.SWITCH === item.formType"
+                v-model="scope.row[name]"
+                @change="item.event(scope.row, _self)"
+              />
+            </div>
+            <span v-else-if="name!=='handler'" :class="item['cell-class-name']" v-html="formatter(scope, item)" />
             <a
               v-else
               :class="item['cell-class-name']"
@@ -66,16 +74,16 @@
       <transition name="transform-y">
         <div v-if="selected" class="handler">
           <span>已选择 <span class="is-primary">{{ selectedRows.length }}</span> 条</span>
-          <el-button @click="cancelDelete" type="default" size="small" class="is-shadow">取消</el-button>
+          <el-button @click="cancelSelectedRows" type="default" size="small" class="is-shadow">取消</el-button>
           <el-button
-            @click="confirmDelete"
+            @click="confirmSelectedRows"
             :disabled="!selectedRows.length"
             :loading="loading"
             type="primary"
             size="small"
             class="is-shadow"
           >
-            <i class="icon-ico_delete" /> 确认删除
+            <i class="icon-ico_delete" /> 确认
           </el-button>
         </div>
       </transition>
@@ -97,7 +105,8 @@ import TDetail from './detail'
 import defaultHandler from './defaultHandler'
 import defaultEditHandler from './defaultEditHandler'
 import getConf from '~/config/mods'
-import { isString, isArray, isObject } from '~/utils'
+import { isString, isArray, isObject, isFunction, toBooble } from '~/utils'
+import * as formtype from '~/constant/formItemType'
 
 /**
  * 该组件提供常规增删改查
@@ -132,6 +141,7 @@ export default {
       },
       pageSizes: [10, 20, 30, 50],
       opts: {},
+      formtype,
       ...conf
     }
   },
@@ -153,6 +163,21 @@ export default {
     this.fetch()
   },
   methods: {
+    formatterData (rows) {
+      const filterItems = []
+      Object.keys(this.tableFields).forEach((key) => {
+        const field = this.tableFields[key]
+        if (field.formType && field.formType === formtype.SWITCH) {
+          filterItems.push(key)
+        }
+      })
+      return rows.map((obj) => {
+        filterItems.forEach((k) => {
+          obj[k] = toBooble(obj[k])
+        })
+        return obj
+      })
+    },
     async fetch (page = 1) {
       this.loading = true
       try {
@@ -162,7 +187,11 @@ export default {
           limit: this.pagination.size,
           page
         })
-        this.tableData = data.data.rows
+        if (this.tableFields) {
+          this.tableData = this.formatterData(data.data.rows)
+        } else {
+          this.tableData = data.data.rows
+        }
         this.pagination.total = data.data.total
       } catch (e) {
         console.warn(e.message || e)
@@ -171,6 +200,7 @@ export default {
       }
     },
     async fetchDetail () {
+      if (!this.urls.read) { return }
       try {
         const { data } = await this.$axios.post(this.urls.read, {
           [this.primaryKey]: this.currentRow[this.primaryKey]
@@ -209,26 +239,42 @@ export default {
     openDetail (row) {
       this.visibleDetail = true
     },
-    cancelDelete () {
+    cancelSelectedRows () {
       this.selected = false
       this.selectedRows = []
       if (this.$refs.table) { this.$refs.table.clearSelection() }
     },
-    async confirmDelete () {
+    async confirmSelectedRows () {
       if (!this.urls || !this.urls.delete) { throw new Error('需要提供Url') }
       if (this.selectedRows.length) {
         try {
           this.loading = true
-          const ids = this.selectedRows.map(row => row[this.primaryKey])
-          const { data } = await this.$axios.post(this.urls.delete, {
-            educationInfoId: ids.join()
-          })
+          let url, formdata
+          if (this.selectedFunc) {
+            const res = this.selectedFunc(this.selectedRows)
+            url = res.url
+            formdata = res.data
+          } else if (isFunction(this.urls.delete)) {
+            const res = this.urls.delete(this.selectedRows)
+            url = res.url
+            formdata = res.data
+          } else {
+            const ids = this.selectedRows.map(row => row[this.primaryKey])
+            url = this.urls.delete
+            formdata = {
+              ids: ids.join()
+            }
+          }
+          const { data } = await this.$axios.post(url, formdata)
           console.table(data)
           this.selected = false
           this.selectedRows = []
+          this.selectedFunc = null
           if (this.$refs.table) { this.$refs.table.clearSelection() }
           this.fetch()
-        } catch (e) {} finally {
+        } catch (e) {
+          console.error(e)
+        } finally {
           this.loading = false
         }
       }

@@ -1,0 +1,177 @@
+@font-face {
+  font-family: 'lantu';
+  src:  url('fonts/lantu.eot?gujchj');
+  src:  url('fonts/lantu.eot?gujchj#iefix') format('embedded-opentype'),
+    url('fonts/lantu.ttf?gujchj') format('truetype'),
+    url('fonts/lantu.woff?gujchj') format('woff'),
+    url('fonts/lantu.svg?gujchj#lantu') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'lantu' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-ico_contract:before {
+  content: "\e900"
+}
+.icon-ico_system-switching:before {
+  content: "\e901"
+}
+.icon-ico_add:before {
+  content: "\e902"
+}
+.icon-ico_Authentication-white:before {
+  content: "\e903"
+}
+.icon-ico_back:before {
+  content: "\e904"
+}
+.icon-ico_batch:before {
+  content: "\e905"
+}
+.icon-ico_birthday:before {
+  content: "\e906"
+}
+.icon-ico_calendar:before {
+  content: "\e907"
+}
+.icon-ico_cancel:before {
+  content: "\e908"
+}
+.icon-ico_choice_sure:before {
+  content: "\e909"
+}
+.icon-ico_clear:before {
+  content: "\e90a"
+}
+.icon-ico_delete:before {
+  content: "\e90b"
+}
+.icon-ico_doubt:before {
+  content: "\e90c"
+}
+.icon-ico_download:before {
+  content: "\e90d"
+}
+.icon-ico_download1:before {
+  content: "\e90e"
+}
+.icon-ico_drop-down:before {
+  content: "\e90f"
+}
+.icon-ico_edit:before {
+  content: "\e910"
+}
+.icon-ico_eliminate:before {
+  content: "\e911"
+}
+.icon-ico_emll:before {
+  content: "\e912"
+}
+.icon-ico_export-and-import:before {
+  content: "\e913"
+}
+.icon-ico_export:before {
+  content: "\e914"
+}
+.icon-ico_eye:before {
+  content: "\e915"
+}
+.icon-ico_file:before {
+  content: "\e916"
+}
+.icon-ico_history:before {
+  content: "\e917"
+}
+.icon-ico_import:before {
+  content: "\e918"
+}
+.icon-ico_iphone:before {
+  content: "\e919"
+}
+.icon-ico_iphone2:before {
+  content: "\e91a"
+}
+.icon-ico_more-functions:before {
+  content: "\e91b"
+}
+.icon-ico_new-additions:before {
+  content: "\e91c"
+}
+.icon-ico_next:before {
+  content: "\e91d"
+}
+.icon-ico_next2:before {
+  content: "\e91e"
+}
+.icon-ico_no-Authentication-white:before {
+  content: "\e91f"
+}
+.icon-ico_occupation:before {
+  content: "\e920"
+}
+.icon-ico_password:before {
+  content: "\e921"
+}
+.icon-ico_personal-information:before {
+  content: "\e922"
+}
+.icon-ico_printing:before {
+  content: "\e923"
+}
+.icon-ico_quit:before {
+  content: "\e924"
+}
+.icon-ico_reduce:before {
+  content: "\e925"
+}
+.icon-ico_revoke:before {
+  content: "\e926"
+}
+.icon-ico_Search:before {
+  content: "\e927"
+}
+.icon-ico_send-out:before {
+  content: "\e928"
+}
+.icon-ico_set-up:before {
+  content: "\e929"
+}
+.icon-ico_sure:before {
+  content: "\e92a";
+}
+.icon-ico_tips:before {
+  content: "\e92b"
+}
+.icon-ico_to-update:before {
+  content: "\e92c"
+}
+.icon-ico_transformation:before {
+  content: "\e92d"
+}
+.icon-ico_warning:before {
+  content: "\e92e"
+}
+.icon-ico_withdraw-account:before {
+  content: "\e92f"
+}
+.icon-notice_bell_icon:before {
+  content: "\e930"
+}
+.icon-notice_horn_icon:before {
+  content: "\e931"
+}

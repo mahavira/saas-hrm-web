@@ -16,66 +16,24 @@
       class="item"
     >
       <div v-if="item.divider" />
-      <div v-else-if="!edited" class="inner">{{ value[name] || '/' }}</div>
+      <div v-else-if="!edited" v-html="formatter(item, name, value)" class="inner" />
       <div v-else>
-        <el-input v-if="!item.formType||INPUT === item.formType" v-model="value[name]" :placeholder="item.placeholder||'请输入'" size="small" />
-        <el-date-picker
-          v-if="DATE_PICKER === item.formType"
-          v-model="value[name]"
-          :placeholder="item.placeholder || '请选择'"
-          :format="item.format||'yyyy-MM-dd'"
-          :value-format="item.valueFormat||'yyyy-MM-dd HH:mm:ss'"
-          size="small"
-          type="date"
-        />
-        <el-select v-if="SELECT === item.formType" v-model="value[name]" :placeholder="item.placeholder||'请选择'" size="small">
-          <el-option
-            v-for="(label, key) in opts[name]"
-            :key="key"
-            :value="key"
-            :label="label"
-          />
-        </el-select>
-        <el-input
-          v-if="TEXTAREA === item.formType"
-          :rows="item.rows||3"
-          v-model="value[name]"
-          :placeholder="item.placeholder||'请输入'"
-          type="textarea"
-        />
-        <el-input-number
-          v-if="INPUT_NUMBER === item.formType"
-          v-model="value[name]"
-          :placeholder="item.placeholder||'请输入'"
-          size="small"
-        />
-        <el-switch
-          v-if="SWITCH === item.formType"
-          v-model="value[name]"
-        />
-        <el-checkbox-group
-          v-if="CHECKBOX === item.formType"
-          v-model="value[name]"
-          :placeholder="item.placeholder||'请选择'"
-          size="small"
-          class="checkbox-group"
-        >
-          <el-checkbox v-for="(label, key) in opts[name]" :label="key" :key="key">{{ label }}</el-checkbox>
-        </el-checkbox-group>
-        <el-radio-group
-          v-if="RADIO === item.formType"
-          v-model="value[name]"
-          :placeholder="item.placeholder||'请选择'"
-          size="small"
-          class="radio-group"
-        >
-          <el-radio v-for="(label, key) in opts[name]" :label="key" :key="key">{{ label }}</el-radio>
-        </el-radio-group>
+        <!-- eslint-disable vue/require-component-is -->
+        <component :is="comps[item.formType]" :value.sync="value[name]" v-bind="item" />
       </div>
     </el-form-item>
   </el-form>
 </template>
 <script>
+import SelectTree from './form-item/select-tree'
+import SelectDict from './form-item/select-dict'
+import DatePicker from './form-item/date-picker'
+import CascaderArea from './form-item/cascader-area'
+import InputText from './form-item/input-text'
+import InputTextarea from './form-item/input-textarea'
+import InputNumber from './form-item/input-number'
+import Switchs from './form-item/switch'
+
 import * as formtype from '~/constant/formItemType'
 import { isArray, isObject, isString } from '~/utils'
 
@@ -90,7 +48,7 @@ export default {
       default: () => {}
     },
     edited: {
-      type: Boolean,
+      type: [Boolean, String],
       default: true
     },
     rules: {
@@ -98,7 +56,7 @@ export default {
       default: () => {}
     },
     value: {
-      type: [String, Array, Boolean, Number, Date, Object],
+      type: [Array, Object],
       default: () => {}
     },
     labelWidth: {
@@ -108,6 +66,16 @@ export default {
   },
   data () {
     return {
+      comps: {
+        SelectTree,
+        DatePicker,
+        SelectDict,
+        CascaderArea,
+        InputText,
+        InputTextarea,
+        InputNumber,
+        Switchs
+      },
       ...formtype,
       opts: {}
     }
@@ -116,6 +84,36 @@ export default {
     fields: {
       handler () {
         this.setOpts()
+      },
+      immediate: true
+    },
+    value: {
+      handler () {
+        Object.keys(this.fields).forEach((name) => {
+          const item = this.fields[name]
+          if (item.formType === formtype.CASCADER_CITY) {
+            const provinceKey = item.fieldmap.province
+            const cityKey = item.fieldmap.city
+            const provinceVal = this.value[provinceKey]
+            const cityVal = this.value[cityKey]
+            const province = this.$store.state.dict.province
+            const city = this.$store.state.dict.city
+            if (provinceVal) {
+              if (!Object.keys(province).length) {
+                this.$store.dispatch('dict/fetchProvince')
+              }
+              if (!this.value[name]) { this.value[name] = [] }
+              this.value[name][0] = provinceVal
+            }
+            if (cityVal) {
+              if (!city[provinceVal]) {
+                this.$store.dispatch('dict/fetchCity', provinceVal)
+              }
+              if (!this.value[name]) { this.value[name] = [] }
+              this.value[name][1] = cityVal
+            }
+          }
+        })
       },
       immediate: true
     }
@@ -138,13 +136,13 @@ export default {
     setOpts () {
       Object.keys(this.fields).forEach((name) => {
         const item = this.fields[name]
-        if (isString(item.options) && item.options) {
-          const opts = this.$store.state.dict[item.options]
+        if (item.options && isString(item.options)) {
+          const opts = this.$store.state.dict.data[item.options]
           if (opts && Object.keys(opts).length) {
-            this.$set(this.opts, name, opts)
+            this.$set(this.opts, item.options, opts)
           } else {
             this.$store.dispatch('dict/fetch', item.options).then(() => {
-              this.$set(this.opts, name, this.$store.state.dict[item.options])
+              this.$set(this.opts, item.options, this.$store.state.dict.data[item.options])
             })
           }
         } else if (isArray(item.options)) {
@@ -153,19 +151,49 @@ export default {
           this.$set(this.opts, name, item.options)
         }
       })
+    },
+    formatter (item, key, row) {
+      const val = row[key]
+      if (item.options) {
+        if (isObject(item.options)) {
+          return item.options[val]
+        } else if (this.opts[item.options] && this.opts[item.options][val]) {
+          return this.opts[item.options][val]
+        }
+      } else if (item.formType === formtype.CASCADER_CITY) {
+        const provinceKey = item.fieldmap.province
+        const cityKey = item.fieldmap.city
+        const provinceVal = row[provinceKey]
+        const cityVal = row[cityKey]
+        const provincecity = ['/', '']
+        if (provinceVal) {
+          const provinces = this.$store.state.dict.province
+          provincecity[0] = provinces[provinceVal]
+        }
+        if (cityVal) {
+          const citys = this.$store.state.dict.city
+          const city = citys[provinceVal]
+          if (city) { provincecity[1] = city[cityVal] }
+        }
+        return provincecity.join(' ')
+      }
+      if (item.formatter) {
+        return item.formatter(row)
+      }
+      if (!val) { return item.ellipsis || '/' }
+      return val
     }
   }
 }
 </script>
 <style scoped lang="scss">
 .divider{
-  margin: 0 0 14px 0;
-  padding-top: 10px;
+  margin: 0;
   &.line{
+    margin: 0 0 14px 0;
+    padding-top: 10px;
     border-top: 1px solid rgba(215,214,230,1);
   }
 }
-.checkbox-group{
-  height: 32px;
-}
+
 </style>
