@@ -44,7 +44,7 @@ export default {
       if (isFunction(action)) {
         return action(this.parent)
       }
-      const [ type, prop ] = action.split(':')
+      const [ type, prop, key ] = action.split(':')
       if (type === 'dialog') {
         const dialog = this.parent.dialog
         if (!dialog) { return }
@@ -62,6 +62,7 @@ export default {
         this.parent[prop] = !this.parent[prop]
       } else if (type === 'detail') {
         this.parent[prop] = !this.parent[prop]
+        this.$parent.editedKey = key
       } else if (context[type]) {
         context[type](this.parent)
       }

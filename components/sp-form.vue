@@ -25,15 +25,7 @@
   </el-form>
 </template>
 <script>
-import SelectTree from './form-item/select-tree'
-import SelectDict from './form-item/select-dict'
-import DatePicker from './form-item/date-picker'
-import CascaderArea from './form-item/cascader-area'
-import InputText from './form-item/input-text'
-import InputTextarea from './form-item/input-textarea'
-import InputNumber from './form-item/input-number'
-import Switchs from './form-item/switch'
-
+import FormItem from './form-item'
 import * as formtype from '~/constant/formItemType'
 import { isArray, isObject, isString } from '~/utils'
 
@@ -66,16 +58,7 @@ export default {
   },
   data () {
     return {
-      comps: {
-        SelectTree,
-        DatePicker,
-        SelectDict,
-        CascaderArea,
-        InputText,
-        InputTextarea,
-        InputNumber,
-        Switchs
-      },
+      comps: FormItem,
       ...formtype,
       opts: {}
     }
@@ -91,7 +74,7 @@ export default {
       handler () {
         Object.keys(this.fields).forEach((name) => {
           const item = this.fields[name]
-          if (item.formType === formtype.CASCADER_CITY) {
+          if (item.formType === formtype.CASCADER_AREA) {
             const provinceKey = item.fieldmap.province
             const cityKey = item.fieldmap.city
             const provinceVal = this.value[provinceKey]
@@ -160,7 +143,7 @@ export default {
         } else if (this.opts[item.options] && this.opts[item.options][val]) {
           return this.opts[item.options][val]
         }
-      } else if (item.formType === formtype.CASCADER_CITY) {
+      } else if (item.formType === formtype.CASCADER_AREA) {
         const provinceKey = item.fieldmap.province
         const cityKey = item.fieldmap.city
         const provinceVal = row[provinceKey]

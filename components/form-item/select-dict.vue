@@ -9,7 +9,7 @@
   </el-select>
 </template>
 <script>
-import { isObject, isString } from '~/utils'
+import { isObject, isString, isFunction } from '~/utils'
 
 const defaultProps = {
   placeholder: '请选择',
@@ -26,8 +26,13 @@ export default {
       default: () => {}
     },
     options: {
-      type: [String, Object],
+      type: [String, Object, Function],
       default: null
+    }
+  },
+  data () {
+    return {
+      remoteOpts: null
     }
   },
   computed: {
@@ -47,9 +52,22 @@ export default {
         return opts
       } else if (isObject(this.options)) {
         return this.options
+      } else if (isFunction(this.options)) {
+        if (!this.remoteOpts) {
+          this.fetchOptions()
+          return null
+        } else {
+          return this.remoteOpts
+        }
       }
       console.error('options值只能为String/Object')
       return null
+    }
+  },
+  methods: {
+    async fetchOptions () {
+      const opts = await this.options(this)
+      if (opts) { this.remoteOpts = opts }
     }
   }
 }

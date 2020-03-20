@@ -23,6 +23,7 @@
         @row-click="onRowClick"
         @selection-change="onSelectionChange"
         v-if="tableFields"
+        v-scroll-bar:el-table="$route.path.split('/').length > 3 ? 391 : 329"
       >
         <el-table-column
           v-if="selected"
@@ -37,7 +38,7 @@
           v-bind="item"
         >
           <template slot-scope="scope">
-            <div v-if="item.formType">
+            <div v-if="item.formType" @click.stop="">
               <el-switch
                 v-if="formtype.SWITCH === item.formType"
                 v-model="scope.row[name]"
@@ -50,7 +51,7 @@
               :class="item['cell-class-name']"
               v-for="(action,index) in item.actions"
               :key="index"
-              @click="openDetail(scope.row)"
+              @click.native.stop="openDetail(scope.row)"
               href="javascript:;"
               class="handler-icon is-primary"
             >
@@ -215,12 +216,12 @@ export default {
       Object.keys(fields).forEach((name) => {
         const item = fields[name]
         if (isString(item.options) && item.options) {
-          const opts = this.$store.state.dict[item.options]
+          const opts = this.$store.state.dict.data[item.options]
           if (opts && Object.keys(opts).length) {
             this.$set(this.opts, name, opts)
           } else {
             this.$store.dispatch('dict/fetch', item.options).then(() => {
-              this.$set(this.opts, name, this.$store.state.dict[item.options])
+              this.$set(this.opts, name, this.$store.state.dict.data[item.options])
             })
           }
         } else if (isArray(item.options)) {
@@ -231,10 +232,10 @@ export default {
       })
     },
     onRowClick (row) {
-      if (this.visibleDetail) {
-        this.currentRow = row
-        this.fetchDetail()
-      }
+      console.log(row)
+      this.visibleDetail = true
+      this.currentRow = row
+      this.fetchDetail()
     },
     openDetail (row) {
       this.visibleDetail = true

@@ -3,9 +3,9 @@ const awaitRequests = []
 
 export default {
   state: {
-    province: {},
-    city: {},
     data: {
+      province: {},
+      city: {},
       offerState: {
         1: '已接受',
         0: '未接受'
@@ -22,7 +22,7 @@ export default {
   },
   mutations: {
     set (state, payload) {
-      state[payload.key] = payload.value
+      state.data[payload.key] = payload.value
     }
   },
   actions: {

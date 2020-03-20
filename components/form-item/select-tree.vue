@@ -14,7 +14,7 @@
       :props="props"
       :expand-on-click-node="false"
       :filter-node-method="filterNode"
-      :default-expand-all="false"
+      :default-expand-all="true"
       @node-click="onClickNode"
       class="select-tree"
       highlight-current
@@ -211,6 +211,7 @@ export default {
 .select-tree {
   max-height: 350px;
   overflow-y: scroll;
+  margin: 10px 0;
 }
 /* 菜单滚动条 */
 .select-tree::-webkit-scrollbar {

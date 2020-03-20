@@ -10,7 +10,7 @@
     .lay-header
       a.item.search
       a.item.bell
-      el-dropdown
+      el-dropdown(@command="onCommand")
         a.item.user
           img(src="~/assets/icon/logo.png")
         el-dropdown-menu(slot="dropdown",class='dropdown')
@@ -26,7 +26,7 @@
           el-dropdown-item.dropdown-item.line
             i.icon-ico_quit
             span 进入官网
-          el-dropdown-item.dropdown-item
+          el-dropdown-item.dropdown-item(command="logout")
             i.el-icon-switch-button
             span 退出登录
     nuxt.lay-main(v-if="!menus[1]||!menus[1].length")
@@ -36,7 +36,7 @@
         nuxt(v-if="!menus[3]||!menus[3].length")
         tab-level-three(v-else :tabs="menus[3]" :active="currentPaths[3]" :prefix="[...currentPaths].splice(0,3).join('/')")
           nuxt
-  dialog-form
+  dialog-form(v-if="dialog.visible",:visible.sync="dialog.visible",v-bind="dialog.config")
 </template>
 <script>
 import TabLevelOne from '~/components/level-tab/one'
@@ -50,12 +50,48 @@ export default {
     }
   },
   components: { TabLevelOne, TabLevelTwo, TabLevelThree, DialogForm },
+  data () {
+    return {
+      dialog: {
+        visible: false,
+        config: {}
+      }
+    }
+  },
   computed: {
     menus () {
       return this.$store.getters['route/currentMenus']
     },
     currentPaths () {
       return this.$store.getters['route/currentPaths']
+    }
+  },
+  created () {
+    if (!this.$store.state.authorization) {
+      this.$router.push('/login')
+    }
+  },
+  mounted () {
+    this.$bus.$on('dialog:form', (config) => {
+      this.dialog.config = config
+      this.dialog.visible = true
+    })
+  },
+  beforeDestroy () {
+    this.$bus.$off('dialog:form')
+  },
+  methods: {
+    onCommand (e) {
+      if (!e) { return }
+      if (e === 'logout') {
+        this.logout()
+      }
+    },
+    logout () {
+      this.$store.commit('set', {
+        authorization: ''
+      })
+      this.$router.push('/login')
     }
   }
 }
