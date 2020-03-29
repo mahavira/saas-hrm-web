@@ -67,7 +67,9 @@ export default {
           applicationKey: conf.applicationKey,
           userFrom: '5'
         }, this.formData)
-        const { data } = await this.$axios.post('/ltLogin/login', formData)
+        const { data } = await this.$axios.post('/ltLogin/login', formData, {
+          baseURL: '/ucsp'
+        })
         if (data && data.status === 0) {
           this.$store.commit('set', {
             userinfo: data.data.permission.ltStaffDto,
