@@ -1,10 +1,12 @@
+import config from './config'
+
 export default {
   mode: 'spa',
   /*
   ** Headers of the page
   */
   head: {
-    title: process.env.npm_package_name || '',
+    title: config.title, // process.env.npm_package_name
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -41,10 +43,7 @@ export default {
     { src: '~/plugins/perfect-scrollbar', ssr: false }
   ],
   router: {
-    // 在每页渲染前运行 middleware/user-agent.js 中间件的逻辑
-    // middleware: 'auth'
-    extendRoutes (routes, resolve) {
-    }
+    middleware: 'auth'
   },
   /*
   ** Nuxt.js dev-modules
@@ -72,7 +71,7 @@ export default {
     // baseURL: 'http://172.16.17.106:9590/',
     timeout: 1000,
     headers: {
-      AuthorizationType: 'web-api'
+      fib: config.applicationKey
     }
   },
   proxy: {
@@ -80,10 +79,7 @@ export default {
       target: 'http://localhost:3001/',
       pathRewrite: { '^/api/mock': '' }
     },
-    '/api': {
-      target: 'http://172.16.17.106:9590/',
-      pathRewrite: { '^/api': '' }
-    }
+    ...config.proxy
   },
   /*
   ** Build configuration
@@ -99,7 +95,6 @@ export default {
         use: [ 'json-loader', 'yaml-loader' ]
       })
     }
-  }
-  // ignore: ['**/*.test.*', '**/*.spec.*', '**/*.conf.*']
-  // ignore: ['**/*.test.*', '**/*.spec.*']
+  },
+  ignore: ['**/*.test.*', '**/*.spec.*', '**/*.conf.*', '**/*.mixin.*']
 }

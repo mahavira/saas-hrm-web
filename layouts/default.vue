@@ -66,11 +66,6 @@ export default {
       return this.$store.getters['route/currentPaths']
     }
   },
-  created () {
-    if (!this.$store.state.authorization) {
-      this.$router.push('/login')
-    }
-  },
   mounted () {
     this.$bus.$on('dialog:form', (config) => {
       this.dialog.config = config

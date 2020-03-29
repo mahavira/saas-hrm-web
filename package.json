@@ -9,7 +9,10 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "lint": "eslint --ext .js,.vue --ignore-path .gitignore ."
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "add-common": "git remote add -f lantu-common http://172.16.17.102/xiongliming/lantu-common.git && git subtree add --prefix=lantu-common lantu-common master --squash",
+    "pull-common": "git subtree pull --prefix=lantu-common lantu-common master --squash",
+    "push-common": "git subtree push --prefix=lantu-common lantu-common master"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",

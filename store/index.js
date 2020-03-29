@@ -1,16 +1,103 @@
 import Vue from 'vue'
+import createPersistedState from 'vuex-persistedstate'
+import { Message } from 'element-ui'
+import { translateDataToTree, treeToEmap } from '~/utils'
 
+// 参与本地存储
+const includeStorageState = [
+  'authorization',
+  'userinfo',
+  'apps',
+  'application',
+  'menus',
+  'permission',
+  'rolePermissionDtos',
+  'orgs'
+]
 export default {
+  strict: process.env.NODE_ENV !== 'production',
+  plugins: [createPersistedState({
+    setState: (key, state, storage) => {
+      const saved = {}
+      Object.keys(state).filter(s => includeStorageState.includes(s)).forEach((k) => {
+        saved[k] = state[k]
+      })
+      return storage.setItem(key, JSON.stringify(saved))
+    }
+  })],
+  getters: {
+    permission (state) {
+      const path = state.route.path
+      const permission = state.permission
+      if (permission[path]) {
+        return permission[path]
+      }
+      return []
+    },
+    organId ({ orgs }) {
+      if (orgs && orgs.length) {
+        return orgs[0].organId
+      }
+      return null
+    }
+  },
   state: {
-    // authorization: 'eyJhbGciOiJIUzUxMiJ9.eyJleGciOiJvTkFOVVNKRTAxTDdWSHgzWDJ4UFVTaHUvSjc5bUdLNC92NVlUYXFwTWc5VGwrNmM5Q1hEd0ZseUdiaDhBMm5PIiwiZXhwIjoxNTc1NTU4NzQ3LCJpYXQiOjE1NzQ5NTM5NDcsImZpYiI6IjFvU1Q5eVBJbjg5aFI5YWM4SnZDV1E9PSJ9.GymOaRDrhZOMYhlAEHkPaIqV_IycO9f6fiksyMmo38BegnOwP6ZpOnzP7KFdaBMLPYOMe1Ecr9FttsdVkqP0oA'
-    // authorization: 'eyJhbGciOiJIUzUxMiJ9.eyJleGciOiJZNGt1QlhaWWZMQlZGUGJGUGt3Qll5UFFIVk9OenFPS29QalUxMnJHZGJWVGwrNmM5Q1hEd0ZseUdiaDhBMm5PIiwiZXhwIjoxNTc1MzY4ODI1LCJpYXQiOjE1NzQ3NjQwMjUsImZpYiI6IlUydWtyN0pGaHl1S28wOC9zV3JFOEE9PSJ9.rSHf7suX_i3oUah2z1GohKEzHUrL-jUHkVHvTux1r_WITKLL7XJcy2nvwjXl7TyxHwK4K1APoVPRoo1ZX6pAgg'
-    authorization: 'eyJhbGciOiJIUzUxMiJ9.eyJleGciOiJvTkFOVVNKRTAxTDdWSHgzWDJ4UFVTaHUvSjc5bUdLNC92NVlUYXFwTWc5VGwrNmM5Q1hEd0ZseUdiaDhBMm5PIiwiZXhwIjoxNTc2MDY0ODgwLCJpYXQiOjE1NzU0NjAwODAsImZpYiI6IjFvU1Q5eVBJbjg5aFI5YWM4SnZDV1E9PSJ9.0tDyM9amy_u6UxrgC8E0ic1t7xjyF5Oa2YFJI0pz5TvXbLDSBD32C4k6AEGYRMI0xEalqF6ZyJDY76wK2ryE-g'
+    userinfo: {},
+    apps: [],
+    menus: [],
+    authorization: '',
+    rolePermissionDtos: [],
+    application: {},
+    permission: {}, // 按钮权限
+    orgs: []
   },
   mutations: {
     set (state, payload) {
       Object.keys(payload).forEach((k) => {
         Vue.set(state, k, payload[k])
       })
+    },
+    logout (state) {
+      state.apps = []
+      state.authorization = ''
+      state.userinfo = {}
+      state.menus = []
+      state.rolePermissionDtos = []
+      state.application = {}
+      state.permission = {}
+      state.orgs = []
+    }
+  },
+  actions: {
+    switchApp ({ state, commit }, e) {
+      if (!state.rolePermissionDtos.length) {
+        Message.error({
+          message: '当前用户没有配置权限信息！',
+          showClose: true
+        })
+        return false
+      }
+      const application = e.ltApplicationDto
+      const menus = state.rolePermissionDtos[0].menus
+      const treeMenus = translateDataToTree(menus, '1')
+      const permission = {}
+      const findBtns = (data, names) => {
+        if (data.children && data.children.length) {
+          if (data.children[0].menuType === '2') {
+            permission['/' + names.join('/')] = data.children.map(item => item.buttonType)
+            delete data.children
+          } else {
+            data.children.forEach(item => findBtns(item, [...names, item.keyName]))
+          }
+        }
+      }
+      treeMenus.forEach(item => findBtns(item, [item.keyName]))
+      commit('set', {
+        menus: treeToEmap(treeMenus, { url: 'path', keyName: 'name', icon: 'icon', name: 'label' }),
+        permission,
+        application
+      })
+      return true
     }
   }
 }

@@ -22,7 +22,7 @@
     <div slot="footer">
       <el-button
         v-show="showCancelButton"
-        @click="onCannel"
+        @click="close"
         type="default"
         size="small"
         class="is-large-padding"
@@ -52,76 +52,50 @@
   </el-dialog>
 </template>
 <script>
-import { isObject } from '~/utils'
 import SpForm from '~/components/sp-form'
 import * as formItemType from '~/constant/formItemType'
-/**
- * 可传参数
- */
-const defaultOpts = {
-  mode: 'double', // double | single
-  title: '添加',
-  fields: {},
-  showClose: true,
-  showCancelButton: true,
-  showConfirmButton: true,
-  showConfirmNextButton: false,
-  cancelButtonText: '取消',
-  confirmButtonText: '保存',
-  confirmButtonNextText: '保存，继续录入',
-  callback: null,
-  beforeText: '',
-  url: '',
-  labelWidth: 124
-}
 
 export default {
   components: { SpForm },
+  props: {
+    visible: { type: Boolean, default: false }, // double | single
+    mode: { type: String, default: 'double' }, // double | single
+    title: { type: String, default: '添加' },
+    fields: { type: Object, default: () => {} },
+    showClose: { type: Boolean, default: true },
+    showCancelButton: { type: Boolean, default: true },
+    showConfirmButton: { type: Boolean, default: true },
+    showConfirmNextButton: { type: Boolean, default: false },
+    cancelButtonText: { type: String, default: '取消' },
+    confirmButtonText: { type: String, default: '保存' },
+    confirmButtonNextText: { type: String, default: '保存，继续录入' },
+    callback: { type: Function, default: null },
+    beforeText: { type: String, default: '' },
+    url: { type: String, default: '' },
+    labelWidth: { type: Number, default: 124 },
+    data: { type: Object, default: () => null }
+  },
   data () {
     return {
-      visible: false,
       loading: false,
       formData: {},
-      formRules: null,
-      ...defaultOpts
+      formRules: null
     }
   },
   watch: {
     $route () {
       if (this.visible === false) { return }
-      this.visible = false
+      this.close()
     }
   },
   created () {
-    this.$bus.$on('dialog:form', (data) => {
-      this.resetAttrs(data)
-      this.resetFields()
-      this.visible = true
-      this.$nextTick(() => this.$refs.ltform.form.resetFields())
-    })
-  },
-  beforeDestroy () {
-    this.$bus.$off('dialog:form')
+    this.resetFields()
+    this.$nextTick(() => this.$refs.ltform.form.resetFields())
   },
   methods: {
-    resetAttrs (data) {
-      Object.keys(defaultOpts).forEach((key) => {
-        const defaultVal = defaultOpts[key]
-        const val = data[key]
-        if (typeof val === 'undefined') {
-          if (isObject(defaultVal)) {
-            this[key] = Object.assign({}, defaultVal)
-          } else {
-            this[key] = defaultVal
-          }
-        } else {
-          this[key] = val
-        }
-      })
-    },
     resetFields () {
       const formRules = {}
-      const formData = {}
+      const formData = Object.assign({}, this.data)
       if (this.fields) {
         Object.keys(this.fields).forEach((key) => {
           const { rules, formType } = this.fields[key]
@@ -129,26 +103,24 @@ export default {
             formRules[key] = rules
           }
           if (formType === formItemType.CHECKBOX) {
-            formData[key] = []
+            formData[key] = this.data ? this.data[key] : []
+          } else if (formType === formItemType.SWITCH) {
+            formData[key] = this.data ? !!this.data[key] : false
           } else {
-            formData[key] = ''
+            formData[key] = this.data ? this.data[key] : ''
           }
         })
       }
       this.formRules = formRules
       this.formData = formData
-      // this.formData.staffId = '0c8c3af0a4744d81b54a11511870734c'
-      this.$set(this, 'formData', this.formData)
     },
     close () {
-      this.visible = false
+      if (!this.visible) { return }
+      this.$emit('update:visible', false)
       this.runCallback('cancel')
     },
     runCallback (e) {
-      if (this.callback) { this.callback(e) }
-    },
-    onCannel () {
-      this.close()
+      if (this.callback) { this.callback(e, this.formData) }
     },
     async onSave (isNext) {
       try {
@@ -172,9 +144,8 @@ export default {
       try {
         const { data } = await this.$axios.post(this.url, formData)
         if (data.status === 200 || data.status === 0) {
-          this.$refs.ltform.form.resetFields()
           if (!isNext) {
-            this.visible = false
+            this.$emit('update:visible', false)
             this.runCallback('confirm')
           } else {
             this.runCallback('next')

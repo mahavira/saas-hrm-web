@@ -1,8 +1,12 @@
 import { Message } from 'element-ui'
 const requestToken = []
+
 export default function ({ $axios, store, redirect, app }) {
   $axios.onRequest((config) => {
     config.headers.token = store.state.authorization || ''
+    if (store.getters.organId) {
+      config.headers.gor = store.getters.organId
+    }
     const source = $axios.CancelToken.source()
     requestToken.push(source)
     config.cancelToken = source.token
@@ -12,6 +16,23 @@ export default function ({ $axios, store, redirect, app }) {
       message: '加载超时'
     })
     Promise.reject(error)
+  })
+  $axios.onResponse(({ config, data }) => { // 默认除了2XX之外的都是错误的，就会走这里
+    requestToken.some((item, index) => {
+      if (item.token === config.cancelToken) {
+        requestToken.splice(index, 1)
+        return true
+      }
+    })
+    const code = parseInt(data.status)
+    if (code === 205519) {
+      store.commit('logout')
+      Message.error({
+        message: '用户凭证已过期，重新登录'
+      })
+      redirect('/login')
+      return true
+    }
   })
   $axios.onError((error) => {
     const code = parseInt(error.response && error.response.status)
