@@ -4,7 +4,7 @@
     nuxt-link(
       v-for="item in tabs",
       :key="item.name",
-      :to="`/${prefix}/${item.path}`",
+      :to="`${item.path}`",
       :class="{active: item.name===active}",
       class="el-link item"
     )

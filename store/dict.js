@@ -1,40 +1,55 @@
+import Vue from 'vue'
 import { isArray } from '~/utils'
 const awaitRequests = []
-
+const defaultData = {
+  offerState: {
+    1: '已接受',
+    0: '未接受'
+  },
+  gender: {
+    'man': '男',
+    'woman': '女'
+  },
+  sex: {
+    'man': '男',
+    'woman': '女'
+  }
+}
 export default {
   state: {
-    data: {
-      province: {},
-      city: {},
-      offerState: {
-        1: '已接受',
-        0: '未接受'
-      },
-      gender: {
-        'man': '男',
-        'woman': '女'
-      },
-      sex: {
-        'man': '男',
-        'woman': '女'
+    data: defaultData
+  },
+  getters: {
+    g: state => (key) => {
+      if (state.data[key]) {
+        return state.data[key]
       }
+      return null
     }
   },
   mutations: {
-    set (state, payload) {
-      state.data[payload.key] = payload.value
+    set (state, { key, value }) {
+      Vue.set(state.data, key, value)
     }
   },
   actions: {
-    async fetch ({ state, commit, dispatch }, dictType = '') {
+    async fetch ({ state, rootState, commit, dispatch }, dictType = '') {
+      if (dictType === 'jobs') {
+        return dispatch('fetchJobs')
+      }
       if (isArray(dictType)) {
         return dictType.forEach(e => dispatch('fetch', e))
       }
-      if (state[dictType] && Object.keys(state[dictType]).length) { return }
-      if (awaitRequests.includes(dictType)) { return }
+      if (state.data[dictType] || awaitRequests.includes(dictType)) { return }
+      if (dictType === 'province') {
+        return dispatch('fetchProvince')
+      }
       try {
         awaitRequests.push(dictType)
-        const { data } = await this.$axios.post('hrRedisCache/list', { type: dictType })
+        const { data } = await this.$axios.post('hrRedisCache/list', {
+          type: dictType,
+          tenantId: rootState.application.tenantId
+        })
         if (!data.data || !data.data.length) {
           throw new Error(`字典[${dictType}]没有数据`)
         }
@@ -53,7 +68,7 @@ export default {
       }
     },
     async fetchProvince ({ state, commit }) {
-      if (state.province && Object.keys(state.province).length) { return }
+      if (state.data.province && Object.keys(state.data.province).length) { return }
       try {
         const { data } = await this.$axios.post('/ltArea/province')
         const map = {}
@@ -69,7 +84,7 @@ export default {
       }
     },
     async fetchCity ({ state, commit }, parentId) {
-      if (state.city[parentId] && Object.keys(state.city[parentId]).length) { return }
+      if (state.data.city && state.data.city[parentId] && Object.keys(state.data.city[parentId]).length) { return }
       try {
         const { data } = await this.$axios.post('/ltArea/city', {
           parentId
@@ -85,6 +100,26 @@ export default {
         })
       } catch (e) {
         console.error(e)
+      }
+    },
+    async fetchJobs ({ commit }) {
+      try {
+        const { data } = await this.$axios.post('ltPost/list', {
+          limit: 99999
+        }, {
+          baseURL: '/ucsp'
+        })
+        if (data.status === 0 || data.status === 200) {
+          const map = {}
+          data.data.forEach((item) => {
+            map[item.id] = item.postName
+          })
+          commit('set', {
+            key: 'jobs',
+            value: map
+          })
+        }
+      } finally {
       }
     }
   }

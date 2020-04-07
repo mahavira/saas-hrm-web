@@ -1,6 +1,6 @@
 export default [{
-  color: 'default',
+  color: 'primary',
   icon: 'icon-ico_edit',
   action: 'detail:edited',
-  label: '快速编辑'
+  label: '编辑'
 }]

@@ -1,7 +1,7 @@
 <template lang="pug">
-.el-container.is-vertical.is-relative
+.el-container.is-relative
   .sp-tabs__one(v-if="tabs.length")
-    nuxt-link(v-for="item in tabs", :key="item.name", :to="`/${prefix}/${item.path}`", :class="{active: item.name===active}", class="el-link item")
+    nuxt-link(v-for="item in tabs", :key="item.name", :to="`${item.path}`", :class="{active: item.name===active}", class="el-link item")
       span {{item.label}}
   slot
 </template>
@@ -24,6 +24,8 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+@import '~/assets/var.scss';
+
 .sp-tabs{
   &__one{
     position: absolute;
@@ -34,7 +36,7 @@ export default {
       color: #FFF;
       font-size: 18px;
       height: 46px;
-      padding: 10px 34px 10px 24px;
+      padding: 10px 28px 10px 30px;
       box-sizing: border-box;
       line-height: 1;
       margin-right: 12px;
@@ -48,7 +50,7 @@ export default {
       }
       &::before, &::after{
         content: '';
-        background: #FFF;
+        background: #F1F2F4;
         visibility: hidden;
         position: absolute;
         transition: all 0.3s cubic-bezier(.25,.1,.3,1.5);

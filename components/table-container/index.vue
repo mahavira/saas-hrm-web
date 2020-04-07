@@ -1,5 +1,5 @@
 <template>
-  <div class="sp-container">
+  <div class="sp-container is-flex-column">
     <div v-if="!hideHeader" class="sp-filter">
       <div class="search">
         <el-input
@@ -23,7 +23,7 @@
         @row-click="onRowClick"
         @selection-change="onSelectionChange"
         v-if="tableFields"
-        v-scroll-bar:el-table="$route.path.split('/').length > 3 ? 391 : 329"
+        v-scroll-bar:el-table="$route.path.split('/').length > 3 ? 375 : 313"
       >
         <el-table-column
           v-if="selected"
@@ -39,11 +39,8 @@
         >
           <template slot-scope="scope">
             <div v-if="item.formType" @click.stop="">
-              <el-switch
-                v-if="formtype.SWITCH === item.formType"
-                v-model="scope.row[name]"
-                @change="item.event(scope.row, _self)"
-              />
+              <!-- eslint-disable vue/require-component-is -->
+              <component :is="FormItemComps[item.formType]" :data="scope.row" :value.sync="scope.row[name]" v-bind="item" />
             </div>
             <span v-else-if="name!=='handler'" :class="item['cell-class-name']" v-html="formatter(scope, item)" />
             <a
@@ -75,7 +72,7 @@
       <transition name="transform-y">
         <div v-if="selected" class="handler">
           <span>已选择 <span class="is-primary">{{ selectedRows.length }}</span> 条</span>
-          <el-button @click="cancelSelectedRows" type="default" size="small" class="is-shadow">取消</el-button>
+          <el-button @click="cancelSelectedRows" type="default" size="small" class="is-cancel">取消</el-button>
           <el-button
             @click="confirmSelectedRows"
             :disabled="!selectedRows.length"
@@ -101,14 +98,24 @@
   </div>
 </template>
 <script>
+import FormItem from '../form-item'
 import THandler from './handler'
 import TDetail from './detail'
 import defaultHandler from './defaultHandler'
 import defaultEditHandler from './defaultEditHandler'
-import getConf from '~/config/mods'
 import { isString, isArray, isObject, isFunction, toBooble } from '~/utils'
-import * as formtype from '~/constant/formItemType'
+import * as formtype from '~/constant/FORMITEM_TYPE'
 
+const props = {
+  urls: { type: Object, default: () => {} },
+  primaryKey: { type: String, default: 'id' },
+  tableFields: { type: Object, default: () => {} },
+  editFields: { type: Object, default: () => {} },
+  dialog: { type: Object, default: () => {} },
+  handler: { type: Array, default: () => [] },
+  editHandler: { type: Array, default: () => [] },
+  searchPlaceholder: { type: String, default: '' }
+}
 /**
  * 该组件提供常规增删改查
  * 扩展其他功能可通过再次封装实现
@@ -120,11 +127,10 @@ export default {
     }
   },
   components: { TDetail, THandler },
+  props,
   data () {
-    const conf = getConf(this.$route.path)
     return {
-      tableFields: null,
-      searchPlaceholder: '',
+      FormItemComps: FormItem,
       hideHeader: false,
       loading: true,
       keyword: '',
@@ -142,8 +148,7 @@ export default {
       },
       pageSizes: [10, 20, 30, 50],
       opts: {},
-      formtype,
-      ...conf
+      formtype
     }
   },
   computed: {
@@ -216,12 +221,12 @@ export default {
       Object.keys(fields).forEach((name) => {
         const item = fields[name]
         if (isString(item.options) && item.options) {
-          const opts = this.$store.state.dict.data[item.options]
+          const opts = this.$store.getters['dict/g'](item.options)
           if (opts && Object.keys(opts).length) {
             this.$set(this.opts, name, opts)
           } else {
             this.$store.dispatch('dict/fetch', item.options).then(() => {
-              this.$set(this.opts, name, this.$store.state.dict.data[item.options])
+              this.$set(this.opts, name, this.$store.getters['dict/g'](item.options))
             })
           }
         } else if (isArray(item.options)) {
@@ -232,7 +237,6 @@ export default {
       })
     },
     onRowClick (row) {
-      console.log(row)
       this.visibleDetail = true
       this.currentRow = row
       this.fetchDetail()
@@ -246,6 +250,11 @@ export default {
       if (this.$refs.table) { this.$refs.table.clearSelection() }
     },
     async confirmSelectedRows () {
+      if (this.selectAfter) {
+        this.selectAfter(this.selectedRows)
+        this.selectAfter = null
+        return
+      }
       if (!this.urls || !this.urls.delete) { throw new Error('需要提供Url') }
       if (this.selectedRows.length) {
         try {
@@ -304,7 +313,7 @@ export default {
         }
       }
       if (item.formatter) {
-        return item.formatter(row)
+        return item.formatter(row, this)
       }
       return value
     }

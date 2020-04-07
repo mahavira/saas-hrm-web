@@ -1,4 +1,4 @@
-import { SELECT, INPUT } from '~/constant/formItemType'
+import { SELECT, INPUT } from '~/constant/FORMITEM_TYPE'
 const conf = {
   info: {
     label: '在职信息',

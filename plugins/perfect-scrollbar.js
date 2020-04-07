@@ -2,25 +2,40 @@ import Vue from 'vue'
 import PerfectScrollbar from 'perfect-scrollbar'
 import 'perfect-scrollbar/css/perfect-scrollbar.css'
 import debounce from 'lodash/debounce'
+function getElementToPageTop (el) {
+  if (el.parentElement) {
+    return getElementToPageTop(el.parentElement) + el.offsetTop
+  }
+  return el.offsetTop
+}
 
 const setTableHeight = (el, value) => {
-  el.style.height = `${window.innerHeight - value}px`
+  if (!value) {
+    const top = getElementToPageTop(el)
+    el.style.height = `${window.innerHeight - top - 32 - 64}px`
+  } else {
+    el.style.height = `${window.innerHeight - value}px`
+  }
 }
 let debounceFunc = null
 const initScrollBar = (el, value) => {
   if (el._ps_ instanceof PerfectScrollbar) {
-    debounceFunc = debounce(() => setTableHeight(el, value), 600)
-    setTableHeight(el, value)
-    window.addEventListener('resize', debounceFunc)
     el._ps_.update()
   } else {
     el._ps_ = new PerfectScrollbar(el, { suppressScrollX: true })
+    if (!el.isFixed) {
+      debounceFunc = debounce(() => setTableHeight(el, value), 600)
+      setTableHeight(el, value)
+      window.addEventListener('resize', debounceFunc)
+    }
   }
 }
 const getEl = (el, arg) => {
   if (arg === 'el-table') {
     el = el.querySelector('.el-table__body-wrapper')
     !el && console.warn('未发现className为el-table__body-wrapper的dom')
+  } else if (arg === 'fixed') {
+    el.isFixed = true
   }
   return el
 }

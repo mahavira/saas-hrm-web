@@ -1,6 +1,17 @@
-import menus from '~/config/menu.yml'
+import defaultMenus from '~/config/menu.yml'
 import { findChildren } from '~/utils/collection'
 
+function supPath (data, basePath = '') {
+  data.forEach((item) => {
+    if (item.path && item.path[0] !== '/') {
+      item.path = `${basePath}/${item.name}`
+    }
+    if (item.children && item.children.length) {
+      supPath(item.children, item.path)
+    }
+  })
+}
+supPath(defaultMenus)
 const moduleName = 'route'
 function cloneRoute (to, from) {
   const clone = {
@@ -26,6 +37,8 @@ export default function ({ app, store }) {
       currentPaths: state => state.path.split('/').filter(n => !!n),
       currentMenus (state, getters) {
         const paths = []
+        const menus = defaultMenus
+        // const menus = store.state.menus
         const res = [
           menus,
           ...getters.currentPaths.map((path) => {

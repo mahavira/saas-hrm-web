@@ -1,6 +1,6 @@
 import Mock from 'better-mock'
 import getConf from '~/config/mods'
-import { SELECT, INPUT, DATE_PICKER, INPUT_NUMBER } from '~/constant/formItemType'
+import { SELECT, INPUT, DATE_PICKER, INPUT_NUMBER } from '~/constant/FORMITEM_TYPE'
 
 function setTemplate (fields, template = {}) {
   Object.keys(fields).forEach((name) => {

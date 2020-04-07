@@ -1,6 +1,6 @@
 <template>
   <div class="sp-fixed-height__one">
-    <div class="sp-filter is-white-bg">
+    <!-- <div class="sp-filter is-white-bg">
       <div class="selection">
         <div class="title">架构师</div>
         <div>
@@ -40,38 +40,62 @@
         <el-button @click="onDelete" type="default" class="is-shadow" size="small"><i class="icon-ico_eliminate is-primary" /> 淘汰/流失</el-button>
         <el-button @click="onDelete" type="default" class="is-shadow" size="small"><i class="icon-ico_delete is-primary" /> 删除候选</el-button>
       </div>
-    </div>
-    <tab-warp :tabs="tabs" :show-delete="false" style="flex: 1;">
-      <t-sidebar />
+    </div> -->
+    <tab-warp :tabs="tabs" :is-scroll="false" :show-delete="false" style="flex: 1;">
+      <t-sidebar :user="user" />
     </tab-warp>
   </div>
 </template>
 <script>
 import TSidebar from './-sidebar'
-import modA from './.mods/a.vue'
-import modB from './.mods/b.vue'
-import modC from './.mods/c.vue'
+import modFamily from './.mods/family.vue'
+import modSkills from './.mods/skills.vue'
+import modWorks from './.mods/works.vue'
+import modEducation from './.mods/education.vue'
+import modContact from './.mods/contact.vue'
+import modCertificate from './.mods/certificate.vue'
+import modLanguage from './.mods/language.vue'
 import TabWarp from '~/components/tab-warp'
 
 const tabs = [{
-  label: '个人信息', name: 'a', comp: modA
+  label: '家庭成员', name: 'family', comp: modFamily
 }, {
-  label: '简历材料', name: 'b', comp: modB
+  label: '工作技能', name: 'skills', comp: modSkills
 }, {
-  label: '操作记录', name: 'c', comp: modC
+  label: '工作经验', name: 'experience', comp: modWorks
+}, {
+  label: '教育经历', name: 'education', comp: modEducation
+}, {
+  label: '紧急联系人', name: 'contact', comp: modContact
+}, {
+  label: '证书/证件', name: 'certificate', comp: modCertificate
+}, {
+  label: '语言能力', name: 'language', comp: modLanguage
 }]
 export default {
   components: { TSidebar, TabWarp },
   data () {
     return {
-      tabs
+      tabs,
+      user: {}
     }
   },
   created () {
+    this.fetch()
   },
   methods: {
     onDropdown () {},
-    onDelete () {}
+    onDelete () {},
+    async fetch () {
+      try {
+        const { data } = await this.$axios.post('/hrTalentArchives/view', {
+          talentIds: this.$route.params.id
+        })
+        if (data.data && data.data.hrTalentArchivesDto) {
+          this.user = data.data.hrTalentArchivesDto
+        }
+      } catch (e) {}
+    }
   }
 }
 </script>

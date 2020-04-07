@@ -9296,6 +9296,13 @@ vue-client-only@^2.0.0:
   resolved "https://registry.npmjs.org/vue-client-only/-/vue-client-only-2.0.0.tgz#ddad8d675ee02c761a14229f0e440e219de1da1c"
   integrity sha512-arhk1wtWAfLsJyxGMoEYhoBowM87/i6HLSG2LH/03Yog6i2d9JEN1peMP0Ceis+/n9DxdenGYZZTxbPPJyHciA==
 
+vue-compose@^0.7.3:
+  version "0.7.3"
+  resolved "https://registry.yarnpkg.com/vue-compose/-/vue-compose-0.7.3.tgz#8cece8dbb0ca785046760c84c17264261afbf80a"
+  integrity sha512-R2Uwz/yy/P5/9SzdRGe4F/QyOVneQ+27vioMzjZgLdsDwJoiZiYajBV89dK+1OVdaQBikt0ZIEx1ugpsTZPOMA==
+  dependencies:
+    vue-hoc "0.x.x"
+
 vue-eslint-parser@^5.0.0:
   version "5.0.0"
   resolved "https://registry.npmjs.org/vue-eslint-parser/-/vue-eslint-parser-5.0.0.tgz#00f4e4da94ec974b821a26ff0ed0f7a78402b8a1"
@@ -9331,6 +9338,11 @@ vue-eslint-parser@^7.0.0:
     espree "^6.1.2"
     esquery "^1.0.1"
     lodash "^4.17.15"
+
+vue-hoc@0.x.x, vue-hoc@^0.4.7:
+  version "0.4.7"
+  resolved "https://registry.yarnpkg.com/vue-hoc/-/vue-hoc-0.4.7.tgz#4d3322ba89b8b0e42b19045ef536c21d948a4fac"
+  integrity sha512-bFHE7mf1bBBQSYg36Zg3ON0BawtRSxhiVS2wkDXq4LldSyBoH84WmfR+JijYenICiZTv81dbrYVFTf8S/FT1aQ==
 
 vue-hot-reload-api@^2.3.0:
   version "2.3.4"

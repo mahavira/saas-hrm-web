@@ -69,7 +69,7 @@ export default {
     }
   },
   actions: {
-    switchApp ({ state, commit }, e) {
+    switchApp2 ({ state, commit }, e) {
       if (!state.rolePermissionDtos.length) {
         Message.error({
           message: '当前用户没有配置权限信息！',
@@ -95,6 +95,13 @@ export default {
       commit('set', {
         menus: treeToEmap(treeMenus, { url: 'path', keyName: 'name', icon: 'icon', name: 'label' }),
         permission,
+        application
+      })
+      return true
+    },
+    switchApp ({ state, commit }, e) {
+      const application = e.ltApplicationDto
+      commit('set', {
         application
       })
       return true

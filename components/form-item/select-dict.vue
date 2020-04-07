@@ -45,7 +45,7 @@ export default {
     },
     opts () {
       if (isString(this.options)) {
-        const opts = this.$store.state.dict.data[this.options]
+        const opts = this.$store.getters['dict/g'](this.options)
         if (!opts) {
           this.$store.dispatch('dict/fetch', this.options)
         }
@@ -54,7 +54,7 @@ export default {
         return this.options
       } else if (isFunction(this.options)) {
         if (!this.remoteOpts) {
-          this.fetchOptions()
+          this.fetchRemoteOptions()
           return null
         } else {
           return this.remoteOpts
@@ -65,7 +65,7 @@ export default {
     }
   },
   methods: {
-    async fetchOptions () {
+    async fetchRemoteOptions () {
       const opts = await this.options(this)
       if (opts) { this.remoteOpts = opts }
     }

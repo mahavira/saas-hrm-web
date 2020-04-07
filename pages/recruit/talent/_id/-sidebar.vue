@@ -1,20 +1,20 @@
 <template>
   <div class="intro">
     <img class="headimg" src="" alt="">
-    <div class="username">Joe Black</div>
+    <div class="username">{{ user.name }}</div>
     <div class="number">
-      <div>女 I 28岁 <span>I</span> 4年工作经验 I 大连</div>
+      <div>女 I {{ user.age }}岁 <span>I</span> 4年工作经验 I {{ user.homeTown }}</div>
       <div>渤海大学 I 网络工程专业</div>
     </div>
     <div class="info">
       <div>
-        <i class="icon-ico_occupation is-primary" /> <span>架构师-B1</span>
+        <i class="icon-ico_occupation is-primary" /> <span>{{ user.workNature }}</span>
       </div>
       <div>
-        <i class="icon-ico_iphone is-primary" /> <span>18834567899</span>
+        <i class="icon-ico_iphone is-primary" /> <span>{{ user.mobile }}</span>
       </div>
       <div>
-        <i class="icon-ico_emll is-primary" /> <span>102377489390@163.com</span>
+        <i class="icon-ico_emll is-primary" /> <span>{{ user.personalEmail }}</span>
       </div>
     </div>
     <div class="handler">
@@ -26,6 +26,9 @@
 </template>
 <script>
 export default {
+  props: {
+    user: { type: Object, default: () => {} }
+  },
   data () {
     return {
     }

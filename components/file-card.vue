@@ -5,7 +5,8 @@ export default {
     icon: { type: String, default: '' },
     label: { type: [String, Array], default: '' },
     desc: { type: String, default: '' },
-    guide: { type: String, default: '' }
+    guide: { type: String, default: '' },
+    uploadUrl: { type: String, default: 'hrEducationInfo/export' }
   },
   methods: {
     async onUploadSuccess (response, file, fileList) {
@@ -14,7 +15,7 @@ export default {
       }
       try {
         this.importing = true
-        const res = await this.$axios.post('hrEducationInfo/export', response.data, {
+        const res = await this.$axios.post(this.uploadUrl, response.data, {
           responseType: 'blob'
         })
         const fileName = '导入错误说明.xls'
@@ -82,7 +83,7 @@ export default {
         headers: {
           token: this.$store.state.authorization
         },
-        action: `${this.$axios.defaults.baseURL}/hrEducationInfo/import`,
+        action: `${this.$axios.defaults.baseURL}${this.uploadUrl}`,
         onSuccess: this.onUploadSuccess,
         name: 'uploadFile',
         drag: true

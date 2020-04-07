@@ -6,6 +6,7 @@
   />
 </template>
 <script>
+import { toBooble } from '~/utils'
 const defaultProps = {
   placeholder: '请输入',
   size: 'small',
@@ -17,7 +18,7 @@ const defaultProps = {
 export default {
   props: {
     value: {
-      type: [Boolean, String],
+      type: [Boolean, String, Number],
       default: false
     },
     props: {
@@ -30,8 +31,19 @@ export default {
       return Object.assign({}, defaultProps, this.props)
     },
     model: {
-      get () { return !!this.value },
-      set (e) { this.$emit('update:value', e) }
+      get () { return toBooble(this.value) },
+      set (e) {
+        let val = e
+        if (this.$attrs.handler) {
+          val = this.$attrs.handler(this.$attrs.data, this)
+        } else {
+          val = e ? 1 : 0
+        }
+        this.$emit('update:value', val)
+        if (this.$attrs.event) {
+          this.$attrs.event(this.$attrs.data, this)
+        }
+      }
     }
   }
 }

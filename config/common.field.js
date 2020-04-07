@@ -1,6 +1,6 @@
 import {
   SELECT
-} from '~/constant/formItemType'
+} from '~/constant/FORMITEM_TYPE'
 export const staffId = {
   label: '选择员工',
   alias: 'name',

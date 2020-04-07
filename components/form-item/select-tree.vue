@@ -44,7 +44,7 @@ export default {
   },
   props: {
     // 接收绑定参数
-    value: { type: String, default: '' },
+    value: { type: [String, Number], default: '' },
     // 输入框宽度
     width: { type: String, default: '' },
     // 选项数据
@@ -64,8 +64,8 @@ export default {
       required: false,
       default: () => ({
         parent: 'parentId',
-        value: 'value',
-        label: 'label',
+        value: 'id',
+        label: 'title',
         children: 'children'
       })
     }
@@ -106,6 +106,9 @@ export default {
         this.labelModel = this.queryTree(this.data, val)
       },
       immediate: true
+    },
+    valueModel () {
+      this.$emit('update:value', this.valueModel)
     }
   },
   created () {
@@ -123,6 +126,7 @@ export default {
     onClickNode (node) {
       this.labelModel = node[this.props.label]
       this.valueModel = node[this.props.value]
+      // this.$emit('update:value', this.valueModel)
       this.onCloseTree()
     },
     // 偏平数组转化为树状层级结构

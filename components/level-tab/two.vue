@@ -1,16 +1,15 @@
 <template lang="pug">
-div
+div.el-container.is-vertical
   .sp-tabs__two(v-if="tabs.length")
     nuxt-link(
       v-for="item in tabs",
       :key="item.name",
-      :to="`/${prefix}/${item.path}`",
+      :to="`${item.path}`",
       :class="{active: item.name===active}",
       class="el-link item"
     )
       span {{ item.label }}
-  el-scrollbar.is-vertical.sp-fixed-height__two
-    slot
+  slot
 </template>
 <script>
 export default {
@@ -35,7 +34,8 @@ export default {
 .sp-tabs{
   &__two{
     overflow: hidden;
-    background: #FFF;
+    // background: #ddd;
+    background-image: linear-gradient(to bottom, #f1f2f4,#d9d9d9);
     padding: 16px 16px 0;
     box-shadow: 1px 5px 5px 1px $bgcolor-primary;
     z-index: 1;

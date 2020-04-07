@@ -1,4 +1,4 @@
-import { SELECT } from '~/constant/formItemType'
+import { SELECT } from '~/constant/FORMITEM_TYPE'
 
 export const urls = {
   create: '/mock/salary/manage/payroll/detail/create',

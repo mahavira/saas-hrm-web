@@ -2,7 +2,7 @@
   <div class="sp-detail">
     <div class="header">
       <div>
-        <el-button @click="back" class="back" size="small" icon="el-icon-arrow-right" />
+        <el-button @click="back" class="back" size="small" icon="icon-ico_next" />
       </div>
       <div v-if="!parent.edited">
         <t-handler v-for="(item, index) in handler" :key="index" :item="item" />
@@ -34,7 +34,7 @@
     </el-scrollbar>
     <transition name="transform-y">
       <div v-if="parent.edited" class="footer">
-        <el-button @click="cancelEdit" type="default" size="small" class="is-shadow">取消</el-button>
+        <el-button @click="cancelEdit" type="default" size="small" class="is-cancel">取消</el-button>
         <el-button @click="onSave" :loading="loading" type="primary" size="small" class="is-shadow">保存</el-button>
       </div>
     </transition>

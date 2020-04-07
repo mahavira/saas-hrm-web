@@ -2,9 +2,6 @@ import config from './config'
 
 export default {
   mode: 'spa',
-  /*
-  ** Headers of the page
-  */
   head: {
     title: config.title, // process.env.npm_package_name
     meta: [
@@ -16,60 +13,39 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
-  /*
-  ** Customize the progress-bar color
-  */
   loading: { color: '#fff' },
-  /*
-  ** Global CSS
-  */
   css: [
     'normalize.css',
     '@/assets/element-ui.scss',
     '@/assets/helper.scss',
     '@/assets/common.scss'
   ],
-  /*
-  ** Plugins to load before mounting the App
-  */
   plugins: [
-    { src: '@/plugins/resize', ssr: false },
-    { src: '@/plugins/element-ui', ssr: false },
-    { src: '~/plugins/mock', ssr: false },
-    '@/plugins/moment',
-    '@/plugins/axios',
-    '@/plugins/vuex-router-sync',
+    { src: '~/plugins/resize', ssr: false },
+    { src: '~/plugins/element-ui', ssr: false },
+    // { src: '~/plugins/mock', ssr: false },
+    { src: '~/plugins/moment', ssr: false },
+    { src: '~/plugins/axios', ssr: false },
+    { src: '~/plugins/vuex-router-sync', ssr: false },
     { src: '~/plugins/bus-inject', ssr: false },
-    { src: '~/plugins/perfect-scrollbar', ssr: false }
+    { src: '~/plugins/perfect-scrollbar', ssr: false },
+    { src: '~/plugins/request', ssr: false }
   ],
   router: {
     middleware: 'auth'
   },
-  /*
-  ** Nuxt.js dev-modules
-  */
   buildModules: [
-    // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module'
   ],
-  /*
-  ** Nuxt.js modules
-  */
   modules: [
-    // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/proxy',
-    '~/modules/conf'
+    '@nuxtjs/proxy'
+    // '~/modules/conf'
   ],
-  /*
-  ** Axios module configuration
-  ** See https://axios.nuxtjs.org/options
-  */
   axios: {
     proxy: true,
     prefix: '/hrm',
-    // baseURL: 'http://172.16.17.106:9590/',
-    timeout: 1000,
+    timeout: 30000,
     headers: {
       fib: config.applicationKey
     }
@@ -79,16 +55,11 @@ export default {
       target: 'http://localhost:3001/',
       pathRewrite: { '^/api/mock': '' }
     },
-    ...config.proxy
+    '/ucsp': { target: 'http://172.16.24.121:39400/', pathRewrite: { '^/ucsp': '' } },
+    '/hrm': { target: 'http://172.16.17.106:9590/', pathRewrite: { '^/hrm': '' } }
   },
-  /*
-  ** Build configuration
-  */
   build: {
     transpile: [/^element-ui/],
-    /*
-    ** You can extend webpack config here
-    */
     extend (config, ctx) {
       config.module.rules.push({
         test: /\.ya?ml$/,

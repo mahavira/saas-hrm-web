@@ -1,11 +1,12 @@
 import { Message } from 'element-ui'
+import conf from '~/config'
 const requestToken = []
 
 export default function ({ $axios, store, redirect, app }) {
   $axios.onRequest((config) => {
     config.headers.token = store.state.authorization || ''
-    if (store.getters.organId) {
-      config.headers.gor = store.getters.organId
+    if (conf.name === 'middleground' && store.state.application.applicationId) {
+      config.headers.exp = store.state.application.applicationId
     }
     const source = $axios.CancelToken.source()
     requestToken.push(source)

@@ -1,5 +1,5 @@
 import fields from '~/fields'
-import { SELECT, TEXTAREA, INPUT, DATE_PICKER } from '~/constant/formItemType'
+import { SELECT, TEXTAREA, INPUT, DATE_PICKER } from '~/constant/FORMITEM_TYPE'
 
 export const urls = {
   query: 'mock/organization/duty/manage/query',

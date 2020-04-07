@@ -3,7 +3,7 @@
     v-bind="mergeProps"
     v-model="model"
     :props="cascaderProps"
-    @change="onCascader($event,item)"
+    @change="onCascader"
   />
 </template>
 <script>
@@ -20,6 +20,10 @@ export default {
     props: {
       type: Object,
       default: () => {}
+    },
+    data: {
+      type: Object,
+      default: () => {}
     }
   },
   data () {
@@ -30,10 +34,10 @@ export default {
           const { level, value } = node
           let opts
           if (level === 0) {
-            opts = this.$store.state.dict.province
-            if (!Object.keys(opts).length) {
+            opts = this.$store.getters['dict/g']('province')
+            if (!opts) {
               await this.$store.dispatch('dict/fetchProvince')
-              opts = this.$store.state.dict.province
+              opts = this.$store.getters['dict/g']('province')
             }
             const nodes = Object.keys(opts).map(key => ({
               value: key,
@@ -43,11 +47,11 @@ export default {
             }))
             resolve(nodes)
           } else {
-            let citys = this.$store.state.dict.city
-            opts = citys[value]
-            if (!opts || !Object.keys(opts).length) {
+            let citys = this.$store.getters['dict/g']('city')
+            if (citys) { opts = citys[value] }
+            if (!citys || !opts || !Object.keys(opts).length) {
               await this.$store.dispatch('dict/fetchCity', value)
-              citys = this.$store.state.dict.city
+              citys = this.$store.getters['dict/g']('city')
               opts = citys[value]
             }
             const nodes = Object.keys(opts).map(key => ({
@@ -71,9 +75,10 @@ export default {
     }
   },
   methods: {
-    onCascader (e, item) {
-      if (e && e[0]) { this.value[item.fieldmap.province] = e[0] }
-      if (e && e[1]) { this.value[item.fieldmap.city] = e[1] }
+    onCascader (e) {
+      const { province, city } = this.$attrs.fieldmap
+      if (e && e[0]) { this.value[province] = e[0] }
+      if (e && e[1]) { this.value[city] = e[1] }
     }
   }
 }

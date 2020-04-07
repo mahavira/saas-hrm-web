@@ -4,13 +4,13 @@
   @include clearfix;
 }
 .is-blod{
-  font-weight: 700;
+  font-weight: 700 !important;
 }
 .is-relative {
-  position: relative;
+  position: relative !important;
 }
 .is-absolute {
-  position: absolute;
+  position: absolute !important;
 }
 .is-primary{
   color: $color-primary !important;
@@ -23,29 +23,35 @@
 }
 
 .is-justify-center{
-  justify-content: center;
+  justify-content: center !important;
 }
 .is-justify-end{
-  justify-content: flex-end;
+  justify-content: flex-end !important;
 }
 .is-justify-space-between{
-  justify-content: space-between;
+  justify-content: space-between !important;
 }
 .is-justify-space-around{
-  justify-content: space-around;
+  justify-content: space-around !important;
 }
 .is-rotate-90{
-  transform: rotate(90deg);
+  transform: rotate(90deg) !important;
 }
 .is-rotate-180{
-  transform: rotate(180deg);
+  transform: rotate(180deg) !important;
 }
 .is-large-padding{
-  padding-left: 36px;
-  padding-right: 36px;
+  padding-left: 36px !important;
+  padding-right: 36px !important;
 }
 .is-align-items-center{
-  align-items: center;
+  align-items: center !important;
+}
+.is-flex-column{
+  flex-direction: column !important;
+}
+.is-flex-row{
+  flex-direction: row !important;
 }
 /* transform-x */
 .transform-x-leave-active,

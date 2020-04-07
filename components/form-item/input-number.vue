@@ -7,12 +7,14 @@
 <script>
 const defaultProps = {
   placeholder: '请输入',
-  size: 'small'
+  size: 'small',
+  min: 0,
+  controlsPosition: 'right'
 }
 export default {
   props: {
     value: {
-      type: Number,
+      type: [Number, String],
       default: 0
     },
     props: {
@@ -25,7 +27,7 @@ export default {
       return Object.assign({}, defaultProps, this.props)
     },
     model: {
-      get () { return this.value },
+      get () { return this.value - 0 },
       set (e) { this.$emit('update:value', e) }
     }
   }

@@ -53,7 +53,7 @@
 </template>
 <script>
 import SpForm from '~/components/sp-form'
-import * as formItemType from '~/constant/formItemType'
+import * as formItemType from '~/constant/FORMITEM_TYPE'
 
 export default {
   components: { SpForm },

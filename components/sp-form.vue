@@ -26,8 +26,8 @@
 </template>
 <script>
 import FormItem from './form-item'
-import * as formtype from '~/constant/formItemType'
-import { isArray, isObject, isString } from '~/utils'
+import * as formtype from '~/constant/FORMITEM_TYPE'
+import { isArray, isObject, isString, isFunction } from '~/utils'
 
 export default {
   props: {
@@ -79,8 +79,8 @@ export default {
             const cityKey = item.fieldmap.city
             const provinceVal = this.value[provinceKey]
             const cityVal = this.value[cityKey]
-            const province = this.$store.state.dict.province
-            const city = this.$store.state.dict.city
+            const province = this.$store.getters['dict/g']('province')
+            const city = this.$store.getters['dict/g']('city')
             if (provinceVal) {
               if (!Object.keys(province).length) {
                 this.$store.dispatch('dict/fetchProvince')
@@ -120,18 +120,22 @@ export default {
       Object.keys(this.fields).forEach((name) => {
         const item = this.fields[name]
         if (item.options && isString(item.options)) {
-          const opts = this.$store.state.dict.data[item.options]
-          if (opts && Object.keys(opts).length) {
+          const opts = this.$store.getters['dict/g'](item.options)
+          if (opts) {
             this.$set(this.opts, item.options, opts)
           } else {
             this.$store.dispatch('dict/fetch', item.options).then(() => {
-              this.$set(this.opts, item.options, this.$store.state.dict.data[item.options])
+              this.$set(this.opts, item.options, this.$store.getters['dict/g'](item.options))
             })
           }
         } else if (isArray(item.options)) {
           this.$set(this.opts, name, item.options)
         } else if (isObject(item.options)) {
           this.$set(this.opts, name, item.options)
+        } else if (isFunction(item.options)) {
+          item.options(this).then((res) => {
+            this.$set(this.opts, name, res)
+          })
         }
       })
     },
@@ -150,11 +154,11 @@ export default {
         const cityVal = row[cityKey]
         const provincecity = ['/', '']
         if (provinceVal) {
-          const provinces = this.$store.state.dict.province
+          const provinces = this.$store.getters['dict/g']('province')
           provincecity[0] = provinces[provinceVal]
         }
         if (cityVal) {
-          const citys = this.$store.state.dict.city
+          const citys = this.$store.getters['dict/g']('city')
           const city = citys[provinceVal]
           if (city) { provincecity[1] = city[cityVal] }
         }
@@ -165,6 +169,17 @@ export default {
       }
       if (!val) { return item.ellipsis || '/' }
       return val
+    },
+    getFormdata () {
+      const formData = Object.assign({}, this.value)
+      Object.keys(formData).forEach((key) => {
+        if (!this.fields[key]) { return }
+        const handler = this.fields[key].handler
+        if (handler) {
+          formData[key] = handler(formData)
+        }
+      })
+      return formData
     }
   }
 }

@@ -1,4 +1,4 @@
-import { SELECT, INPUT, TEXTAREA } from '~/constant/formItemType'
+import { SELECT, INPUT, TEXTAREA } from '~/constant/FORMITEM_TYPE'
 
 export const tableData = [{
   id: 1,

@@ -4,7 +4,7 @@ import {
   TEXTAREA,
   INPUT,
   DATE_PICKER
-} from '~/constant/formItemType'
+} from '~/constant/FORMITEM_TYPE'
 
 export const urls = {
   query: '/hrEducationInfo/list',

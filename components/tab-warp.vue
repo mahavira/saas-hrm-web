@@ -20,10 +20,12 @@
           :label="item.label"
         />
       </el-tabs>
-      <el-scrollbar class="content is-vertical">
+      <el-scrollbar v-if="isScroll" class="content is-vertical">
         <!-- eslint-disable-next-line vue/require-component-is -->
         <component v-bind:is="comp" class="sp-material-content" />
       </el-scrollbar>
+      <!-- eslint-disable-next-line vue/require-component-is -->
+      <component v-else v-bind:is="comp" class="sp-material-content" />
     </div>
   </div>
 </template>
@@ -37,6 +39,10 @@ export default {
     showDelete: {
       type: Boolean,
       default: false
+    },
+    isScroll: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
@@ -57,7 +63,7 @@ export default {
     }
   },
   created () {
-    this.activeTab = this.$route.query.tab || 'a'
+    this.activeTab = this.$route.query.tab || this.tabs[0].name
   },
   methods: {
     onTab (e) {

@@ -1,12 +1,12 @@
-import { SELECT, INPUT, DATE_PICKER, SWITCH } from '~/constant/formItemType'
+import { SELECT, INPUT, DATE_PICKER, SWITCH } from '~/constant/FORMITEM_TYPE'
 import { toBooble } from '~/utils'
+import { downloadBlobFile } from '~/utils/file'
 
 export const urls = {
   create: '/hrTalentArchives/add',
   query: '/hrTalentArchives/list',
   update: '/hrTalentArchives/update',
   delete: '/hrTalentArchives/remove',
-  // read: '/mock/recruit/offer/all/read',
   moveCandidate: ''
 }
 export const primaryKey = 'talentId'
@@ -38,6 +38,7 @@ export const tableFields = {
   },
   handler: {
     label: '操作',
+    width: 80,
     actions: ['EDIT']
   }
 }
@@ -132,16 +133,16 @@ const createFields = {
 }
 
 const moveCandidateFormItems = {
-  entryDt: {
+  recruitPositionId: {
     label: '应聘职位',
     formType: SELECT,
-    options: 'entryDt',
+    options: 'jobs',
     rules: [{ required: true, message: '请选择应聘职位' }]
   },
-  entryDep: {
+  jobWay: {
     label: '应聘渠道',
-    formType: INPUT,
-    options: 'dep'
+    formType: SELECT,
+    options: ''
   }
 }
 
@@ -258,7 +259,7 @@ export const dialog = {
   moveCandidate: {
     title: '添加到候选人',
     fields: moveCandidateFormItems,
-    url: urls.create,
+    url: '/hrTalentArchives/tocandidate',
     refresh: true,
     labelWidth: 80,
     confirmButtonText: '确 认',
@@ -295,11 +296,26 @@ export const handler = [{
   options: [{
     label: '批量导出人才',
     icon: 'icon-ico_import',
-    action: ''
+    action: (ctx) => {
+      ctx.selected = true
+      ctx.selectAfter = async (rows) => {
+        try {
+          const { data } = await ctx.$axios.post('/hrTalentArchives/export', {
+            searchText: ctx.keyword,
+            hrTalentArchivesIds: rows.map(item => item.talentId).join()
+          })
+          downloadBlobFile(data)
+        } catch (e) {
+          console.error(e)
+          ctx.$message.error(e.message || e)
+        } finally {
+        }
+      }
+    }
   }, {
     label: '批量导入人才',
     icon: 'icon-ico_export',
-    action: ''
+    action: 'onImportTalent'
   }]
 }, {
   color: 'default',
@@ -307,23 +323,36 @@ export const handler = [{
   label: '批量',
   options: [{
     label: '批量更改应聘',
-    icon: 'icon-ico_import',
-    action: ''
+    icon: 'icon-ico_edit'
   }, {
     label: '批量下载简历',
-    icon: 'icon-ico_export',
-    action: ''
+    icon: 'icon-ico_download',
+    action: (ctx) => {
+      ctx.selected = true
+      ctx.selectAfter = async (rows) => {
+        try {
+          const { data } = await ctx.$axios.post('/hrTalentArchives/downloadlist', {
+            hrTalentArchivesIds: rows.map(item => item.talentId).join()
+          })
+          downloadBlobFile(data)
+        } catch (e) {
+          console.error(e)
+          ctx.$message.error(e.message || e)
+        } finally {
+        }
+      }
+    }
   }, {
     label: '更改应聘职位',
     icon: 'icon-ico_edit',
-    action: 'dialog:changeJobFormItems'
+    action: 'table:selected'
   }]
 }]
 
 export const editHandler = [{
   color: 'default',
   icon: 'icon-ico_file is-primary',
-  action: context => context.$router.push(`/recruit/talent/${context.currentRow.id}`),
+  action: context => context.$router.push(`/recruit/talent/${context.currentRow.talentId}`),
   label: '人员档案'
 }, {
   color: 'default',
@@ -332,7 +361,7 @@ export const editHandler = [{
   options: [{
     label: '移动到候选人',
     icon: 'icon-ico_revoke',
-    action: 'dialog:moveCandidate'
+    action: 'onMoveToCandidate'
   }, {
     label: '移出人才库',
     icon: 'icon-ico_revoke',
@@ -349,7 +378,7 @@ export const editHandler = [{
   options: [{
     label: '导出人才简历',
     icon: 'icon-ico_export',
-    action: ''
+    action: 'onImportResume'
   }, {
     label: '发送offer',
     icon: 'icon-ico_send-out',

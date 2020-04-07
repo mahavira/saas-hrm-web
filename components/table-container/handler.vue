@@ -63,7 +63,7 @@ export default {
       } else if (type === 'detail') {
         this.parent[prop] = !this.parent[prop]
         this.$parent.editedKey = key
-      } else if (context[type]) {
+      } else if (context[type] && isFunction(context[type])) {
         context[type](this.parent)
       }
     },
