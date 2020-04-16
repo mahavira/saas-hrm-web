@@ -1,11 +1,15 @@
 import { SELECT, INPUT, DATE_PICKER } from '~/constant/FORMITEM_TYPE'
 
 export const urls = {
-  create: '/mock/recruit/offer/invalid/create',
-  query: '/mock/recruit/offer/invalid/query',
-  update: '/mock/recruit/offer/invalid/update',
-  delete: 'mock/recruit/offer/invalid/delete',
-  read: '/mock/recruit/offer/invalid/read'
+  query: { url: '/hrOffer/list', data: { type: 2 } },
+  delete: (rows) => {
+    return {
+      url: '/hrOffer/delete',
+      formData: {
+        hrOfferIds: rows.map(row => row.hrOfferId).join()
+      }
+    }
+  }
 }
 export const primaryKey = ''
 const commonField = {

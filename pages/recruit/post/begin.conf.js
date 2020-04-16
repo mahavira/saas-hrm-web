@@ -1,86 +1,84 @@
-import { SELECT, INPUT, DATE_PICKER, INPUT_NUMBER } from '~/constant/FORMITEM_TYPE'
-
+import { SELECT, INPUT, DATE_PICKER, INPUT_NUMBER, SLIDER, SLIDER_AGE, SWITCH_STATE, TEXTAREA } from '~/constant/FORMITEM_TYPE'
 export const urls = {
-  create: '/mock/recruit/offer/all/create',
-  query: '/mock/recruit/offer/all/query',
-  update: '/mock/recruit/offer/all/update',
-  delete: 'mock/recruit/offer/all/delete',
-  read: '/mock/recruit/offer/all/read'
+  create: '/hrRecruitmentPosition/add',
+  query: {
+    url: '/hrRecruitmentPosition/list',
+    data: { status: 1 }
+  },
+  update: '/hrRecruitmentPosition/update',
+  delete: '/hrRecruitmentPosition/delete',
+  read: '/hrRecruitmentPosition/read'
 }
 export const primaryKey = ''
-const commonField = {
-  name: {
+
+export const tableFields = {
+  positionName: {
     label: '职位名称',
     'class-name': 'is-blod'
   },
-  job: {
+  organId: {
     label: '用人部门',
-    formType: INPUT,
-    options: 'job'
+    options: 'organ'
   },
-  gender: {
+  workNature: {
     label: '工作性质',
-    formType: SELECT,
     options: 'work_nature'
   },
-  age: {
-    label: '学历要求',
-    formType: INPUT_NUMBER
+  academicRequirements: {
+    label: '学历要求'
   },
-  work_age: {
-    label: '工作经验要求',
-    formType: INPUT_NUMBER
+  recruitWorkExperience: {
+    label: '工作经验要求'
   },
-  education: {
+  workPlaceCity: {
     label: '工作城市',
-    formType: SELECT,
     options: 'education'
   },
-  graduate_school: {
-    label: '最迟到岗日期',
-    formType: INPUT
+  lastHiredateTime: {
+    label: '最迟到岗日期'
   },
-  offState: {
+  recruitsTotal: {
     label: '招聘人数',
-    formType: SELECT,
     options: 'offState'
   },
-  offerSendDt: {
-    label: '已入职人数',
-    formType: INPUT
-  }
-}
-export const tableFields = {
-  ...commonField,
   handler: {
+    width: 60,
     label: '操作',
     actions: ['EDIT']
   }
 }
-
+const commonField = {
+  positionName: { label: '职位名称', formType: INPUT },
+  organId: { label: '用人部门', formType: SELECT, options: 'dep' },
+  workNature: { label: '工作性质', formType: SELECT, options: 'work_nature' },
+  recruitsTotal: { label: '招聘人数', formType: INPUT_NUMBER },
+  recruitAge: { label: '年龄要求', formType: SLIDER_AGE },
+  recruitWorkExperience: { label: '工作经验要求', formType: INPUT },
+  academicRequirements: { label: '学历要求', formType: SELECT, options: 'education' },
+  salaryRange: { label: '薪资区间', formType: SLIDER, props: { min: 1000, max: 30000 } },
+  entryTime: { label: '入职日期', formType: DATE_PICKER },
+  lastHiredateTime: { label: '最迟到岗时间', formType: DATE_PICKER },
+  recruitPosition: { label: '招聘岗位', formType: INPUT },
+  recruitReason: { label: '招聘原因', formType: INPUT },
+  startRecruitDatetime: { label: '启动时间', formType: DATE_PICKER },
+  workPlaceDistrict: { label: '工作地点省', formType: SELECT, options: 'provice' },
+  workPlaceProvince: { label: '工作地点市', formType: SELECT, options: 'city' },
+  workPlaceCity: { label: '工作地点区', formType: INPUT },
+  enabled: { label: '启用状态', formType: SWITCH_STATE },
+  status: { label: '发布状态', formType: SELECT, options: { 0: '已发布', 1: '招聘中', 2: '已停止' } },
+  positionDescription: { label: '职位描述', formType: TEXTAREA, isFull: true, isTopAlign: true }
+}
 export const editFields = {
-  ...commonField,
-  entryDt: {
-    label: '入职日期',
-    formType: DATE_PICKER
-  },
-  entryDep: {
-    label: '入职部门',
-    formType: SELECT,
-    options: 'dep'
-  },
-  entryJob: {
-    label: '入职岗位',
-    formType: SELECT,
-    options: 'job'
-  }
+  ...commonField
 }
 export const dialog = {
   create: {
     fields: commonField,
+    url: urls.create,
     title: '添加招聘职位',
-    callback: () => {
-      console.log(10)
+    refresh: true,
+    callback: (done) => {
+      console.log(done)
     }
   }
 }
@@ -98,8 +96,27 @@ export const handler = [{
   label: '导 出'
 }, {
   color: 'default',
-  action: 'table:selected',
-  label: '批 量'
+  action: 'DROPDOWN',
+  label: '批 量',
+  options: [{
+    label: '批量停止招聘',
+    icon: 'icon-ico_eliminate',
+    action: (ctx) => {
+      ctx.selected = true
+      ctx.selectAfter = async (rows) => {
+        try {
+          const { data } = await ctx.$axios.post('/hrRecruitmentPosition/stop', {
+            hrRecruitPositionIds: rows.map(item => item.recruitPositionId).join()
+          })
+          console.log(data)
+        } catch (e) {
+          console.error(e)
+          ctx.$message.error(e.message || e)
+        } finally {
+        }
+      }
+    }
+  }]
 }]
 
 export const editHandler = [{

@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <div v-for="(item,index) in data" :key="index" :class="{'is-primary':item.isPrimary}" class="item">
+    <div v-for="(item,index) in summaryData" :key="index" :class="{'is-primary':item.isPrimary}" class="item">
       {{ item.label }} <span :class="{'is-primary':item.isPrimary}" class="num">{{ item.value }}</span> {{ item.unit || unit }}
       <el-popover
         v-if="item.children && item.children.length"
@@ -11,7 +11,7 @@
         <div class="popover">
           <div v-for="(citem,i) in item.children" :key="i" class="item">
             <div>{{ citem.label }}</div>
-            <div><span>{{ item.value }}</span> {{ item.unit || unit }}</div>
+            <div><span>{{ citem.value }}</span> {{ citem.unit || unit }}</div>
           </div>
         </div>
         <i slot="reference" class="icon-ico_drop-down" />
@@ -24,37 +24,26 @@
 export default {
   props: {
     unit: { type: String, default: '人' },
-    data: {
+    data: { type: Object, default: () => {} },
+    props: {
       type: Array,
-      default: () => [{
-        label: '在职',
-        value: 9
-      }, {
-        label: '全职',
-        value: 9,
-        children: [{
-          label: '全职',
-          value: 103
-        }, {
-          label: '实习生',
-          value: 1203
-        }, {
-          label: '劳务派遣',
-          value: 3
-        }, {
-          label: '退休返聘',
-          value: 11
-        }]
-      }, {
-        label: '试用期',
-        value: 9
-      }, {
-        label: '待入职',
-        value: 9
-      }, {
-        label: '待离职',
-        value: 9
-      }]
+      default: () => []
+    }
+  },
+  computed: {
+    summaryData () {
+      const recursion = (props, data) => {
+        return props.map((item) => {
+          if (item.children) {
+            item.children = recursion(item.children, data)
+          }
+          if (!item.name) { return item }
+          return Object.assign(item, {
+            value: typeof data[item.name] !== 'undefined' ? data[item.name] : item.value
+          })
+        })
+      }
+      return recursion(this.props, this.data)
     }
   }
 }
@@ -62,7 +51,7 @@ export default {
 <style lang="scss" scoped>
 @import '~/assets/var.scss';
 .header{
-  padding: 30px 32px 0;
+  padding: 15px 32px 0;
   position: relative;
   bottom: -8px;
   .item{

@@ -4,7 +4,7 @@ div.el-container.is-vertical
     nuxt-link(
       v-for="item in tabs",
       :key="item.name",
-      :to="`${item.path}`",
+      :to="`/${prefix}/${item.path}`",
       :class="{active: item.name===active}",
       class="el-link item"
     )
@@ -34,8 +34,7 @@ export default {
 .sp-tabs{
   &__two{
     overflow: hidden;
-    // background: #ddd;
-    background-image: linear-gradient(to bottom, #f1f2f4,#d9d9d9);
+    background: #fff;
     padding: 16px 16px 0;
     box-shadow: 1px 5px 5px 1px $bgcolor-primary;
     z-index: 1;

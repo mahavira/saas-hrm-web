@@ -1,14 +1,19 @@
 import { SELECT, INPUT, DATE_PICKER } from '~/constant/FORMITEM_TYPE'
 
 export const urls = {
-  create: '/mock/recruit/offer/all/create',
-  query: '/mock/recruit/offer/all/query',
-  update: '/mock/recruit/offer/all/update',
-  delete: 'mock/recruit/offer/all/delete',
-  read: '/mock/recruit/offer/all/read'
+  query: { url: '/hrOffer/list', data: { type: 0 } },
+  delete: (rows) => {
+    return {
+      url: '/hrOffer/delete',
+      formData: {
+        hrOfferIds: rows.map(row => row.hrOfferId).join()
+      }
+    }
+  }
 }
 export const primaryKey = ''
-const commonField = {
+
+export const tableFields = {
   name: {
     label: '姓名',
     'class-name': 'is-blod'
@@ -43,10 +48,7 @@ const commonField = {
   email: {
     label: '邮箱',
     formType: INPUT
-  }
-}
-export const tableFields = {
-  ...commonField,
+  },
   handler: {
     label: '操作',
     width: 60,
@@ -54,23 +56,6 @@ export const tableFields = {
   }
 }
 
-export const editFields = {
-  ...commonField,
-  entryDt: {
-    label: '入职日期',
-    formType: DATE_PICKER
-  },
-  entryDep: {
-    label: '入职部门',
-    formType: SELECT,
-    options: 'dep'
-  },
-  entryJob: {
-    label: '入职岗位',
-    formType: SELECT,
-    options: 'job'
-  }
-}
 export const searchPlaceholder = '姓名/手机号/邮箱'
 
 export const handler = [{

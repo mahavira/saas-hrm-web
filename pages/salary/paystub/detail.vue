@@ -13,7 +13,7 @@
         <el-button @click="onDelete" type="default" class="is-shadow" size="small"><i class="el-icon-s-order is-primary" /> 删除工资条</el-button>
       </div>
     </div>
-    <summary-header :data="summary" style="top:0;" />
+    <summary-header :props="summary" style="top:0;" />
     <table-container />
   </div>
 </template>

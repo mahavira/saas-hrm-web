@@ -2,18 +2,6 @@ import Vue from 'vue'
 import { isArray } from '~/utils'
 const awaitRequests = []
 const defaultData = {
-  offerState: {
-    1: '已接受',
-    0: '未接受'
-  },
-  gender: {
-    'man': '男',
-    'woman': '女'
-  },
-  sex: {
-    'man': '男',
-    'woman': '女'
-  }
 }
 export default {
   state: {
@@ -46,7 +34,7 @@ export default {
       }
       try {
         awaitRequests.push(dictType)
-        const { data } = await this.$axios.post('hrRedisCache/list', {
+        const { data } = await this.$axios.post('/hrDict/idList', {
           type: dictType,
           tenantId: rootState.application.tenantId
         })

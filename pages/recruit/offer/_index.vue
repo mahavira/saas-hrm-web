@@ -1,6 +1,6 @@
 <template>
   <div>
-    <table-container ref="tableContainer" />
+    <table-container ref="tableContainer" v-bind="conf" />
     <el-dialog
       :visible.sync="visibleOfferDialog"
       title="查看offer"
@@ -49,6 +49,11 @@
 <script>
 import printJS from 'print-js'
 import TableContainer from '~/components/table-container'
+const conf = {
+  all: require('./all.conf'),
+  invalid: require('./invalid.conf'),
+  accepted: require('./accepted.conf')
+}
 export default {
   components: { TableContainer },
   data () {
@@ -56,7 +61,10 @@ export default {
       visibleOfferDialog: false
     }
   },
-  mounted () {
+  computed: {
+    conf () {
+      return conf[this.$route.params.index]
+    }
   },
   methods: {
     openOffer (row) {

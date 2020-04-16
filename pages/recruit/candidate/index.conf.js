@@ -1,14 +1,76 @@
 import { SELECT, INPUT, INPUT_NUMBER, DATE_PICKER, CHECKBOX } from '~/constant/FORMITEM_TYPE'
-
+import { downloadBlobFile } from '~/utils/file'
 export const urls = {
-  create: '/mock/recruit/candidate/create',
-  query: '/mock/recruit/candidate/query',
-  update: '/mock/recruit/candidate/update',
-  delete: 'mock/recruit/candidate/delete',
-  read: '/mock/recruit/candidate/read'
+  create: '/hrCandidate/add',
+  query: '/hrCandidate/list',
+  update: '/hrCandidate/update',
+  delete: (rows) => {
+    return {
+      url: '/hrCandidate/delete',
+      formData: {
+        candidateIds: rows.map(row => row.candidateId).join()
+      }
+    }
+  }
 }
 export const primaryKey = ''
-const commonField = {
+
+export const tableFields = {
+  talentName: {
+    label: '姓名',
+    'cell-class-name': 'is-blod'
+  },
+  // isTalent: {
+  //   label: '',
+  //   hidden: true,
+  //   formatter: (row) => {
+  //     return row.isTalent ? '<span class="el-tag el-tag--warning el-tag--small">人才</span>' : ''
+  //   }
+  // },
+  recruitPositionId: {
+    label: '招聘职位',
+    options: 'jobs'
+  },
+  recruitStage: {
+    label: '候选人状态',
+    options: 'recruitStage'
+  },
+  dep: {
+    label: '用人部门',
+    options: 'dep'
+  },
+  director: {
+    label: '招聘负责人'
+  },
+  // gender: {
+  //   label: '性别',
+  //   options: 'sex'
+  // },
+  // age: {
+  //   label: '年龄'
+  // },
+  // work_age: {
+  //   label: '工作年限'
+  // },
+  handler: {
+    width: 60,
+    label: '操作',
+    actions: ['EDIT']
+  }
+}
+
+const createFields = {
+  name: {
+    label: '姓名',
+    formType: INPUT
+  },
+  recruitPositionId: {
+    label: '招聘职位',
+    formType: SELECT,
+    options: 'jobs'
+  }
+}
+export const editFields = {
   name: {
     label: '姓名',
     'cell-class-name': 'is-blod'
@@ -24,7 +86,7 @@ const commonField = {
   job: {
     label: '招聘职位',
     formType: SELECT,
-    options: 'job'
+    options: 'jobs'
   },
   candidateStatus: {
     label: '候选人状态',
@@ -52,18 +114,7 @@ const commonField = {
   work_age: {
     label: '工作年限',
     formType: INPUT_NUMBER
-  }
-}
-export const tableFields = {
-  ...commonField,
-  handler: {
-    label: '操作',
-    actions: ['EDIT']
-  }
-}
-
-const createFields = {
-  ...commonField,
+  },
   entryDt: {
     label: '入职日期',
     formType: DATE_PICKER
@@ -79,140 +130,155 @@ const createFields = {
     options: 'job'
   }
 }
-export const editFields = {
-  name: {
-    label: '姓名',
-    'class-name': 'is-blod'
-  },
-  empty: { divider: true, line: true },
-  dep: {
-    label: '部门',
-    'class-name': 'is-blod',
-    formType: SELECT,
-    options: 'dep'
-  },
-  job: {
-    label: '岗位',
-    'class-name': 'is-blod',
-    formType: SELECT,
-    options: 'dep'
-  },
-  s_dt: {
-    label: '入职时间',
-    formType: DATE_PICKER
-  },
-  t_dt: {
-    label: '转正日期',
-    formType: DATE_PICKER
-  },
-  work: {
-    label: '工作性质',
-    formType: SELECT,
-    options: 'work'
-  },
-  a: {
-    label: '员工状态',
-    formType: SELECT,
-    options: 'work'
-  },
-  b: {
-    label: '岗位类别',
-    formType: SELECT,
-    options: 'work'
-  },
-  c: {
-    label: '岗位职级',
-    formType: SELECT,
-    options: 'work'
-  },
-  idcardtype: {
-    label: '证件类型',
-    formType: SELECT,
-    options: 'idcardtype'
-  },
-  idcardnumber: {
-    label: '证件号码',
-    formType: INPUT
-  },
-  phone: {
-    label: '手机号码',
-    formType: INPUT
-  },
-  empty2: { divider: true },
-  contractCompany: {
-    label: '合同公司',
-    formType: INPUT
-  },
-  fdsd: {
-    label: '司龄',
-    formType: INPUT_NUMBER
-  },
-  workage: {
-    label: '工龄',
-    formType: INPUT_NUMBER
-  },
-  edu: {
-    label: '最高学历',
-    formType: SELECT
-  },
-  edu_school: {
-    label: '毕业院校',
-    formType: INPUT
-  },
-  edu_major: {
-    label: '毕业专业',
-    formType: SELECT
-  }
-}
 export const dialog = {
   create: {
     title: '添加候选人',
     fields: createFields,
     url: urls.create,
+    mode: 'single',
+    labelWidth: 80,
     refresh: true
   }
 }
 export const handler = [{
   color: 'primary',
-  label: '添加员工',
+  label: '添加候选人',
   options: [{
     label: '单个添加候选人',
     icon: 'icon-ico_new-additions',
     action: 'dialog:create'
   }, {
     label: '批量导入简历',
-    icon: 'icon-ico_import',
-    action: 'showImport'
+    icon: 'icon-ico_import'
+    // action: 'showImport'
   }, {
-    label: 'Excel导入候选人',
+    label: '导入候选人',
     icon: 'icon-ico_import',
     action: 'showImport'
   }]
 }, {
   color: 'default',
-  icon: 'icon-ico_export is-primary',
-  action: 'EXPORT',
-  label: '导 出'
-}, {
-  color: 'default',
-  icon: 'icon-ico_clear is-primary',
-  action: 'EXPORT',
-  label: '一键清理'
+  label: '更多',
+  options: [{
+    label: '导出',
+    icon: 'icon-ico_export',
+    action: (ctx) => {
+      ctx.selected = true
+      ctx.selectAfter = async (rows) => {
+        try {
+          const { data } = await ctx.$axios.post('/hrCandidate/export', {
+            candidateIds: rows.map(item => item.candidateId).join()
+          })
+          downloadBlobFile(data)
+        } catch (e) {
+          console.error(e)
+          ctx.$message.error(e.message || e)
+        } finally {
+        }
+      }
+    }
+  }, {
+    label: '一键清理',
+    icon: 'icon-ico_clear',
+    action: 'tasble:selected'
+  }]
+// }, {
+//   color: 'default',
+//   icon: 'icon-ico_clear is-primary',
+//   action: 'EXPORT',
+//   label: '一键清理'
 }]
 
 export const editHandler = [{
-  color: 'primary',
-  icon: 'el-icon-check',
-  action: '',
-  label: '确认入职'
+  color: 'default',
+  icon: 'icon-ico_transformation',
+  label: '移动人才',
+  options: [{
+    label: '移动到初选通过',
+    icon: 'icon-ico_revoke',
+    action: async (ctx) => {
+      console.log(ctx.currentRow)
+      const { data } = await ctx.$axios.post('/hrCandidate/updateInterviewRecord', {
+        candidateId: ctx.currentRow.candidateId
+      })
+      if (data.status === 0) {
+        ctx.$message.success('已移动到初选通过')
+      } else {
+        ctx.$message.error('错误')
+      }
+    }
+  }, {
+    label: '移动到面试安排',
+    icon: 'icon-ico_revoke',
+    action: async (ctx) => {
+      console.log(ctx.currentRow)
+      const { data } = await ctx.$axios.post('/hrCandidate/addToWaitingEntry', {
+        candidateId: ctx.currentRow.candidateId
+      })
+      if (data.status === 0) {
+        ctx.$message.success('已移动到待入职')
+      } else {
+        ctx.$message.error('错误')
+      }
+    }
+  }, {
+    label: '移动到面试通过',
+    icon: 'icon-ico_revoke',
+    action: async (ctx) => {
+      console.log(ctx.currentRow)
+      const { data } = await ctx.$axios.post('/hrCandidate/updateInterviewDoubleRecord', {
+        candidateId: ctx.currentRow.candidateId
+      })
+      if (data.status === 0) {
+        ctx.$message.success('已移动到面试通过')
+      } else {
+        ctx.$message.error('错误')
+      }
+    }
+  }, {
+    label: '移动到待入职',
+    icon: 'icon-ico_revoke',
+    action: async (ctx) => {
+      console.log(ctx.currentRow)
+      const { data } = await ctx.$axios.post('/hrCandidate/addToWaitingEntry', {
+        candidateId: ctx.currentRow.candidateId
+      })
+      if (data.status === 0) {
+        ctx.$message.success('已移动到待入职')
+      } else {
+        ctx.$message.error('错误')
+      }
+    }
+  }]
 }, {
   color: 'default',
   icon: 'icon-ico_edit is-primary',
   action: 'detail:edited',
-  label: '快速编辑'
-}, {
-  color: 'default',
-  icon: 'icon-ico_file is-primary',
-  action: 'showDetail',
-  label: '员工档案'
+  label: '更多操作',
+  options: [{
+    label: '快速编辑',
+    icon: 'icon-ico_edit',
+    action: 'detail:edited'
+  }, {
+    label: '资料档案',
+    icon: 'icon-ico_revoke',
+    action: (ctx) => {
+      ctx.$router.push(`/recruit/talent/${ctx.currentRow.talentId}`)
+    }
+  }, {
+    label: '导出简历',
+    icon: 'icon-ico_revoke',
+    action: async (ctx) => {
+      try {
+        const res = await ctx.$axios.post('/hrTalentArchives/download', {
+          hrTalentArchivesIds: ctx.currentRow.talentId
+        })
+        downloadBlobFile(res.data, `${ctx.currentRow.talentName}简历.doc`, 'application/msword')
+      } catch (e) {
+        console.error(e)
+        ctx.$message.error(e.message || e)
+      } finally {
+      }
+    }
+  }]
 }]

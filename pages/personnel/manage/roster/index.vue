@@ -1,6 +1,6 @@
 <template>
   <div class="el-container is-vertical">
-    <summary-header :data="total" />
+    <summary-header :props="summaryProps" />
     <table-container ref="tableContainer" />
   </div>
 </template>
@@ -12,7 +12,7 @@ export default {
   components: { SummaryHeader, TableContainer },
   data () {
     return {
-      total: [{
+      summaryProps: [{
         label: '在职',
         value: 9,
         isPrimary: true

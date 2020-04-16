@@ -25,10 +25,10 @@ body{
   justify-content: space-between;
   .search{
     width: 272px;
-    .el-input-group__append{
-      border: none;
-      background: rgb(241, 242, 244)
-    }
+  }
+  .el-input-group__append{
+    border: none;
+    background: rgb(241, 242, 244)
   }
 }
 .sp-container{

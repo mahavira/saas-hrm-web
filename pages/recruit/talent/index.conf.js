@@ -18,7 +18,7 @@ export const tableFields = {
   },
   sex: {
     label: '性别',
-    options: 'gender'
+    options: 'sex'
   },
   age: {
     label: '年龄'
@@ -34,7 +34,7 @@ export const tableFields = {
   },
   workNature: {
     label: '工作性质',
-    options: 'work_nature'
+    options: 'workNature'
   },
   handler: {
     label: '操作',
@@ -102,7 +102,7 @@ const createFields = {
   workNature: {
     label: '工作性质',
     formType: SELECT,
-    options: 'work_nature'
+    options: 'workNature'
   },
   enabled: {
     label: '启用状态',
@@ -214,7 +214,7 @@ export const editFields = {
   workNature: {
     label: '工作性质',
     formType: SELECT,
-    options: 'work_nature'
+    options: 'workNature'
   },
   enabled: {
     label: '启用状态',

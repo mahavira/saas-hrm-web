@@ -1,7 +1,7 @@
 <template lang="pug">
 .el-container.is-relative
   .sp-tabs__one(v-if="tabs.length")
-    nuxt-link(v-for="item in tabs", :key="item.name", :to="`${item.path}`", :class="{active: item.name===active}", class="el-link item")
+    nuxt-link(v-for="item in tabs", :key="item.name", :to="`/${prefix}/${item.path}`", :class="{active: item.name===active}", class="el-link item")
       span {{item.label}}
   slot
 </template>
@@ -50,7 +50,7 @@ export default {
       }
       &::before, &::after{
         content: '';
-        background: #F1F2F4;
+        background: #fff;
         visibility: hidden;
         position: absolute;
         transition: all 0.3s cubic-bezier(.25,.1,.3,1.5);

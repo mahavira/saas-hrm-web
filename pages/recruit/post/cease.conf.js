@@ -1,88 +1,87 @@
-import { SELECT, INPUT, DATE_PICKER } from '~/constant/FORMITEM_TYPE'
-
+import { SELECT, INPUT, DATE_PICKER, INPUT_NUMBER, SLIDER, SLIDER_AGE, SWITCH_STATE, TEXTAREA } from '~/constant/FORMITEM_TYPE'
 export const urls = {
-  create: '/mock/recruit/offer/invalid/create',
-  query: '/mock/recruit/offer/invalid/query',
-  update: '/mock/recruit/offer/invalid/update',
-  delete: 'mock/recruit/offer/invalid/delete',
-  read: '/mock/recruit/offer/invalid/read'
+  create: '/hrRecruitmentPosition/add',
+  query: {
+    url: '/hrRecruitmentPosition/list',
+    data: { status: 2 }
+  },
+  update: '/hrRecruitmentPosition/update',
+  delete: '/hrRecruitmentPosition/delete',
+  read: '/hrRecruitmentPosition/read'
 }
 export const primaryKey = ''
-const commonField = {
-  name: {
-    label: '姓名',
+
+export const tableFields = {
+  positionName: {
+    label: '职位名称',
     'class-name': 'is-blod'
   },
-  job: {
-    label: '应聘职位',
-    formType: SELECT,
-    options: 'job'
+  organId: {
+    label: '用人部门',
+    options: 'organ'
   },
-  candidateState: {
-    label: '候选人状态',
-    formType: SELECT,
-    options: 'candidateState'
+  workNature: {
+    label: '工作性质',
+    options: 'work_nature'
   },
-  offerSendDt: {
-    label: 'Offer发送时间',
-    formType: DATE_PICKER
+  academicRequirements: {
+    label: '学历要求'
   },
-  invalidDt: {
-    label: '失效时间',
-    formType: INPUT
+  recruitWorkExperience: {
+    label: '工作经验要求'
   },
-  invalidReason: {
-    label: '失效原因',
-    formType: INPUT
+  workPlaceCity: {
+    label: '工作城市',
+    options: 'education'
   },
-  sendfrom: {
-    label: '发送人',
-    formType: INPUT
+  lastHiredateTime: {
+    label: '最迟到岗日期'
   },
-  phone: {
-    label: '手机号',
-    formType: INPUT
+  recruitsTotal: {
+    label: '招聘人数',
+    options: 'offState'
   },
-  email: {
-    label: '邮箱',
-    formType: INPUT
-  }
-}
-export const tableFields = {
-  ...commonField,
   handler: {
+    width: 60,
     label: '操作',
     actions: ['EDIT']
   }
 }
+const commonField = {
+  positionName: { label: '职位名称', formType: INPUT },
+  organId: { label: '用人部门', formType: SELECT, options: 'dep' },
+  workNature: { label: '工作性质', formType: SELECT, options: 'work_nature' },
+  recruitsTotal: { label: '招聘人数', formType: INPUT_NUMBER },
+  recruitAge: { label: '年龄要求', formType: SLIDER_AGE },
+  recruitWorkExperience: { label: '工作经验要求', formType: INPUT },
+  academicRequirements: { label: '学历要求', formType: SELECT, options: 'education' },
+  salaryRange: { label: '薪资区间', formType: SLIDER, props: { min: 1000, max: 30000 } },
+  entryTime: { label: '入职日期', formType: DATE_PICKER },
+  lastHiredateTime: { label: '最迟到岗时间', formType: DATE_PICKER },
+  recruitPosition: { label: '招聘岗位', formType: INPUT },
+  recruitReason: { label: '招聘原因', formType: INPUT },
+  startRecruitDatetime: { label: '启动时间', formType: DATE_PICKER },
+  workPlaceDistrict: { label: '工作地点省', formType: SELECT, options: 'provice' },
+  workPlaceProvince: { label: '工作地点市', formType: SELECT, options: 'city' },
+  workPlaceCity: { label: '工作地点区', formType: INPUT },
+  enabled: { label: '启用状态', formType: SWITCH_STATE },
+  status: { label: '发布状态', formType: SELECT, options: { 0: '已发布', 1: '招聘中', 2: '已停止' } },
+  positionDescription: { label: '职位描述', formType: TEXTAREA, isFull: true, isTopAlign: true }
+}
+export const editFields = {
+  ...commonField
+}
 export const dialog = {
   create: {
     fields: commonField,
+    url: urls.create,
     title: '添加招聘职位',
-    callback: () => {
-      console.log(10)
+    refresh: true,
+    callback: (done) => {
+      console.log(done)
     }
   }
 }
-
-export const editFields = {
-  ...commonField,
-  entryDt: {
-    label: '入职日期',
-    formType: DATE_PICKER
-  },
-  entryDep: {
-    label: '入职部门',
-    formType: SELECT,
-    options: 'dep'
-  },
-  entryJob: {
-    label: '入职岗位',
-    formType: SELECT,
-    options: 'job'
-  }
-}
-
 export const searchPlaceholder = '职位名称'
 
 export const handler = [{
@@ -97,15 +96,33 @@ export const handler = [{
   label: '导 出'
 }, {
   color: 'default',
-  icon: 'is-primary icon-ico_batch',
-  action: 'table:selected',
-  label: '批 量'
+  action: 'DROPDOWN',
+  label: '批 量',
+  options: [{
+    label: '批量重启招聘',
+    icon: 'icon-ico_eliminate',
+    action: (ctx) => {
+      ctx.selected = true
+      ctx.selectAfter = async (rows) => {
+        try {
+          const { data } = await ctx.$axios.post('/hrRecruitmentPosition/restart', {
+            hrRecruitPositionIds: rows.map(item => item.recruitPositionId).join()
+          })
+          console.log(data)
+        } catch (e) {
+          console.error(e)
+          ctx.$message.error(e.message || e)
+        } finally {
+        }
+      }
+    }
+  }]
 }]
 
 export const editHandler = [{
   color: 'primary',
-  icon: 'icon-ico_withdraw-account',
-  action: '',
+  icon: 'icon-ico_eliminate',
+  action: 'onRestartRecruit',
   label: '重启招聘'
 }, {
   color: 'default',

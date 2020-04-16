@@ -23,7 +23,7 @@
         @row-click="onRowClick"
         @selection-change="onSelectionChange"
         v-if="tableFields"
-        v-scroll-bar:el-table="$route.path.split('/').length > 3 ? 375 : 313"
+        v-scroll-bar:el-table
       >
         <el-table-column
           v-if="selected"
@@ -187,11 +187,24 @@ export default {
     async fetch (page = 1) {
       this.loading = true
       try {
+        let url
+        let formdata = {}
         if (!this.urls || !this.urls.query) { throw new Error('需要提供Url') }
-        const { data } = await this.$axios.post(this.urls.query, {
+        if (isFunction(this.urls.query)) {
+          const res = this.urls.query()
+          url = res.url
+          formdata = res.data
+        } else if (isObject(this.urls.query)) {
+          url = this.urls.query.url
+          formdata = this.urls.query.data
+        } else {
+          url = this.urls.query
+        }
+        const { data } = await this.$axios.post(url, {
           searchText: this.keyword,
           limit: this.pagination.size,
-          page
+          page,
+          ...formdata
         })
         if (this.tableFields) {
           this.tableData = this.formatterData(data.data.rows)
