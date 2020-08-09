@@ -1,5 +1,5 @@
 <template>
-  <div style="height:0">
+  <div style="height:calc(100vh - 64px)">
     <div class="sp-filter is-white-bg">
       <div class="sp-date-selection">
         <div @click="onYear(-1)" class="handle-left">

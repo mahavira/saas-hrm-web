@@ -10,8 +10,8 @@
       <i :class="item.icon" /> {{ item.label }}
     </el-button>
     <el-dropdown v-else @command="onDorpdownHandler(item, $event)">
-      <el-button :type="item.color || 'primary'" :icon="item.icon" size="small" class="is-shadow">{{ item.label }}
-        <i class="icon-ico_drop-down el-icon--right" /></el-button>
+      <el-button :type="item.color || 'primary'" :icon="item.icon" size="small" class="is-shadow">
+        <i v-if="!item.icon" class="icon-ico_drop-down el-icon--left" /> {{ item.label }}</el-button>
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item v-for="(option, i) in item.options" :key="i" :command="option">
           <i :class="option.icon" class="dropdown-item-icon" />
@@ -38,7 +38,7 @@ export default {
       if (!matched.length) { return null }
       return matched[matched.length - 1].instances.default
     },
-    onHandler ({ action = null, refresh = false }) {
+    async onHandler ({ action = null }) {
       const context = this.getContext()
       if (!action) { return }
       if (isFunction(action)) {
@@ -59,7 +59,20 @@ export default {
         }
         this.$bus.$emit('dialog:form', config)
       } else if (type === 'table') {
-        this.parent[prop] = !this.parent[prop]
+        if (prop === 'selected') {
+          const rows = await this.parent.openSelectRows()
+          await this.parent.deleteRows(rows)
+          this.parent.cancelSelectRows()
+        } else {
+          this.parent[prop] = !this.parent[prop]
+        }
+      } else if (type === 'select') {
+        const rows = await this.parent.openSelectRows()
+        if (prop === 'delete') {
+          await this.parent.deleteRows(rows)
+        } else if (prop === 'export') {
+          await this.parent.exportRows(rows)
+        }
       } else if (type === 'detail') {
         this.parent[prop] = !this.parent[prop]
         this.$parent.editedKey = key

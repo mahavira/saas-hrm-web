@@ -56,7 +56,7 @@ export default {
       pathRewrite: { '^/api/mock': '' }
     },
     '/ucsp': { target: 'http://172.16.24.121:39400/', pathRewrite: { '^/ucsp': '' } },
-    '/hrm': { target: 'http://172.16.17.106:9590/', pathRewrite: { '^/hrm': '' } }
+    '/hrm': { target: 'http://172.16.24.121:39590/', pathRewrite: { '^/hrm': '' } }
   },
   build: {
     transpile: [/^element-ui/],
@@ -67,5 +67,5 @@ export default {
       })
     }
   },
-  ignore: ['**/*.test.*', '**/*.spec.*', '**/*.conf.*', '**/*.mixin.*']
+  ignore: ['**/*.test.*', '**/*.spec.*', '**/*.*.*']
 }

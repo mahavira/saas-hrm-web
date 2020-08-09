@@ -1,5 +1,5 @@
 <template>
-  <div style="height:0">
+  <div>
     <div class="header">
       <div>
         <div class="top is-justify-space-between el-row--flex">
@@ -13,7 +13,7 @@
             <el-input
               v-model="keyword"
               @keyup.enter.native="onSearch"
-              :placeholder="searchPlaceholder || '请输入搜索关键词'"
+              :placeholder="'请输入搜索关键词'"
               size="small"
             >
               <el-button slot="append" @click="onSearch" icon="el-icon-search" />

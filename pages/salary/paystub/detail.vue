@@ -1,5 +1,5 @@
 <template>
-  <div style="height:0">
+  <div>
     <div class="sp-filter is-white-bg">
       <div class="sp-date-selection">
         <div @click="onBack(-1)" class="handle-left">

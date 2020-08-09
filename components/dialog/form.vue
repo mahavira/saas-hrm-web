@@ -52,6 +52,7 @@
   </el-dialog>
 </template>
 <script>
+import isUndefined from 'lodash/isUndefined'
 import SpForm from '~/components/sp-form'
 import * as formItemType from '~/constant/FORMITEM_TYPE'
 
@@ -98,11 +99,13 @@ export default {
       const formData = Object.assign({}, this.data)
       if (this.fields) {
         Object.keys(this.fields).forEach((key) => {
-          const { rules, formType } = this.fields[key]
+          const { rules, formType, defaultValue } = this.fields[key]
           if (rules) {
             formRules[key] = rules
           }
-          if (formType === formItemType.CHECKBOX) {
+          if (!isUndefined(defaultValue)) {
+            formData[key] = defaultValue
+          } else if (formType === formItemType.CHECKBOX) {
             formData[key] = this.data ? this.data[key] : []
           } else if (formType === formItemType.SWITCH) {
             formData[key] = this.data ? !!this.data[key] : false
@@ -136,7 +139,7 @@ export default {
       Object.keys(formData).forEach((key) => {
         if (!this.fields[key]) { return }
         const handler = this.fields[key].handler
-        if (handler) {
+        if (handler && formData) {
           formData[key] = handler(formData)
         }
       })

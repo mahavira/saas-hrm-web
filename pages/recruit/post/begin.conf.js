@@ -1,4 +1,6 @@
-import { SELECT, INPUT, DATE_PICKER, INPUT_NUMBER, SLIDER, SLIDER_AGE, SWITCH_STATE, TEXTAREA } from '~/constant/FORMITEM_TYPE'
+import { SELECT, INPUT, DATE_PICKER, TEXTAREA, SWITCH_STATE } from '~/constant/FORMITEM_TYPE'
+import { downloadBlobFile } from '~/utils/file'
+
 export const urls = {
   create: '/hrRecruitmentPosition/add',
   query: {
@@ -7,9 +9,11 @@ export const urls = {
   },
   update: '/hrRecruitmentPosition/update',
   delete: '/hrRecruitmentPosition/delete',
-  read: '/hrRecruitmentPosition/read'
+  export: '/hrRecruitmentPosition/export',
+  import: '/hrRecruitmentPosition/import'
+  // read: '/hrRecruitmentPosition/read'
 }
-export const primaryKey = ''
+export const primaryKey = 'recruitPositionId'
 
 export const tableFields = {
   positionName: {
@@ -25,10 +29,12 @@ export const tableFields = {
     options: 'work_nature'
   },
   academicRequirements: {
-    label: '学历要求'
+    label: '学历要求',
+    options: 'education'
   },
   recruitWorkExperience: {
-    label: '工作经验要求'
+    label: '工作经验要求',
+    options: 'work_experience_requirements'
   },
   workPlaceCity: {
     label: '工作城市',
@@ -48,24 +54,26 @@ export const tableFields = {
   }
 }
 const commonField = {
-  positionName: { label: '职位名称', formType: INPUT },
-  organId: { label: '用人部门', formType: SELECT, options: 'dep' },
-  workNature: { label: '工作性质', formType: SELECT, options: 'work_nature' },
-  recruitsTotal: { label: '招聘人数', formType: INPUT_NUMBER },
-  recruitAge: { label: '年龄要求', formType: SLIDER_AGE },
-  recruitWorkExperience: { label: '工作经验要求', formType: INPUT },
-  academicRequirements: { label: '学历要求', formType: SELECT, options: 'education' },
-  salaryRange: { label: '薪资区间', formType: SLIDER, props: { min: 1000, max: 30000 } },
+  positionName: { label: '职位名称', formType: INPUT, rules: [{ required: true, message: '请输入职位名称', trigger: 'blur' }] },
+  organId: { label: '用人部门', formType: SELECT, options: 'education', rules: [{ required: true, message: '请输入职位名称', trigger: 'blur' }] },
+  workNature: { label: '工作性质', formType: SELECT, options: 'work_nature', rules: [{ required: true, message: '请输入职位名称', trigger: 'blur' }] },
+  recruitsTotal: { label: '招聘人数', formType: INPUT, rules: [{ required: true, message: '请输入职位名称', trigger: 'blur' }] },
+  // recruitAge: { label: '年龄要求', formType: SLIDER_AGE },
+  recruitWorkExperience: { label: '工作经验要求', formType: SELECT, options: 'work_experience_requirements', rules: [{ required: true, message: '请输入职位名称', trigger: 'blur' }] },
+  academicRequirements: { label: '学历要求', formType: SELECT, options: 'education', rules: [{ required: true, message: '请输入职位名称', trigger: 'blur' }] },
+  salaryRange: { label: '薪资区间', formType: SELECT, options: 'salary_range' },
   entryTime: { label: '入职日期', formType: DATE_PICKER },
-  lastHiredateTime: { label: '最迟到岗时间', formType: DATE_PICKER },
-  recruitPosition: { label: '招聘岗位', formType: INPUT },
-  recruitReason: { label: '招聘原因', formType: INPUT },
+  // recruitPosition: { label: '招聘岗位', formType: INPUT, rules: [{ required: true, message: '请输入职位名称', trigger: 'blur' }] },
+  recruitReason: { label: '招聘原因', formType: SELECT, options: 'salary_range' },
   startRecruitDatetime: { label: '启动时间', formType: DATE_PICKER },
-  workPlaceDistrict: { label: '工作地点省', formType: SELECT, options: 'provice' },
+  lastHiredateTime: { label: '最迟到岗时间', formType: DATE_PICKER },
+  workPlaceDistrict: { label: '工作地点省', formType: SELECT, options: 'province' },
   workPlaceProvince: { label: '工作地点市', formType: SELECT, options: 'city' },
   workPlaceCity: { label: '工作地点区', formType: INPUT },
+  recruitManager: { label: '负责人', formType: SELECT, options: 'recruitManager' },
+  recruitAssist: { label: '协作人', formType: SELECT, options: 'recruitAssist' },
   enabled: { label: '启用状态', formType: SWITCH_STATE },
-  status: { label: '发布状态', formType: SELECT, options: { 0: '已发布', 1: '招聘中', 2: '已停止' } },
+  status: { label: '发布状态', formType: SELECT, defaultValue: '1', options: { 0: '已发布', 1: '招聘中', 2: '已停止' } },
   positionDescription: { label: '职位描述', formType: TEXTAREA, isFull: true, isTopAlign: true }
 }
 export const editFields = {
@@ -80,7 +88,8 @@ export const dialog = {
     callback: (done) => {
       console.log(done)
     }
-  }
+  },
+  stopRecruit: require('./stopRecruit.dialog')
 }
 export const searchPlaceholder = '职位名称'
 
@@ -92,29 +101,25 @@ export const handler = [{
 }, {
   color: 'default',
   icon: 'icon-ico_import is-primary',
-  action: 'table:selected',
-  label: '导 出'
+  label: '导 出',
+  async action (ctx) {
+    const rows = await ctx.openSelectRows()
+    const { data } = await ctx.$axios.post(urls.export, {
+      hrRecruitPositionIds: rows.map(item => item.recruitPositionId).join()
+    })
+    downloadBlobFile(data)
+  }
 }, {
   color: 'default',
-  action: 'DROPDOWN',
   label: '批 量',
   options: [{
     label: '批量停止招聘',
     icon: 'icon-ico_eliminate',
-    action: (ctx) => {
-      ctx.selected = true
-      ctx.selectAfter = async (rows) => {
-        try {
-          const { data } = await ctx.$axios.post('/hrRecruitmentPosition/stop', {
-            hrRecruitPositionIds: rows.map(item => item.recruitPositionId).join()
-          })
-          console.log(data)
-        } catch (e) {
-          console.error(e)
-          ctx.$message.error(e.message || e)
-        } finally {
-        }
-      }
+    async action (ctx) {
+      const rows = await ctx.openSelectRows()
+      await ctx.$axios.post('/hrRecruitmentPosition/stop', {
+        hrRecruitPositionIds: rows.map(item => item.recruitPositionId).join()
+      })
     }
   }]
 }]

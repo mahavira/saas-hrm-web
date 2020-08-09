@@ -99,8 +99,8 @@ export default {
       Object.keys(formData).forEach((key) => {
         if (!this.fields[key]) { return }
         const handler = this.fields[key].handler
-        if (handler) {
-          formData[key] = handler(formData[key])
+        if (handler && formData) {
+          formData[key] = handler(formData)
         }
       })
       this.loading = true

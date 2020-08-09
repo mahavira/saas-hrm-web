@@ -12,7 +12,6 @@ function getElementToPageTop (el) {
 }
 
 const setTableHeight = (el, value) => {
-  console.log(value)
   if (!value) {
     const top = getElementToPageTop(el)
     el.style.height = `${window.innerHeight - top - 32 - 64}px`
@@ -57,7 +56,11 @@ Vue.directive('ScrollBar', {
   inserted (el, binding, vnode) {
     const rules = ['fixed', 'absolute', 'relative']
     if (!rules.includes(window.getComputedStyle(el, null).position)) {
-      console.error(`perfect-scrollbar所在的容器的position属性必须是以下之一：${rules.join('、')}`)
+      console.error(
+        `perfect-scrollbar所在的容器的position属性必须是以下之一：${rules.join(
+          '、'
+        )}`
+      )
     }
     el = getEl(el, binding)
     initScrollBar(el, binding.value)
@@ -65,11 +68,9 @@ Vue.directive('ScrollBar', {
   componentUpdated (el, binding, vnode, oldVnode) {
     el = getEl(el, binding)
     try {
-      vnode.context.$nextTick(
-        () => {
-          initScrollBar(el, binding.value)
-        }
-      )
+      vnode.context.$nextTick(() => {
+        initScrollBar(el, binding.value)
+      })
     } catch (error) {
       console.error(error)
       initScrollBar(el, binding.value)
@@ -80,7 +81,9 @@ Vue.directive('ScrollBar', {
     if (el && el._ps_) {
       el._ps_.destroy()
       el._ps_ = null
-      if (debounceFunc) { window.removeEventListener('resize', debounceFunc) }
+      if (debounceFunc) {
+        window.removeEventListener('resize', debounceFunc)
+      }
     }
   }
 })

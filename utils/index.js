@@ -22,6 +22,7 @@ export function isPromise (obj) {
   return !!obj && (typeof obj === 'object' || typeof obj === 'function') && typeof obj.then === 'function'
 }
 export function toBooble (val) {
+  if (!val) { return false }
   return (val === true || val === 1 || val === '1' || val === 'true')
 }
 /**

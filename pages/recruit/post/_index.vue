@@ -102,6 +102,7 @@ export default {
         if (data.status === 0 || data.status === 200) {
           this.$message.success('已停止')
           this.stopRecruit.visibleDialog = false
+          this.$refs.tableContainer.fetch()
         }
       } catch (e) {
         console.error(e)
@@ -128,6 +129,7 @@ export default {
         if (data.status === 0 || data.status === 200) {
           this.$message.success('已重启')
           this.restartRecruit.visibleDialog = false
+          this.$refs.tableContainer.fetch()
         }
       } catch (e) {
         console.error(e)

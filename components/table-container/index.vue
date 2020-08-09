@@ -72,7 +72,7 @@
       <transition name="transform-y">
         <div v-if="selected" class="handler">
           <span>已选择 <span class="is-primary">{{ selectedRows.length }}</span> 条</span>
-          <el-button @click="cancelSelectedRows" type="default" size="small" class="is-cancel">取消</el-button>
+          <el-button @click="cancelSelectRows" type="default" size="small" class="is-cancel">取消</el-button>
           <el-button
             @click="confirmSelectedRows"
             :disabled="!selectedRows.length"
@@ -257,49 +257,49 @@ export default {
     openDetail (row) {
       this.visibleDetail = true
     },
-    cancelSelectedRows () {
+    openSelectRows () {
+      this.selected = true
+      this.selectedRows = []
+      return new Promise((resolve, reject) => {
+        this.selectedPromise = {
+          resolve,
+          reject
+        }
+      })
+    },
+    cancelSelectRows () {
       this.selected = false
       this.selectedRows = []
+      if (this.selectedPromise) {
+        this.selectedPromise.reject()
+      }
       if (this.$refs.table) { this.$refs.table.clearSelection() }
     },
-    async confirmSelectedRows () {
-      if (this.selectAfter) {
-        this.selectAfter(this.selectedRows)
-        this.selectAfter = null
-        return
-      }
+    confirmSelectedRows () {
+      this.selectedPromise.resolve(this.selectedRows)
+      this.cancelSelectRows()
+    },
+    async deleteRows (rows) {
+      if (!rows.length) { return }
       if (!this.urls || !this.urls.delete) { throw new Error('需要提供Url') }
-      if (this.selectedRows.length) {
-        try {
-          this.loading = true
-          let url, formdata
-          if (this.selectedFunc) {
-            const res = this.selectedFunc(this.selectedRows)
-            url = res.url
-            formdata = res.data
-          } else if (isFunction(this.urls.delete)) {
-            const res = this.urls.delete(this.selectedRows)
-            url = res.url
-            formdata = res.data
-          } else {
-            const ids = this.selectedRows.map(row => row[this.primaryKey])
-            url = this.urls.delete
-            formdata = {
-              ids: ids.join()
-            }
+      try {
+        this.loading = true
+        let url, formdata
+        if (isFunction(this.urls.delete)) {
+          const res = this.urls.delete(rows)
+          url = res.url
+          formdata = res.formData || res.data
+        } else {
+          const ids = rows.map(row => row[this.primaryKey])
+          url = this.urls.delete
+          formdata = {
+            ids: ids.join()
           }
-          const { data } = await this.$axios.post(url, formdata)
-          console.table(data)
-          this.selected = false
-          this.selectedRows = []
-          this.selectedFunc = null
-          if (this.$refs.table) { this.$refs.table.clearSelection() }
-          this.fetch()
-        } catch (e) {
-          console.error(e)
-        } finally {
-          this.loading = false
         }
+        await this.$axios.post(url, formdata)
+        this.fetch()
+      } finally {
+        this.loading = false
       }
     },
     onSearch (e) {

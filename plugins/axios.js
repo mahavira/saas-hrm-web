@@ -8,6 +8,9 @@ export default function ({ $axios, store, redirect, app }) {
     if (conf.name === 'middleground' && store.state.application.applicationId) {
       config.headers.exp = store.state.application.applicationId
     }
+    if (conf.name === 'hrm' && store.state.userinfo.tenantId) {
+      config.headers.exg = store.state.userinfo.tenantId
+    }
     const source = $axios.CancelToken.source()
     requestToken.push(source)
     config.cancelToken = source.token

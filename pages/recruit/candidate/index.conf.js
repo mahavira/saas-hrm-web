@@ -1,4 +1,4 @@
-import { SELECT, INPUT, INPUT_NUMBER, DATE_PICKER, CHECKBOX } from '~/constant/FORMITEM_TYPE'
+import { SELECT, INPUT, DATE_PICKER } from '~/constant/FORMITEM_TYPE'
 import { downloadBlobFile } from '~/utils/file'
 export const urls = {
   create: '/hrCandidate/add',
@@ -14,6 +14,10 @@ export const urls = {
   }
 }
 export const primaryKey = ''
+
+const recruitStageOptions = {
+  '0': '候选人', '1': '面试', '2': 'offer', '3': '入职'
+}
 
 export const tableFields = {
   talentName: {
@@ -33,7 +37,7 @@ export const tableFields = {
   },
   recruitStage: {
     label: '候选人状态',
-    options: 'recruitStage'
+    options: recruitStageOptions
   },
   dep: {
     label: '用人部门',
@@ -88,10 +92,10 @@ export const editFields = {
     formType: SELECT,
     options: 'jobs'
   },
-  candidateStatus: {
+  recruitStage: {
     label: '候选人状态',
-    formType: CHECKBOX,
-    options: 'candidateStatus'
+    formType: SELECT,
+    options: recruitStageOptions
   },
   dep: {
     label: '用人部门',
@@ -102,19 +106,19 @@ export const editFields = {
     label: '招聘负责人',
     formType: INPUT
   },
-  gender: {
-    label: '性别',
-    formType: SELECT,
-    options: 'sex'
-  },
-  age: {
-    label: '年龄',
-    formType: INPUT_NUMBER
-  },
-  work_age: {
-    label: '工作年限',
-    formType: INPUT_NUMBER
-  },
+  // gender: {
+  //   label: '性别',
+  //   formType: SELECT,
+  //   options: 'sex'
+  // },
+  // age: {
+  //   label: '年龄',
+  //   formType: INPUT_NUMBER
+  // },
+  // work_age: {
+  //   label: '工作年限',
+  //   formType: INPUT_NUMBER
+  // },
   entryDt: {
     label: '入职日期',
     formType: DATE_PICKER
@@ -152,35 +156,35 @@ export const handler = [{
     icon: 'icon-ico_import'
     // action: 'showImport'
   }, {
-    label: '导入候选人',
+    label: 'Excel导入候选人',
     icon: 'icon-ico_import',
     action: 'showImport'
   }]
 }, {
   color: 'default',
-  label: '更多',
+  icon: 'icon-ico_calendar is-primary',
+  label: '面试安排',
+  async action (ctx) {
+    const rows = await ctx.openSelectRows()
+    console.log(rows)
+  }
+}, {
+  color: 'default',
+  label: '更多操作',
   options: [{
     label: '导出',
     icon: 'icon-ico_export',
-    action: (ctx) => {
-      ctx.selected = true
-      ctx.selectAfter = async (rows) => {
-        try {
-          const { data } = await ctx.$axios.post('/hrCandidate/export', {
-            candidateIds: rows.map(item => item.candidateId).join()
-          })
-          downloadBlobFile(data)
-        } catch (e) {
-          console.error(e)
-          ctx.$message.error(e.message || e)
-        } finally {
-        }
-      }
+    async action (ctx) {
+      const rows = await ctx.openSelectRows()
+      const { data } = await ctx.$axios.post('/hrCandidate/export', {
+        candidateIds: rows.map(item => item.candidateId).join()
+      })
+      downloadBlobFile(data)
     }
   }, {
     label: '一键清理',
     icon: 'icon-ico_clear',
-    action: 'tasble:selected'
+    action: 'table:selected'
   }]
 // }, {
 //   color: 'default',
@@ -191,7 +195,7 @@ export const handler = [{
 
 export const editHandler = [{
   color: 'default',
-  icon: 'icon-ico_transformation',
+  icon: 'icon-ico_transformation is-primary',
   label: '移动人才',
   options: [{
     label: '移动到初选通过',
@@ -252,7 +256,6 @@ export const editHandler = [{
   }]
 }, {
   color: 'default',
-  icon: 'icon-ico_edit is-primary',
   action: 'detail:edited',
   label: '更多操作',
   options: [{

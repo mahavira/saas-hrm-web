@@ -31,12 +31,14 @@ export default {
       if (state.data[dictType] || awaitRequests.includes(dictType)) { return }
       if (dictType === 'province') {
         return dispatch('fetchProvince')
+      } else if (dictType === 'organ') {
+        return dispatch('fetchOrgan')
       }
       try {
         awaitRequests.push(dictType)
         const { data } = await this.$axios.post('/hrDict/idList', {
           type: dictType,
-          tenantId: rootState.application.tenantId
+          tenantId: rootState.userinfo.tenantId || '1'
         })
         if (!data.data || !data.data.length) {
           throw new Error(`字典[${dictType}]没有数据`)
@@ -55,12 +57,14 @@ export default {
         awaitRequests.splice(awaitRequests.indexOf(dictType), 1)
       }
     },
-    async fetchProvince ({ state, commit }) {
+    async fetchProvince ({ state, commit, rootState }) {
       if (state.data.province && Object.keys(state.data.province).length) { return }
       try {
-        const { data } = await this.$axios.post('/ltArea/province')
+        const { data } = await this.$axios.post('/hrArea/province', {
+          tenantId: rootState.userinfo.tenantId || '1'
+        })
         const map = {}
-        data.data.forEach((item) => {
+        data.data.list.forEach((item) => {
           map[item.code] = item.name
         })
         commit('set', {
@@ -71,14 +75,15 @@ export default {
         console.error(e)
       }
     },
-    async fetchCity ({ state, commit }, parentId) {
+    async fetchCity ({ state, commit, rootState }, parentId) {
       if (state.data.city && state.data.city[parentId] && Object.keys(state.data.city[parentId]).length) { return }
       try {
-        const { data } = await this.$axios.post('/ltArea/city', {
-          parentId
+        const { data } = await this.$axios.post('/hrArea/city', {
+          parentId,
+          tenantId: rootState.userinfo.tenantId || '1'
         })
         const map = {}
-        data.data.forEach((item) => {
+        data.data.list.forEach((item) => {
           map[item.code] = item.name
         })
         const value = Object.assign({ [parentId]: map }, state.city)
@@ -108,6 +113,25 @@ export default {
           })
         }
       } finally {
+      }
+    },
+    async fetchOrgan ({ getters, rootState, state, commit }, parentId) {
+      try {
+        const { data } = await this.$axios.post('/hrOrgan/staff', {
+          organId: getters.organId,
+          tenantId: rootState.userinfo.tenantId || '1'
+        })
+        const map = {}
+        data.data.list.forEach((item) => {
+          map[item.code] = item.name
+        })
+        const value = Object.assign({ [parentId]: map }, state.city)
+        commit('set', {
+          key: 'city',
+          value
+        })
+      } catch (e) {
+        console.error(e)
       }
     }
   }
