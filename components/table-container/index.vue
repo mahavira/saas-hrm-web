@@ -5,8 +5,10 @@
         <el-input
           v-model="keyword"
           @keyup.enter.native="onSearch"
+          @clear="onSearch"
           :placeholder="searchPlaceholder || '请输入搜索关键词'"
           size="small"
+          clearable
         >
           <el-button slot="append" @click="onSearch" icon="el-icon-search" />
         </el-input>

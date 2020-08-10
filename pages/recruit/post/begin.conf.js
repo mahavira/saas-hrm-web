@@ -55,7 +55,7 @@ export const tableFields = {
 }
 const commonField = {
   positionName: { label: '职位名称', formType: INPUT, rules: [{ required: true, message: '请输入职位名称', trigger: 'blur' }] },
-  organId: { label: '用人部门', formType: SELECT, options: 'education', rules: [{ required: true, message: '请输入职位名称', trigger: 'blur' }] },
+  organId: { label: '用人部门', formType: SELECT, options: 'organ', rules: [{ required: true, message: '请输入职位名称', trigger: 'blur' }] },
   workNature: { label: '工作性质', formType: SELECT, options: 'work_nature', rules: [{ required: true, message: '请输入职位名称', trigger: 'blur' }] },
   recruitsTotal: { label: '招聘人数', formType: INPUT, rules: [{ required: true, message: '请输入职位名称', trigger: 'blur' }] },
   // recruitAge: { label: '年龄要求', formType: SLIDER_AGE },
