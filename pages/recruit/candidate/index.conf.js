@@ -164,8 +164,8 @@ export const handler = [{
   color: 'default',
   icon: 'icon-ico_calendar is-primary',
   label: '面试安排',
-  async action (ctx) {
-    const rows = await ctx.openSelectRows()
+  async action () {
+    const rows = await this.openSelectRows()
     console.log(rows)
   }
 }, {
@@ -174,9 +174,9 @@ export const handler = [{
   options: [{
     label: '导出',
     icon: 'icon-ico_export',
-    async action (ctx) {
-      const rows = await ctx.openSelectRows()
-      const { data } = await ctx.$axios.post('/hrCandidate/export', {
+    async action () {
+      const rows = await this.openSelectRows()
+      const { data } = await this.$axios.post('/hrCandidate/export', {
         candidateIds: rows.map(item => item.candidateId).join()
       })
       downloadBlobFile(data)

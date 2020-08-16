@@ -42,7 +42,7 @@ export default {
       const context = this.getContext()
       if (!action) { return }
       if (isFunction(action)) {
-        return action(this.parent)
+        return action.call(this.parent)
       }
       const [ type, prop, key ] = action.split(':')
       if (type === 'dialog') {

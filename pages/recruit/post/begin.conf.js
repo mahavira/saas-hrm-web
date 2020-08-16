@@ -102,9 +102,9 @@ export const handler = [{
   color: 'default',
   icon: 'icon-ico_import is-primary',
   label: '导 出',
-  async action (ctx) {
-    const rows = await ctx.openSelectRows()
-    const { data } = await ctx.$axios.post(urls.export, {
+  async action () {
+    const rows = await this.openSelectRows()
+    const { data } = await this.$axios.post(urls.export, {
       hrRecruitPositionIds: rows.map(item => item.recruitPositionId).join()
     })
     downloadBlobFile(data)
@@ -115,9 +115,9 @@ export const handler = [{
   options: [{
     label: '批量停止招聘',
     icon: 'icon-ico_eliminate',
-    async action (ctx) {
-      const rows = await ctx.openSelectRows()
-      await ctx.$axios.post('/hrRecruitmentPosition/stop', {
+    async action () {
+      const rows = await this.openSelectRows()
+      await this.$axios.post('/hrRecruitmentPosition/stop', {
         hrRecruitPositionIds: rows.map(item => item.recruitPositionId).join()
       })
     }
