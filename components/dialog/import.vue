@@ -11,10 +11,9 @@
   </el-dialog>
 </template>
 <script>
-import WaveSvg from '~/components/wave-svg'
 
 export default {
-  components: { WaveSvg },
+  components: { WaveSvg: import('~/components/wave-svg') },
   props: {
     visible: { type: Boolean, default: false },
     title: { type: String, default: '' },

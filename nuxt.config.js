@@ -63,7 +63,7 @@ export default {
     extend (config, ctx) {
       config.module.rules.push({
         test: /\.ya?ml$/,
-        use: [ 'json-loader', 'yaml-loader' ]
+        use: ['json-loader', 'yaml-loader']
       })
     }
   },

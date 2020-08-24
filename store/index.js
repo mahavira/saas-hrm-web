@@ -45,9 +45,9 @@ export default {
     userinfo: {},
     apps: [],
     menus: [],
-    authorization: '',
+    authorization: 'x',
     rolePermissionDtos: [],
-    application: {},
+    application: { applicationId: 'x' },
     permission: {}, // 按钮权限
     orgs: []
   },

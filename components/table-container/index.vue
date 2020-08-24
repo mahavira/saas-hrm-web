@@ -97,9 +97,11 @@
         :data.sync="currentRow"
       />
     </transition>
+    <Dialog />
   </div>
 </template>
 <script>
+import Dialog from '../dialog/index.vue'
 import FormItem from '../form-item'
 import THandler from './handler'
 import TDetail from './detail'
@@ -128,7 +130,7 @@ export default {
       parent: this
     }
   },
-  components: { TDetail, THandler },
+  components: { TDetail, THandler, Dialog },
   props,
   data () {
     return {

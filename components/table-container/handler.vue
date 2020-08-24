@@ -40,6 +40,7 @@ export default {
     },
     async onHandler ({ action = null }) {
       const context = this.getContext()
+      console.log(context)
       if (!action) { return }
       if (isFunction(action)) {
         return action.call(this.parent)

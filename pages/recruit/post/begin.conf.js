@@ -1,3 +1,5 @@
+// import Vue from 'vue'
+import stopRecruitDialog from './stopRecruit.dialog'
 import { SELECT, INPUT, DATE_PICKER, TEXTAREA, SWITCH_STATE } from '~/constant/FORMITEM_TYPE'
 import { downloadBlobFile } from '~/utils/file'
 
@@ -89,8 +91,9 @@ export const dialog = {
       console.log(done)
     }
   },
-  stopRecruit: require('./stopRecruit.dialog')
+  stopRecruit: import('./stopRecruit.dialog')
 }
+
 export const searchPlaceholder = '职位名称'
 
 export const handler = [{
@@ -103,6 +106,14 @@ export const handler = [{
   icon: 'icon-ico_import is-primary',
   label: '导 出',
   async action () {
+    // const MessageBoxConstructor = Vue.extend(stopRecruitDialog)
+    console.log(stopRecruitDialog)
+    this.$dialog(stopRecruitDialog, {})
+    this.$msgbox({
+      title: '消s息',
+      message: <component is={stopRecruitDialog} />,
+      confirmButtonText: '确定'
+    })
     const rows = await this.openSelectRows()
     const { data } = await this.$axios.post(urls.export, {
       hrRecruitPositionIds: rows.map(item => item.recruitPositionId).join()

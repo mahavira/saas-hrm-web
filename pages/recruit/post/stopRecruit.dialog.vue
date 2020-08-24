@@ -1,6 +1,6 @@
 <template>
   <el-dialog
-    :visible.sync="stopRecruit.visible"
+    :visible.sync="visible"
     title="停止招聘"
     width="460px"
   >
@@ -23,6 +23,9 @@
 
 <script>
 export default {
+  props: {
+    visible: { type: Boolean, default: false }
+  },
   data () {
     return {
       stopRecruit: {
